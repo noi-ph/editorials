@@ -1,14 +1,15 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.10
 
 from argparse import ArgumentParser
 from pathlib import Path
 from subprocess import run
 
+
 def main():
     parser = ArgumentParser(description='Compile .md files to .html files')
 
     parser.add_argument('loc', nargs='*', default=[Path()], type=Path,
-        help='Folder containing files to compile (default: current folder)')
+        help='Folders containing files to compile (default: current folder)')
     parser.add_argument('-t', '--template', default='editorial_template.html', type=Path,
         help='HTML template for pandoc to use (default: %(default)s)')
 
@@ -36,6 +37,7 @@ def main():
 
     print()
     print("DONE")
+
 
 if __name__ == '__main__':
     main()
