@@ -54,8 +54,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <style type="text/css">
+        body {
+            background-color: #e0e0e0;
+        }
         .editorial {
-            font-family: Georgia,"Times New Roman",Times,serif;
+            font-family: Georgia,Cambria,"Times New Roman",Times,serif;
             font-size: 20px;
             max-width: 900px;
         }
@@ -67,14 +70,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             margin-left: auto;
             margin-right: auto;
         }
-        .editorial .sourceCode {
+        .editorial pre {
             background-color: #f8f8f8;
+            border: 1px solid #c8c8c8;
+            border-radius: 5px;
             padding: 6px;
             /* margin-top: 2px; */
             margin-bottom: 12px;
         }
-        .editorial .h3 {
-            padding-top: 30px;
+        .editorial .editorial-section {
+            border: 1px solid #c8c8c8;
+            border-radius: 10px;
+            padding: 1.5rem 1rem 1rem 1rem;
+            background-color: white;
         }
     </style>
 
@@ -97,10 +105,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <strong>Statement Authors:</strong> Cisco Ortega<br />
 <strong>Test Data Authors:</strong> Kevin Atienza, Cisco Ortega<br />
 <strong>Editorialist:</strong> Cisco Ortega</p>
-<p><details><summary class="h3">Subtask 1</summary></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
 <p>You can manually compute the value by hand, since <span class="math inline">\(N=10\)</span> is small enough. Use a calculator to speed things up.</p>
 <p></details></p>
-<p><details><summary class="h3">Subtask 2</summary></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 2</summary></p>
 <p>Directly implement the function <span class="math inline">\(f\)</span> in code, and sum over all <span class="math inline">\(n\)</span> from <span class="math inline">\(1\)</span> to <span class="math inline">\(N\)</span>. Something like this:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># pseudocode</span>
 
@@ -119,7 +127,7 @@ ans <span class="op">=</span> <span class="dv">0</span>
 <span class="bu">print</span>(ans <span class="op">%</span> MOD)</code></pre></div>
 <p>You can count that this does <span class="math inline">\(\approx N(N+1)/2\)</span> addition operations (you can refer to the proof at the start of the &quot;bonus&quot; subsection of this solution sketch). Even a slow language like Python can do on the order of <span class="math inline">\(\approx 10^7\)</span> operations per second, so this should terminate within a few seconds for the <span class="math inline">\(N\)</span> in subtask <span class="math inline">\(2\)</span>.</p>
 <p></details></p>
-<p><details><summary class="h3">Subtask 3</summary></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 3</summary></p>
 <p>First, note that <span class="math inline">\(f(n) = 1 + 3 + 5 + \dots + (\text{$n$th odd number}) = n^2\)</span>. There are many ways to prove this fact, involving some classic visual proofs which the author finds quite beautiful. For example:</p>
 <p><img class="illus" src="images/sum-odds-proof.png" height="450px" /></p>
 <p>Thus, we can speed up our code by replacing the loop in <span class="math inline">\(f(n)\)</span> with our magical formula.</p>
@@ -139,7 +147,7 @@ ans <span class="op">=</span> <span class="dv">0</span>
 <p>Note also that we are now getting in the habit of reducing modulo <span class="math inline">\(10^6 + 37\)</span> at <em>each intermediate step</em>, instead of only right at the end, so that our numbers don't get too big. Users of languages like C++ or Java must be extra vigilant about taking modulos whenever possible, in order to avoid integer overflow.</p>
 <p>The number of operations is now roughly linear (i.e., directly proportional) to <span class="math inline">\(N\)</span>. So, with <span class="math inline">\(N = 3^{15} \approx 1.4 \times 10^7\)</span>, this program should terminate in a few seconds.</p>
 <p></details></p>
-<p><details><summary class="h3">Subtask 4</summary></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 4</summary></p>
 <p>It has been revealed that our task, essentially, is to compute the sum <span class="math inline">\(1^2 + 2^2 + 3^2 + \dots + N^2\)</span>. This sum also has a well-known formula! If you hadn't encountered it before, Googling &quot;sum of squares formula&quot; should show this: <span class="math display">\[1^2 + 2^2 + 3^2 + \dots + N^2 = \frac{N(N+1)(2N+1)}{6}\]</span></p>
 <p>You can prove it using induction, although that does feel a bit magical. At the end of this tutorial, just for fun, we'll present a way to derive this formula totally from scratch.</p>
 <p>If you're using a language like Python, which allows for arbitrarily large integers, then all you have to do is implement this formula.</p>
@@ -173,7 +181,7 @@ MOD <span class="op">=</span> <span class="dv">10</span><span class="op">**</spa
 <p>There are general algorithms for producing such a multiplicative inverse of any nonzero number if one exists (it helps that our modulus in prime), but in this particular case, it is easy to find <span class="math inline">\(6^{-1}\)</span> by inspection.</p>
 <p>Let <span class="math inline">\(m = 10^6 + 37\)</span>; note that <span class="math inline">\(m + 1\)</span> is divisible by <span class="math inline">\(6\)</span>, and so <span class="math inline">\(\frac{m+1}{6}\)</span> is an integer. And in fact, <span class="math inline">\(6^{-1} = \frac{m+1}{6}\)</span> because <span class="math inline">\(6~\frac{m+1}{6} \equiv 1 \pmod m\)</span>.</p>
 <p></details></p>
-<p><details><summary class="h3">Bonus: The Sum of Squares Formula</summary></p>
+<p><details class="editorial-section"><summary class="h2">Bonus: The Sum of Squares Formula</summary></p>
 <p>The only prerequisite is some familiarity with manipulations in summation notation.</p>
 <p>As a building block, we first need the fact that <span class="math inline">\(1 + 2 + 3 + \dots + N = N(N+1)/2\)</span>. This can also be proved visually, for example:</p>
 <p><img class="illus" src="images/sum-n.png" height="450px" /></p>

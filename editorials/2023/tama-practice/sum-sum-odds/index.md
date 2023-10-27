@@ -11,7 +11,7 @@
 
 
 
-<details><summary class="h3">Subtask 1</summary>
+<details class="editorial-section"><summary class="h2">Subtask 1</summary>
 
 You can manually compute the value by hand, since $N=10$ is small enough.  Use a calculator to speed things up.
 
@@ -19,7 +19,7 @@ You can manually compute the value by hand, since $N=10$ is small enough.  Use a
 
 
 
-<details><summary class="h3">Subtask 2</summary>
+<details class="editorial-section"><summary class="h2">Subtask 2</summary>
 
 Directly implement the function $f$ in code, and sum over all $n$ from $1$ to $N$.  Something like this:
 ```python
@@ -45,7 +45,7 @@ You can count that this does $\approx N(N+1)/2$ addition operations (you can ref
 
 
 
-<details><summary class="h3">Subtask 3</summary>
+<details class="editorial-section"><summary class="h2">Subtask 3</summary>
 
 First, note that $f(n) = 1 + 3 + 5 + \dots + (\text{$n$th odd number}) = n^2$.  There are many ways to prove this fact, involving some classic visual proofs which the author finds quite beautiful.  For example:
 
@@ -75,7 +75,7 @@ The number of operations is now roughly linear (i.e., directly proportional) to 
 
 
 
-<details><summary class="h3">Subtask 4</summary>
+<details class="editorial-section"><summary class="h2">Subtask 4</summary>
 
 It has been revealed that our task, essentially, is to compute the sum $1^2 + 2^2 + 3^2 + \dots + N^2$.  This sum also has a well-known formula!  If you hadn't encountered it before, Googling "sum of squares formula" should show this:
 $$1^2 + 2^2 + 3^2 + \dots + N^2 = \frac{N(N+1)(2N+1)}{6}$$
@@ -129,7 +129,7 @@ And in fact, $6^{-1} = \frac{m+1}{6}$ because $6~\frac{m+1}{6} \equiv 1 \pmod m$
 
 
 
-<details><summary class="h3">Bonus: The Sum of Squares Formula</summary>
+<details class="editorial-section"><summary class="h2">Bonus: The Sum of Squares Formula</summary>
 
 The only prerequisite is some familiarity with manipulations in summation notation.
 
