@@ -95,7 +95,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         .editorial .proof {
             border: 1px solid #c8c8c8;
             border-radius: 10px;
-            padding: 1rem;
+            padding: 1rem 1rem .25rem 1rem;
             background-color: #fbfbfb;
             margin-top: 1rem;
             margin-bottom: 1rem;
@@ -108,6 +108,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         }
         .editorial a:visited {
             color: #666699;
+        }
+        .editorial summary {
+            margin-bottom: .75rem;
         }
     </style>
 
@@ -145,17 +148,18 @@ f(x) &amp;= \sum_{i=1}^n (x - v_i)^2 \\
 <p>We know that if <span class="math inline">\(a &gt; 0\)</span>, then the value of the quadratic <span class="math inline">\(ax^2 + bx + c\)</span> is minimized at its vertex, when <span class="math inline">\(x = -b/2a\)</span>. Since <span class="math inline">\(n &gt; 0\)</span>, that tells us that the minimum of <span class="math inline">\(f(x)\)</span> is achieved at <span class="math display">\[x = \frac{-\left(-2\left(\sum_{i=1}^n v_i\right)\right)}{2n},
 \]</span> or, <span class="math display">\[x = \frac{\sum_{i=1}^n v_i}{n},\]</span> which, familiarly, is the average of the sequence. </details></p>
 <p><details class="proof"><summary>Alternate Proof</summary> (This requires a bit of calculus, so feel free to skip if you don't understand it.)</p>
-<p>Define <span class="math inline">\(f(x)\)</span> similarly as before, so that <span class="math display">\[\begin{align*}
-    f(x) &amp;= \sum_{i=1}^n (x - v_i)^2 \\
-    f&#39;(x) &amp;= 2\sum_{i=1}^n (x - v_i) \\
-    f&#39;&#39;(x) &amp;= 2\sum_{i=1}^n 1 = 2n.
-\end{align*}\]</span> Using the <a href="https://en.wikipedia.org/wiki/Derivative_test#First-derivative_test">first derivative test</a>, the minimum of a differentiable function can only occur at points <span class="math inline">\(x\)</span> for which <span class="math inline">\(f&#39;(x) = 0\)</span>. Solving for such <span class="math inline">\(x\)</span>, we get <span class="math display">\[\begin{align*}
+<p>Define <span class="math inline">\(f(x)\)</span> the same as before, so that <span class="math display">\[f&#39;(x) = 2\sum_{i=1}^n (x - v_i).\]</span> Using the <a href="https://en.wikipedia.org/wiki/Derivative_test#First-derivative_test">first derivative test</a>, the minimum of a differentiable function can only occur at points <span class="math inline">\(x\)</span> for which <span class="math inline">\(f&#39;(x) = 0\)</span>. Solving for such <span class="math inline">\(x\)</span>, we get <span class="math display">\[\begin{align*}
     f&#39;(x) &amp;= 0 \\
     2\sum_{i=1}^n (x - v_i) &amp;= 0 \\
     \sum_{i=1}^n (x - v_i) &amp;= 0 \\
     nx - \sum_{i=1}^n v_i &amp;= 0 \\
-    x &amp;= \frac{\sum_{i=1}^n v_i}{n}.
-\end{align*}\]</span> So the only candidate for the minimum is the average. Furthermore, <span class="math inline">\(f&#39;&#39;(x) = 2n\)</span> is positive, so by the <a href="https://en.wikipedia.org/wiki/Derivative_test#Second-derivative_test_(single_variable)">second derivative test</a>, this is indeed the minimum. </details></p>
+    x &amp;= \frac{\sum_{i=1}^n v_i}{n},
+\end{align*}\]</span> so the only candidate for the minimum is the average. Denoting the average by <span class="math inline">\(a\)</span>, we can rewrite <span class="math inline">\(f&#39;(x)\)</span> as <span class="math display">\[\begin{align*}
+    f&#39;(x)
+    &amp;= 2\sum_{i=1}^n (x - v_i) \\
+    &amp;= 2n\left(x - \frac{\sum_{i=1}^n v_i}{n}\right) \\
+    &amp;= 2n(x - a),
+\end{align*}\]</span> so <span class="math inline">\(f&#39;(x) &lt; 0\)</span> when <span class="math inline">\(x &lt; a\)</span> while <span class="math inline">\(f&#39;(x) &gt; 0\)</span> when <span class="math inline">\(x &gt; a\)</span>, so <span class="math inline">\(f\)</span> is decreasing up to <span class="math inline">\(a\)</span> and then increasing afterwards, so <span class="math inline">\(a\)</span> must be the global minimum. </details></p>
 <p><strong>Remark:</strong> This is actually the primary mathematical reason for why averages are so ubiquitous in probability and statistics! It being the square-error minimizer gives us a rigorous notion of what it <em>means</em> to “be in the center” of a set of points.</p>
 <p>Note that this gives us our proof that <span class="math inline">\(n! \times \mathrm{SumSEMs}(a)\)</span> is always an integer. Each summand is an average, meaning it looks like <span class="math inline">\(\text{(sum of integers)}/k\)</span>, where <span class="math inline">\(k\)</span> is the length of a sublist. Since <span class="math inline">\(1 \leq k \leq n\)</span>, we are guaranteed that <span class="math inline">\(n!/k\)</span> is an integer, and therefore all summands become integers after multiplying by <span class="math inline">\(n!\)</span>.</p>
 <p>It may be a bit tedious, but for the first subtask, you can (with the aid of a calculator) compute <span class="math inline">\(a_1, a_2, a_3, a_4, a_5\)</span>, and then find the averages of each of its sublists. There are only <span class="math inline">\(5(5-1)/2 = 10\)</span> sublists, so this may be a bit tedious (especially since the numbers are big), but with a calculator, it’s still doable to compute this by hand.</p>

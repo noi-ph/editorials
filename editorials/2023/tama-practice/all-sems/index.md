@@ -53,12 +53,8 @@ which, familiarly, is the average of the sequence.
 <details class="proof"><summary>Alternate Proof</summary>
 (This requires a bit of calculus, so feel free to skip if you don't understand it.)
 
-Define $f(x)$ similarly as before, so that
-$$\begin{align*}
-    f(x) &= \sum_{i=1}^n (x - v_i)^2 \\
-    f'(x) &= 2\sum_{i=1}^n (x - v_i) \\
-    f''(x) &= 2\sum_{i=1}^n 1 = 2n.
-\end{align*}$$
+Define $f(x)$ the same as before, so that
+$$f'(x) = 2\sum_{i=1}^n (x - v_i).$$
 Using the [first derivative test](https://en.wikipedia.org/wiki/Derivative_test#First-derivative_test), the minimum of a differentiable function can only occur at points
 $x$ for which $f'(x) = 0$. Solving for such $x$, we get
 $$\begin{align*}
@@ -66,10 +62,16 @@ $$\begin{align*}
     2\sum_{i=1}^n (x - v_i) &= 0 \\
     \sum_{i=1}^n (x - v_i) &= 0 \\
     nx - \sum_{i=1}^n v_i &= 0 \\
-    x &= \frac{\sum_{i=1}^n v_i}{n}.
+    x &= \frac{\sum_{i=1}^n v_i}{n},
 \end{align*}$$
-So the only candidate for the minimum is the average. Furthermore, $f''(x) = 2n$ is positive, so
-by the [second derivative test](https://en.wikipedia.org/wiki/Derivative_test#Second-derivative_test_(single_variable)), this is indeed the minimum.
+so the only candidate for the minimum is the average. Denoting the average by $a$, we can rewrite $f'(x)$ as
+$$\begin{align*}
+    f'(x)
+    &= 2\sum_{i=1}^n (x - v_i) \\
+    &= 2n\left(x - \frac{\sum_{i=1}^n v_i}{n}\right) \\
+    &= 2n(x - a),
+\end{align*}$$
+so $f'(x) < 0$ when $x < a$ while $f'(x) > 0$ when $x > a$, so $f$ is decreasing up to $a$ and then increasing afterwards, so $a$ must be the global minimum.
 </details>
 
 **Remark:** This is actually the primary mathematical reason for why
