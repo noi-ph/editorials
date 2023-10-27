@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="pandoc" />
+    <title>Summer SEMs Editorial</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    </style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style type="text/css">
+        body {
+            background-color: #e0e0e0;
+        }
+        .editorial {
+            font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+            font-size: 20px;
+            max-width: 960px;
+        }
+        .editorial p {
+            text-align: justify;
+        }
+        .editorial .illus {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .editorial pre {
+            background-color: #f8f8f8;
+            border: 1px solid #c8c8c8;
+            border-radius: 5px;
+            padding: 6px;
+            /* margin-top: 2px; */
+            margin-bottom: 12px;
+        }
+        .editorial .editorial-section {
+            border: 1px solid #c8c8c8;
+            border-radius: 10px;
+            padding: 1.5rem 1rem 1rem 1rem;
+            background-color: white;
+        }
+        .editorial .theorem {
+            border: 1px solid #c8c8c8;
+            border-radius: 10px;
+            padding: 1rem 1.5rem 0 1.5rem;
+            background-color: #f0fff0;
+        }
+        .editorial .proof {
+            border: 1px solid #c8c8c8;
+            border-radius: 10px;
+            padding: 1rem;
+            background-color: #fbfbfb;
+        }
+        .center-p > p {
+            text-align: center;
+        }
+    </style>
+
+    </head>
+<body>
+
+<!--
+
+<div id="header">
+<h1 class="title">Summer SEMs Editorial</h1>
+
+-->
+
+</div>
+
+<div class="editorial container">
+<h1 id="summer-sems">Summer SEMs</h1>
+<p><strong>Setters:</strong> Cisco Ortega<br />
+<strong>Testers:</strong> Kevin Atienza<br />
+<strong>Statement Authors:</strong> Cisco Ortega<br />
+<strong>Test Data Authors:</strong> Kevin Atienza, Cisco Ortega<br />
+<strong>Editorialist:</strong> Cisco Ortega</p>
+<p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
+<div class="theorem">
+<p><strong>Claim:</strong> The square-error minimizer of any non-empty sequence is just its <strong>average</strong> value.</p>
+</div>
+<p><details class="proof"><summary>Proof</summary> Let <span class="math inline">\(f(x)\)</span> be the total square error of <span class="math inline">\(x\)</span> with respect to some sequence <span class="math inline">\([v_1, v_2, \dots, v_n]\)</span>, so <span class="math display">\[f(x) = \sum_{i=1}^n (x - v_i)^2.\]</span> Let’s do some manipulations on this summation, starting with expanding out the square in each summand: <span class="math display">\[\begin{align*}
+f(x) &amp;= \sum_{i=1}^n (x - v_i)^2 \\
+     &amp;= \sum_{i=1}^n (x^2 - 2xv_i + v_i^2) \\
+     &amp;= x^2 \sum_{i=1}^n 1 - 2x \sum_{i=1}^n v_i + \sum_{i=1}^n v_i^2 \\
+     &amp;= nx^2 - 2\left(\sum_{i=1}^n v_i\right) x + \sum_{i=1}^n v_i^2.
+\end{align*}\]</span> Recall that the values <span class="math inline">\([v_1, v_2, \dots, v_n]\)</span> are all constant with respect to <span class="math inline">\(f\)</span>. Thus, <span class="math inline">\(f\)</span> is actually a <strong>quadratic polynomial</strong> in terms of <span class="math inline">\(x\)</span>.</p>
+<p>We know that if <span class="math inline">\(a &gt; 0\)</span>, then the value of the quadratic <span class="math inline">\(ax^2 + bx + c\)</span> is minimized at its vertex, when <span class="math inline">\(x = -b/2a\)</span>. Since <span class="math inline">\(n &gt; 0\)</span>, that tells us that the minimum of <span class="math inline">\(f(x)\)</span> is achieved at <span class="math display">\[x = \frac{-\left(-2\left(\sum_{i=1}^n v_i\right)\right)}{2n},
+\]</span> or, <span class="math display">\[x = \frac{\sum_{i=1}^n v_i}{n},\]</span> which, familiarly, is the average of the sequence. </details></p>
+<p><details class="proof"><summary>Alternate Proof</summary> (This requires a bit of calculus, so feel free to skip if you don't understand it.)</p>
+<p>Define <span class="math inline">\(f(x)\)</span> similarly as before, so that <span class="math display">\[\begin{align*}
+    f(x) &amp;= \sum_{i=1}^n (x - v_i)^2 \\
+    f&#39;(x) &amp;= 2\sum_{i=1}^n (x - v_i) \\
+    f&#39;&#39;(x) &amp;= 2\sum_{i=1}^n 1 = 2n.
+\end{align*}\]</span> Using the first derivative test, the minimum of a differentiable function can only occur at points <span class="math inline">\(x\)</span> for which <span class="math inline">\(f&#39;(x) = 0\)</span>. Solving for such <span class="math inline">\(x\)</span>, we get <span class="math display">\[\begin{align*}
+    f&#39;(x) &amp;= 0 \\
+    2\sum_{i=1}^n (x - v_i) &amp;= 0 \\
+    \sum_{i=1}^n (x - v_i) &amp;= 0 \\
+    nx - \sum_{i=1}^n v_i &amp;= 0 \\
+    x &amp;= \frac{\sum_{i=1}^n v_i}{n}.
+\end{align*}\]</span> So the only candidate for the minimum is the average. Furthermore, <span class="math inline">\(f&#39;&#39;(x) = 2n\)</span> is positive, so by the second derivative test, this is indeed the minimum. </details></p>
+<p><strong>Remark:</strong> This is actually the primary mathematical reason for why averages are so ubiquitous in probability and statistics! It being the square-error minimizer gives us a rigorous notion of what it <em>means</em> to “be in the center” of a set of points.</p>
+<p>Note that this gives us our proof that <span class="math inline">\(n! \times \mathrm{SumSEMs}(a)\)</span> is always an integer. Each summand is an average, meaning it looks like <span class="math inline">\(\text{(sum of integers)}/k\)</span>, where <span class="math inline">\(k\)</span> is the length of a sublist. Since <span class="math inline">\(1 \leq k \leq n\)</span>, we are guaranteed that <span class="math inline">\(n!/k\)</span> is an integer, and therefore all summands become integers after multiplying by <span class="math inline">\(n!\)</span>.</p>
+<p>It may be a bit tedious, but for the first subtask, you can (with the aid of a calculator) compute <span class="math inline">\(a_1, a_2, a_3, a_4, a_5\)</span>, and then find the averages of each of its sublists. There are only <span class="math inline">\(5(5-1)/2 = 10\)</span> sublists, so this may be a bit tedious (especially since the numbers are big), but with a calculator, it’s still doable to compute this by hand.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 2</summary></p>
+<p>The rest of this tutorial assumes a familiarity with working with multiplicative inverses modulo a prime, in order to handle terms like <span class="math inline">\(1/k\)</span> modulo <span class="math inline">\(998244353\)</span>. If you’re not familiar, you can Google those keywords for resources; the author would like to suggest his writeup <a href="https://drive.google.com/file/d/10LD7JXmjY5qzM1trj_cf87mYY7K1DM2-/view?usp=drive_link">here</a>.</p>
+<p>For all remaining subsections, we will also assume that the values <span class="math inline">\([a_1, a_2, \dots, a_n]\)</span> have just been directly computed by your computer using a simple loop.</p>
+<p>For this subtask, our approach is to just directly implement our “get the average of all sublists” brute force so that a computer can do it for us. You could do something like this:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># pseudocode</span>
+
+n <span class="op">=</span> <span class="dv">1600</span>
+MOD <span class="op">=</span> <span class="dv">998244353</span>
+
+a <span class="op">=</span> [...]             <span class="co"># generate a</span>
+n_fac <span class="op">=</span> ...           <span class="co"># precompute n! mod MOD</span>
+mult_inverse <span class="op">=</span> [...]  <span class="co"># precompute mod mult. inverses; can&#39;t just do 1/k, remember</span>
+
+ans <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> l <span class="kw">in</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, ..., n:
+    <span class="cf">for</span> r <span class="kw">in</span> l, l<span class="op">+</span><span class="dv">1</span>, ..., n:
+        subtotal <span class="op">=</span> <span class="dv">0</span>
+        <span class="cf">for</span> i <span class="kw">in</span> l, l<span class="op">+</span><span class="dv">1</span>, ..., r:
+            subtotal <span class="op">+=</span> a[i]
+        subtotal <span class="op">%=</span> MOD
+        
+        ans <span class="op">+=</span> subtotal <span class="op">*</span> mult_inverse[r<span class="op">-</span>l<span class="op">+</span><span class="dv">1</span>] <span class="op">%</span> MOD 
+        ans <span class="op">%=</span> MOD
+<span class="bu">print</span>(ans <span class="op">*</span> n_fac <span class="op">%</span> MOD)</code></pre></div>
+<p>How many operations are performed by this algorithm? It’s a bit more nontrivial to analyze, but you could say something like this:</p>
+<ul>
+<li><p>It iterates over all sublists of the sequence</p></li>
+<li><p>To process a sublist whose length is some <span class="math inline">\(k\)</span>, this solution perform <span class="math inline">\(\sim k\)</span> operations (to go over the elements one-by-one and add them add together)</p></li>
+<li><p>There are <span class="math inline">\(n-k+1\)</span> sublists whose length is <span class="math inline">\(k\)</span></p></li>
+<li><p>Thus, the total number of operations being performed is roughly <span class="math display">\[\sum_{k=1}^n k(n-k+1) = \frac{n^3}{6} + \frac{n^2}{2} + \frac{n}{3}.\]</span></p></li>
+</ul>
+<p>Many computer scientists would be comfortable with just <em>bounding above</em> the efficiency of their program:</p>
+<ul>
+<li><p>Note that there are three nested loops, where each of <span class="math inline">\(\ell\)</span> and <span class="math inline">\(r\)</span> and <span class="math inline">\(i\)</span> could go from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span> (the inner loops are more restricted than this, but that’s okay, we’re just putting an upper bound). The innermost loop only does one addition and modulo operation.</p></li>
+<li><p>Thus, the total number of operations being performed is <span class="math inline">\(&lt; n \times n \times n = n^3\)</span>.</p></li>
+</ul>
+<p>Computer scientists are typically happy with a bound like this, since it’s good enough for rule-of-thumb estimates—both analyses give the running time as a cubic function of <span class="math inline">\(n\)</span>, so the estimated amount of work should be roughly the same, up to a constant factor. More importantly, the <em>magnitudes</em> will be the same, so we can get a ballpark-estimate of how long this would take to run.</p>
+<p>If <span class="math inline">\(n=1600\)</span>, then <span class="math inline">\(n^3 \approx 4 \times 10^9\)</span>, so even with a slow language like Python, it seems likely that we are within the terminate-within-one-minute ballpark.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 3</summary></p>
+<p>Thinking like a computer scientist, our goal is to bring our running time down from a <em>cubic</em> function of <span class="math inline">\(n\)</span> down to a <em>quadratic</em> function of <span class="math inline">\(n\)</span>. That should dramatically speed up the efficiency of our program, enough that we could claim the points for the third subtask.</p>
+<p>Our analysis revealed that the cubic running time comes from the fact that there are three nested loops. If we can shave off one of those loops, then we’re good.</p>
+The key insight is to realize that there is a lot of <em>overlap</em> between the sums we’re computing, so it’s rather wasteful to start from scratch every time. Let <code class="sourceCode python">range_sum(l, r) <span class="op">=</span> a[l] <span class="op">+</span> a[l<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span> ... <span class="op">+</span> a[r]</code>. Note that:
+<div class="center-p">
+<p><code class="sourceCode python">range_sum(l, r) <span class="op">=</span> range_sum(l, r<span class="dv">-1</span>) <span class="op">+</span> a[r]</code></p>
+</div>
+<p>In words, if you already have a partial sum and want to include the next element <span class="math inline">\(r\)</span> in the sum, then you <em>don’t have to restart the entire sum from scratch</em>; you can just add <code class="sourceCode python">a[r]</code> to what you have so far.</p>
+<p>This gives rise to the following solution:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># pseudocode</span>
+
+n <span class="op">=</span> <span class="dv">16000</span>
+MOD <span class="op">=</span> <span class="dv">998244353</span>
+
+a <span class="op">=</span> [...]             <span class="co"># generate a</span>
+n_fac <span class="op">=</span> ...           <span class="co"># precompute n! mod MOD</span>
+mult_inverse <span class="op">=</span> [...]  <span class="co"># precompute mod mult. inverses; can&#39;t just do 1/k, remember</span>
+
+ans <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> l <span class="kw">in</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, ..., n:
+    subtotal <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> r <span class="kw">in</span> l, l<span class="op">+</span><span class="dv">1</span>, ..., n:
+        subtotal <span class="op">+=</span> a[r]
+        subtotal <span class="op">%=</span> MOD
+        
+        ans <span class="op">+=</span> subtotal <span class="op">*</span> mult_inverse[r<span class="op">-</span>l<span class="op">+</span><span class="dv">1</span>] <span class="op">%</span> MOD 
+        ans <span class="op">%=</span> MOD
+<span class="bu">print</span>(ans <span class="op">*</span> n_fac <span class="op">%</span> MOD)</code></pre></div>
+<p>You can check that for each value of <span class="math inline">\(\ell\)</span> and <span class="math inline">\(r\)</span>, the value of <code class="sourceCode python">subtotal</code> at that point in the loop is precisely <code class="sourceCode python">a[l] <span class="op">+</span> a[l<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span> ... <span class="op">+</span> a[r]</code> using the partial sums (or cumulative sums) idea.</p>
+<p>By similar analysis as in subtask <span class="math inline">\(2\)</span>, this algorithm performs <span class="math inline">\(\sim n^2/2 + n/2\)</span> operations. Or, more simply, the number of operations is bounded above by <span class="math inline">\(\sim n^2\)</span>. Either case gives us a quadratic function. Since <span class="math inline">\(16000^2 = 256000000\)</span>, even a slow language like Python should finish within a minute.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 4</summary></p>
+<p>Again thinking like a computer scientist, our goal is to bring our running time down from a <em>quadratic</em> function of <span class="math inline">\(n\)</span> down to some subquadratic function, such as one <em>linear</em> in <span class="math inline">\(n\)</span>.</p>
+<p>There are <span class="math inline">\(\approx n^2/2\)</span> sublists of a sequence of length <span class="math inline">\(n\)</span>, which should inform our approach and way of thinking. Fundamentally, we <strong>cannot</strong> any more use solutions that examine each sublist of <span class="math inline">\(a\)</span> one-by-one.</p>
+<p>Instead, we have to start thinking about the individual elements of <span class="math inline">\(a\)</span>. For example, maybe this works: for each <span class="math inline">\(a_i\)</span>, what is its contribution to the final sum? Let’s try writing out an example with <span class="math inline">\(n=6\)</span>: <span class="math display">\[\begin{align*}
+    \mathrm{SumSEMs}(a) &amp;= \frac{a_1}{1} + \frac{a_2}{1} + \frac{a_3}{1} + \frac{a_4}{1} + \frac{a_5}{1} + \frac{a_6}{1} \\
+    &amp; +\frac{a_1 + a_2}{2} +\frac{a_2 + a_3}{2} +\frac{a_3 + a_4}{2} + \frac{a_4 + a_5}{2} + \frac{a_5 + a_6}{2} \\
+    &amp; +\frac{a_1 + a_2 + a_3}{3} + \frac{a_2 + a_3 + a_4}{3} + \frac{a_3 + a_4 + a_5}{3} + \frac{a_4 + a_5 + a_6}{3} \\
+    &amp; +\frac{a_1 + a_2 + a_3 + a_4}{4} + \frac{a_2 + a_3 + a_4 + a_5}{4} + \frac{a_3 + a_4 + a_5 + a_6}{4} \\
+    &amp; +\frac{a_1 + a_2 + a_3 + a_4 + a_5}{5} + \frac{a_2 + a_3 + a_4 + a_5 + a_6}{5} \\
+    &amp; +\frac{a_1 + a_2 + a_3 + a_4 + a_5 + a_6}{6}
+\end{align*}\]</span> If we rearrange this sum so that we collect the like <span class="math inline">\(a_i\)</span> terms: <span class="math display">\[\begin{align*}
+    \mathrm{SumSEMs}(a) &amp;= \left(\frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6} \right) a_1 \\
+    &amp;+ \left(\frac{1}{1} + \frac{2}{2} + \frac{2}{3} + \frac{2}{4} + \frac{2}{5} + \frac{1}{6} \right) a_2 \\
+    &amp;+ \left(\frac{1}{1} + \frac{2}{2} + \frac{3}{3} + \frac{3}{4} + \frac{2}{5} + \frac{1}{6} \right) a_3 \\
+    &amp;+ \left(\frac{1}{1} + \frac{2}{2} + \frac{3}{3} + \frac{3}{4} + \frac{2}{5} + \frac{1}{6} \right) a_4 \\
+    &amp;+ \left(\frac{1}{1} + \frac{2}{2} + \frac{2}{3} + \frac{2}{4} + \frac{2}{5} + \frac{1}{6} \right) a_5 \\
+    &amp;+ \left(\frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6} \right) a_6.
+\end{align*}\]</span> That looks like it has a stunning amount of structure that we can leverage! If we examine only the numerators, we get the following grid pattern: <span class="math display">\[\begin{array}{rrrrrr}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+1 &amp; 2 &amp; 2 &amp; 2 &amp; 2 &amp; 1 \\
+1 &amp; 2 &amp; 3 &amp; 3 &amp; 2 &amp; 1 \\
+1 &amp; 2 &amp; 3 &amp; 3 &amp; 2 &amp; 1 \\
+1 &amp; 2 &amp; 2 &amp; 2 &amp; 2 &amp; 1 \\
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+\end{array}\]</span></p>
+<p>Note that in the grid above:</p>
+<ul>
+<li><p>The top half is a mirror image of the bottom half</p></li>
+<li><p>For <span class="math inline">\(i\)</span> such that <span class="math inline">\(2 \leq i \leq n/2\)</span>, the next row can be found by taking the previous row and then “adding <span class="math inline">\(+1\)</span>” to some contiguous band of values.</p></li>
+</ul>
+<p>We’ll leave rigorously proving this pattern as an exercise to you. The numerator in the <span class="math inline">\(i\)</span>th row’s <span class="math inline">\(\text{something}/k\)</span> is given by <em>counting</em> the number of times that <span class="math inline">\(a_i\)</span> appears in a sublist of length <span class="math inline">\(k\)</span>.</p>
+<p>More formally, let <span class="math inline">\(c_i\)</span> be “the coefficient of <span class="math inline">\(a_i\)</span>”. For convenience, let <span class="math inline">\(c_0 = 0\)</span>. Then, for <span class="math inline">\(1 \leq i \leq n/2\)</span>: <span class="math display">\[c_i = c_{i-1} + \left(\frac{1}{i} + \frac{1}{i+1} + \dots + \frac{1}{n-i+1} \right)\]</span> Finally, computing these sums of reciprocals can also be done using running sums. Let <span class="math inline">\(r_i\)</span> be the value added to <span class="math inline">\(c_{i-1}\)</span> at each step, so for <span class="math inline">\(1 \leq i \leq n/2\)</span>: <span class="math display">\[r_i = \frac{1}{i} + \frac{1}{i+1} + \dots + \frac{1}{n-i+1}.\]</span> Note that <span class="math inline">\(r_1 = 1/1 + 1/2 + 1/3 + \dots + 1/n\)</span>. Then, for <span class="math inline">\(2 \leq i \leq n/2\)</span>: <span class="math display">\[r_i = r_{i-1} - \frac{1}{i-1} - \frac{1}{n-(i-1)+1}.\]</span></p>
+<p>All in all, we get the following solution. Here, <code class="sourceCode python">coeff</code> and <code class="sourceCode python">row_delta</code> are variables such that for each <span class="math inline">\(i\)</span> in the loop, <code class="sourceCode python">coeff</code> <span class="math inline">\(= c_i\)</span> and <code class="sourceCode python">row_delta</code> <span class="math inline">\(= r_i\)</span> is always maintained.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># pseudocode</span>
+
+n <span class="op">=</span> <span class="dv">16</span> <span class="op">*</span> <span class="dv">10</span><span class="op">**</span><span class="dv">6</span>
+MOD <span class="op">=</span> <span class="dv">998244353</span>
+
+a <span class="op">=</span> [...]             <span class="co"># generate a</span>
+n_fac <span class="op">=</span> ...           <span class="co"># precompute n! mod MOD</span>
+mult_inverse <span class="op">=</span> [...]  <span class="co"># precompute mod mult. inverses; can&#39;t just do 1/k, remember</span>
+
+ans <span class="op">=</span> <span class="dv">0</span>
+coeff <span class="op">=</span> <span class="dv">0</span>
+row_delta <span class="op">=</span> <span class="va">None</span>
+<span class="cf">for</span> i <span class="kw">in</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, ..., n<span class="op">//</span><span class="dv">2</span>:
+    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">1</span>:
+        row_delta <span class="op">=</span> mult_inverse[<span class="dv">1</span>] <span class="op">+</span> mult_inverse[<span class="dv">2</span>] <span class="op">+</span> ... <span class="op">+</span> mult_inverse[n]
+    <span class="cf">else</span>:
+        row_delta <span class="op">-=</span> mult_inverse[i<span class="dv">-1</span>]
+        row_delta <span class="op">-=</span> mult_inverse[n<span class="op">-</span>(i<span class="dv">-1</span>)<span class="op">+</span><span class="dv">1</span>]
+
+    coeff <span class="op">+=</span> row_delta
+
+    ans <span class="op">+=</span> a[i] <span class="op">*</span> coeff <span class="op">%</span> MOD
+    ans <span class="op">+=</span> a[n<span class="op">-</span>i<span class="op">+</span><span class="dv">1</span>] <span class="op">*</span> coeff <span class="op">%</span> MOD  <span class="co"># for the bottom half</span>
+    ans <span class="op">%=</span> MOD
+
+<span class="bu">print</span>(ans <span class="op">*</span> n_fac <span class="op">%</span> MOD)</code></pre></div>
+<p>There is now only a single loop from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span> that is doing a handful of operations at each iteration. Thus, the number of operations performed by this solution should be linear (i.e., directly proportional) with respect to <span class="math inline">\(n\)</span>, and so it should be fast enough even when <span class="math inline">\(n = 1.6 \times 10^7\)</span>.</p>
+<p></details></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
