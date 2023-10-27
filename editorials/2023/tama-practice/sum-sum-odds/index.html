@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="pandoc" />
+    <title>Sum of Sum of Odds Editorial</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    </style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        .editorial {
+            font-family: Georgia,"Times New Roman",Times,serif;
+            font-size: 20px;
+            max-width: 900px;
+        }
+        .editorial p {
+            text-align: justify;
+        }
+        .editorial .illus {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .editorial .sourceCode {
+            background-color: #f8f8f8;
+            padding: 6px;
+            /* margin-top: 2px; */
+            margin-bottom: 12px;
+        }
+        .editorial .h3 {
+            padding-top: 30px;
+        }
+    </style>
+
+    </head>
+<body>
+
+<!--
+
+<div id="header">
+<h1 class="title">Sum of Sum of Odds Editorial</h1>
+
+-->
+
+</div>
+
+<div class="editorial container">
+<h1 id="sum-of-sum-of-odds">Sum of Sum of Odds</h1>
+<p><strong>Setters:</strong> Cisco Ortega<br />
+<strong>Testers:</strong> Kevin Atienza<br />
+<strong>Statement Authors:</strong> Cisco Ortega<br />
+<strong>Test Data Authors:</strong> Kevin Atienza, Cisco Ortega<br />
+<strong>Editorialist:</strong> Cisco Ortega</p>
+<p><details><summary class="h3">Subtask 1</summary></p>
+<p>You can manually compute the value by hand, since <span class="math inline">\(N=10\)</span> is small enough. Use a calculator to speed things up.</p>
+<p></details></p>
+<p><details><summary class="h3">Subtask 2</summary></p>
+<p>Directly implement the function <span class="math inline">\(f\)</span> in code, and sum over all <span class="math inline">\(n\)</span> from <span class="math inline">\(1\)</span> to <span class="math inline">\(N\)</span>. Something like this:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># pseudocode</span>
+
+N <span class="op">=</span> <span class="dv">10</span><span class="op">**</span><span class="dv">4</span>
+MOD <span class="op">=</span> <span class="dv">10</span><span class="op">**</span><span class="dv">6</span> <span class="op">+</span> <span class="dv">37</span>
+
+function f(n):
+    total <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> k <span class="kw">in</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, ..., n:
+        total <span class="op">+=</span> <span class="dv">2</span><span class="op">*</span>k <span class="op">-</span> <span class="dv">1</span>  <span class="co"># the kth odd</span>
+    <span class="cf">return</span> total
+
+ans <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> n <span class="kw">in</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, ..., N:
+    ans <span class="op">+=</span> f(n)
+<span class="bu">print</span>(ans <span class="op">%</span> MOD)</code></pre></div>
+<p>You can count that this does <span class="math inline">\(\approx N(N+1)/2\)</span> addition operations (you can refer to the proof at the start of the &quot;bonus&quot; subsection of this solution sketch). Even a slow language like Python can do on the order of <span class="math inline">\(\approx 10^7\)</span> operations per second, so this should terminate within a few seconds for the <span class="math inline">\(N\)</span> in subtask <span class="math inline">\(2\)</span>.</p>
+<p></details></p>
+<p><details><summary class="h3">Subtask 3</summary></p>
+<p>First, note that <span class="math inline">\(f(n) = 1 + 3 + 5 + \dots + (\text{$n$th odd number}) = n^2\)</span>. There are many ways to prove this fact, involving some classic visual proofs which the author finds quite beautiful. For example:</p>
+<p><img class="illus" src="images/sum-odds-proof.png" height="450px" /></p>
+<p>Thus, we can speed up our code by replacing the loop in <span class="math inline">\(f(n)\)</span> with our magical formula.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># pseudocode</span>
+
+N <span class="op">=</span> <span class="dv">3</span><span class="op">**</span><span class="dv">15</span>
+MOD <span class="op">=</span> <span class="dv">10</span><span class="op">**</span><span class="dv">6</span> <span class="op">+</span> <span class="dv">37</span>
+
+function f(n):
+    <span class="cf">return</span> (n <span class="op">*</span> n) <span class="op">%</span> MOD
+
+ans <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> n <span class="kw">in</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, ..., N:
+    ans <span class="op">+=</span> f(n)
+    ans <span class="op">%=</span> MOD
+<span class="bu">print</span>(ans)</code></pre></div>
+<p>Note also that we are now getting in the habit of reducing modulo <span class="math inline">\(10^6 + 37\)</span> at <em>each intermediate step</em>, instead of only right at the end, so that our numbers don't get too big. Users of languages like C++ or Java must be extra vigilant about taking modulos whenever possible, in order to avoid integer overflow.</p>
+<p>The number of operations is now roughly linear (i.e., directly proportional) to <span class="math inline">\(N\)</span>. So, with <span class="math inline">\(N = 3^{15} \approx 1.4 \times 10^7\)</span>, this program should terminate in a few seconds.</p>
+<p></details></p>
+<p><details><summary class="h3">Subtask 4</summary></p>
+<p>It has been revealed that our task, essentially, is to compute the sum <span class="math inline">\(1^2 + 2^2 + 3^2 + \dots + N^2\)</span>. This sum also has a well-known formula! If you hadn't encountered it before, Googling &quot;sum of squares formula&quot; should show this: <span class="math display">\[1^2 + 2^2 + 3^2 + \dots + N^2 = \frac{N(N+1)(2N+1)}{6}\]</span></p>
+<p>You can prove it using induction, although that does feel a bit magical. At the end of this tutorial, just for fun, we'll present a way to derive this formula totally from scratch.</p>
+<p>If you're using a language like Python, which allows for arbitrarily large integers, then all you have to do is implement this formula.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># pseudocode</span>
+
+N <span class="op">=</span> <span class="dv">3</span><span class="op">**</span><span class="dv">15</span>
+MOD <span class="op">=</span> <span class="dv">10</span><span class="op">**</span><span class="dv">6</span> <span class="op">+</span> <span class="dv">37</span>
+
+<span class="bu">print</span>((N<span class="op">*</span>(N<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span>(<span class="dv">2</span><span class="op">*</span>N<span class="op">+</span><span class="dv">1</span>)<span class="op">//</span><span class="dv">6</span>) <span class="op">%</span> MOD)</code></pre></div>
+<p>If you're using C++ or Java and are limited to <span class="math inline">\(64\)</span>-bit integers, then the solution is a little bit more interesting. The idea of &quot;implement the formula&quot; is the same, albeit with the extra caution of furiously taking modulos at every intermediate step in order to keep our numbers from getting too big.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+<span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;
+
+<span class="at">const</span> ll MOD = <span class="fl">1e6</span> + <span class="dv">37</span>;
+<span class="at">const</span> ll SIX_INV = (MOD<span class="dv">+1</span>)/<span class="dv">6</span>;
+
+<span class="dt">int</span> main() {
+    ll n; cin &gt;&gt; n;
+    n %= MOD;
+
+    ll ans = n;
+    ans *= n<span class="dv">+1</span>; ans %= MOD;
+    ans *= <span class="dv">2</span>*n<span class="dv">+1</span>; ans %= MOD;
+    ans *= SIX_INV; ans %= MOD;
+
+    cout &lt;&lt; ans &lt;&lt; endl;
+}</code></pre></div>
+<p>Of particular note is how we handle the division by <span class="math inline">\(6\)</span> in our formula, when it is not guaranteed that <span class="math inline">\(N(N+1)(2N+1) \bmod (10^6+37)\)</span> is divisible by <span class="math inline">\(6\)</span> after the modulo.</p>
+<p>We instead multiply by the <em>multiplicative inverse of <span class="math inline">\(6\)</span></em>, i.e., an integer <span class="math inline">\(x\)</span> such that <span class="math inline">\(6x \equiv 1 \pmod{10^6 + 37}\)</span>.</p>
+<p>There are general algorithms for producing such a multiplicative inverse of any nonzero number if one exists (it helps that our modulus in prime), but in this particular case, it is easy to find <span class="math inline">\(6^{-1}\)</span> by inspection.</p>
+<p>Let <span class="math inline">\(m = 10^6 + 37\)</span>; note that <span class="math inline">\(m + 1\)</span> is divisible by <span class="math inline">\(6\)</span>, and so <span class="math inline">\(\frac{m+1}{6}\)</span> is an integer. And in fact, <span class="math inline">\(6^{-1} = \frac{m+1}{6}\)</span> because <span class="math inline">\(6~\frac{m+1}{6} \equiv 1 \pmod m\)</span>.</p>
+<p></details></p>
+<p><details><summary class="h3">Bonus: The Sum of Squares Formula</summary></p>
+<p>The only prerequisite is some familiarity with manipulations in summation notation.</p>
+<p>As a building block, we first need the fact that <span class="math inline">\(1 + 2 + 3 + \dots + N = N(N+1)/2\)</span>. This can also be proved visually, for example:</p>
+<p><img class="illus" src="images/sum-n.png" height="450px" /></p>
+<p>Now, consider the telescoping sum <span class="math display">\[\sum_{n=1}^N (n^3 - (n-1)^3),\]</span> i.e. <span class="math display">\[\begin{array}{cccccccc}
+     N^3 &amp; -(N-1)^3 &amp;          &amp;        &amp;      &amp;      &amp; \\
+         &amp; +(N-1)^3 &amp; -(N-2)^3 &amp;        &amp;      &amp;      &amp; \\
+         &amp;          &amp; +(N-2)^3 &amp; -(N-3)^3 &amp;      &amp;      &amp; \\
+         &amp;          &amp;&amp;   \vdots &amp;        &amp;      &amp;      &amp; \\
+         &amp;          &amp;&amp;          &amp; \vdots &amp;      &amp;      &amp; \\
+         &amp;          &amp;&amp;          &amp; +3^3    &amp; -2^3 &amp;      &amp; \\
+         &amp;          &amp;&amp;          &amp;        &amp;  +2^3 &amp; -1^3 &amp; \\
+         &amp;          &amp;&amp;          &amp;        &amp;      &amp;  +1^3 &amp; - 0^2. \\
+\end{array}\]</span> Written this way, it should hopefully be clear that many terms in this summation cancel out, thus we can say, <span class="math display">\[\sum_{n=1}^N (n^3 - (n-1)^3) = N^3 - 0.\]</span> Now, we perform some algebra. <span class="math display">\[\begin{align*}
+    \sum_{n=1}^N (n^3 - (n-1)^3) &amp;= N^3. \\
+    \sum_{n=1}^N (3n^2 - 3n + 1) &amp;= N^3. \\
+    3 \sum_{n=1}^N n^2 - 3 \sum_{n=1}^N n + \sum_{n=1}^N 1 &amp;= N^3. \\
+    3 \sum_{n=1}^N n^2 - 3\frac{N(N+1)}{2} + N &amp;= N^3. \\
+    \sum_{n=1}^N n^2 &amp;= \frac{1}{3} \left(N^3 + 3\frac{N(N+1)}{2} - N\right). \\
+    \sum_{n=1}^N n^2 &amp;= \frac{N(N+1)(2N+1)}{6}. \\
+\end{align*}\]</span></p>
+<p><strong>Bonus:</strong> This process generalizes well. Use it derive a simple polynomial formula for the sum of cubes up to <span class="math inline">\(N\)</span>.</p>
+<p><strong>Remark:</strong> The main ideas here can be used to derive formulas for any sum-of-powers summation. Using strong induction, you can show that <span class="math inline">\(\sum_{n=1}^N n^k\)</span> is always a degree <span class="math inline">\(k+1\)</span> polynomial in terms of <span class="math inline">\(N\)</span>—albeit for larger <span class="math inline">\(k\)</span>, the coefficients become much messier to look at.</p>
+<p></details></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
