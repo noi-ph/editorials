@@ -1,13 +1,15 @@
-% Summer SEMs Editorial
+% Solution Writeup: Summer SEMs
 
 
 # Summer SEMs  
+## Solution Writeup
 
-**Setters:** Cisco Ortega  
-**Testers:** Kevin Atienza  
-**Statement Authors:** Cisco Ortega  
-**Test Data Authors:** Kevin Atienza, Cisco Ortega  
-**Editorialist:** Cisco Ortega  
+**Contest:** [TAMa 2023 Practice](https://noi.ph/tama-2023-practice-problems)  
+**Problem Idea:** Cisco Ortega  
+**Testing:** Kevin Atienza  
+**Statement:** Cisco Ortega  
+**Test Data Preparation:** Kevin Atienza, Cisco Ortega  
+**Solution Writeup:** Cisco Ortega  
 
 
 
