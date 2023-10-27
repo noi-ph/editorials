@@ -57,7 +57,7 @@ $$\begin{align*}
     f'(x) &= 2\sum_{i=1}^n (x - v_i) \\
     f''(x) &= 2\sum_{i=1}^n 1 = 2n.
 \end{align*}$$
-Using the first derivative test, the minimum of a differentiable function can only occur at points
+Using the [first derivative test](https://en.wikipedia.org/wiki/Derivative_test#First-derivative_test), the minimum of a differentiable function can only occur at points
 $x$ for which $f'(x) = 0$. Solving for such $x$, we get
 $$\begin{align*}
     f'(x) &= 0 \\
@@ -67,7 +67,7 @@ $$\begin{align*}
     x &= \frac{\sum_{i=1}^n v_i}{n}.
 \end{align*}$$
 So the only candidate for the minimum is the average. Furthermore, $f''(x) = 2n$ is positive, so
-by the second derivative test, this is indeed the minimum.
+by the [second derivative test](https://en.wikipedia.org/wiki/Derivative_test#Second-derivative_test_(single_variable)), this is indeed the minimum.
 </details>
 
 **Remark:** This is actually the primary mathematical reason for why
