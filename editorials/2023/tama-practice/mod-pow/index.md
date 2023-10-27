@@ -6,11 +6,10 @@
 
 **Contest:** [TAMa 2023 Practice](https://noi.ph/tama-2023-practice-problems)  
 **Problem Idea:** Cisco Ortega  
-**Testing:** Kevin Atienza  
+<!-- **Testing:** Cisco Ortega   -->
 **Statement:** Cisco Ortega  
-**Test Data Preparation:** Kevin Atienza, Cisco Ortega  
+**Test Data Preparation:** Kevin Atienza  
 **Solution Writeup:** Cisco Ortega  
-
 
 
 
@@ -62,6 +61,7 @@ things up.
 </details>
 
 
+
 <details class="editorial-section"><summary class="h2">Subtask 2</summary>
 
 Directly implement this formula in code, where we implement
@@ -91,6 +91,7 @@ the $n$ in subtask $2$.
 </details>
 
 
+
 <details class="editorial-section"><summary class="h2">Subtask 3</summary>
 
 If $n$ is very very large, then “literally do something $n/2$ times” is
@@ -113,7 +114,9 @@ subtask $3$ in a fraction of a second.
 </details>
 
 
+
 <details class="editorial-section"><summary class="h2">Subtask 4</summary>
+
 
 ### Dealing with power towers {#dealing-with-power-towers .unnumbered}
 
@@ -193,6 +196,7 @@ Repeatedly apply this Euler’s Theorem trick to shave levels off your
 power tower until you hit a case where the exponent is small enough that
 a fast exponentiation algorithm can do the trick.
 
+
 ### Dividing by $2$ {#dividing-by-2 .unnumbered}
 
 Going back to our problem, recall that we want to compute (since
@@ -234,6 +238,7 @@ But note that
 $\left(q, \dfrac{r}{d}\right)$ satisfies these criteria for $(q', r')$;
 by the uniqueness of $(q', r')$, we therefore conclude that
 $r' = \dfrac{r}{d}$, which is what we wanted to show.
+
 
 ### Computing totients {#computing-totients .unnumbered}
 

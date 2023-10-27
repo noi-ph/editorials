@@ -121,19 +121,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <div id="header">
 <h1 class="title">Solution Writeup: Summer SEMs</h1>
+</div>
 
 -->
 
-</div>
 
 <div class="editorial container">
 <h1 id="summer-sems">Summer SEMs</h1>
 <h2 id="solution-writeup">Solution Writeup</h2>
 <p><strong>Contest:</strong> <a href="https://noi.ph/tama-2023-practice-problems">TAMa 2023 Practice</a><br />
 <strong>Problem Idea:</strong> Cisco Ortega<br />
-<strong>Testing:</strong> Kevin Atienza<br />
-<strong>Statement:</strong> Cisco Ortega<br />
-<strong>Test Data Preparation:</strong> Kevin Atienza, Cisco Ortega<br />
+<!-- **Testing:** Cisco Ortega   --> <strong>Statement:</strong> Cisco Ortega<br />
+<strong>Test Data Preparation:</strong> Kevin Atienza<br />
 <strong>Solution Writeup:</strong> Cisco Ortega</p>
 <p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
 <div class="theorem">
@@ -147,7 +146,7 @@ f(x) &amp;= \sum_{i=1}^n (x - v_i)^2 \\
 \end{align*}\]</span> Recall that the values <span class="math inline">\([v_1, v_2, \dots, v_n]\)</span> are all constant with respect to <span class="math inline">\(f\)</span>. Thus, <span class="math inline">\(f\)</span> is actually a <strong>quadratic polynomial</strong> in terms of <span class="math inline">\(x\)</span>.</p>
 <p>We know that if <span class="math inline">\(a &gt; 0\)</span>, then the value of the quadratic <span class="math inline">\(ax^2 + bx + c\)</span> is minimized at its vertex, when <span class="math inline">\(x = -b/2a\)</span>. Since <span class="math inline">\(n &gt; 0\)</span>, that tells us that the minimum of <span class="math inline">\(f(x)\)</span> is achieved at <span class="math display">\[x = \frac{-\left(-2\left(\sum_{i=1}^n v_i\right)\right)}{2n},
 \]</span> or, <span class="math display">\[x = \frac{\sum_{i=1}^n v_i}{n},\]</span> which, familiarly, is the average of the sequence. </details></p>
-<p><details class="proof"><summary>Alternate Proof</summary> (This requires a bit of calculus, so feel free to skip if you don't understand it.)</p>
+<p><details class="proof"><summary>Alternate Proof</summary> (This requires a bit of calculus, so feel free to skip it if you don't understand it.)</p>
 <p>Define <span class="math inline">\(f(x)\)</span> the same as before, so that <span class="math display">\[f&#39;(x) = 2\sum_{i=1}^n (x - v_i).\]</span> Using the <a href="https://en.wikipedia.org/wiki/Derivative_test#First-derivative_test">first derivative test</a>, the minimum of a differentiable function can only occur at points <span class="math inline">\(x\)</span> for which <span class="math inline">\(f&#39;(x) = 0\)</span>. Solving for such <span class="math inline">\(x\)</span>, we get <span class="math display">\[\begin{align*}
     f&#39;(x) &amp;= 0 \\
     2\sum_{i=1}^n (x - v_i) &amp;= 0 \\

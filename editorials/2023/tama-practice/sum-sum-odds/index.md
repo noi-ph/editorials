@@ -6,9 +6,9 @@
 
 **Contest:** [TAMa 2023 Practice](https://noi.ph/tama-2023-practice-problems)  
 **Problem Idea:** Cisco Ortega  
-**Testing:** Kevin Atienza  
+<!-- **Testing:** Cisco Ortega   -->
 **Statement:** Cisco Ortega  
-**Test Data Preparation:** Kevin Atienza, Cisco Ortega  
+**Test Data Preparation:** Kevin Atienza  
 **Solution Writeup:** Cisco Ortega  
 
 

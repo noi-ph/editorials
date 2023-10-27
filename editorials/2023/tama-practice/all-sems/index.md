@@ -6,18 +6,14 @@
 
 **Contest:** [TAMa 2023 Practice](https://noi.ph/tama-2023-practice-problems)  
 **Problem Idea:** Cisco Ortega  
-**Testing:** Kevin Atienza  
+<!-- **Testing:** Cisco Ortega   -->
 **Statement:** Cisco Ortega  
-**Test Data Preparation:** Kevin Atienza, Cisco Ortega  
+**Test Data Preparation:** Kevin Atienza  
 **Solution Writeup:** Cisco Ortega  
 
 
 
-
-
-
 <details class="editorial-section"><summary class="h2">Subtask 1</summary>
-
 
 <div class="theorem">
 **Claim:** The square-error minimizer of any non-empty sequence is just
@@ -51,7 +47,7 @@ which, familiarly, is the average of the sequence.
 </details>
 
 <details class="proof"><summary>Alternate Proof</summary>
-(This requires a bit of calculus, so feel free to skip if you don't understand it.)
+(This requires a bit of calculus, so feel free to skip it if you don't understand it.)
 
 Define $f(x)$ the same as before, so that
 $$f'(x) = 2\sum_{i=1}^n (x - v_i).$$
@@ -94,8 +90,8 @@ big), but with a calculator, it’s still doable to compute this by hand.
 </details>
 
 
-<details class="editorial-section"><summary class="h2">Subtask 2</summary>
 
+<details class="editorial-section"><summary class="h2">Subtask 2</summary>
 
 The rest of this tutorial assumes a familiarity with working with
 multiplicative inverses modulo a prime, in order to handle terms like
@@ -174,8 +170,8 @@ terminate-within-one-minute ballpark.
 </details>
 
 
-<details class="editorial-section"><summary class="h2">Subtask 3</summary>
 
+<details class="editorial-section"><summary class="h2">Subtask 3</summary>
 
 Thinking like a computer scientist, our goal is to bring our running
 time down from a *cubic* function of $n$ down to a *quadratic* function
@@ -237,8 +233,8 @@ should finish within a minute.
 </details>
 
 
-<details class="editorial-section"><summary class="h2">Subtask 4</summary>
 
+<details class="editorial-section"><summary class="h2">Subtask 4</summary>
 
 Again thinking like a computer scientist, our goal is to bring our
 running time down from a *quadratic* function of $n$ down to some

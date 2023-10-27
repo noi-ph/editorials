@@ -36,7 +36,7 @@ def main():
     copytree(source, target)
 
     print()
-    print("DONE. PLEASE RUN ./compileall.py")
+    print("DONE. PLEASE RUN ./compileall.py AFTER")
 
 
 if __name__ == '__main__':
