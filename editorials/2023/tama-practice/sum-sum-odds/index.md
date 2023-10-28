@@ -164,8 +164,12 @@ $$\begin{align*}
     \sum_{n=1}^N n^2 &= \frac{N(N+1)(2N+1)}{6}. \\
 \end{align*}$$
 
-**Bonus:** This process generalizes well.  Use it derive a simple polynomial formula for the sum of cubes up to $N$.
+<div class="task">
+**Bonus:** This process generalizes well.  Use it to derive a simple polynomial formula for the sum of cubes up to $N$.
+</div>
 
+<div class="remarks">
 **Remark:** The main ideas here can be used to derive formulas for any sum-of-powers summation.  Using strong induction, you can show that $\sum_{n=1}^N n^k$ is always a degree $k+1$ polynomial in terms of $N$&mdash;albeit for larger $k$, the coefficients become much messier to look at.
+</div>
 
 </details>

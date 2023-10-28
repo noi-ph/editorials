@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="pandoc" />
+    <title></title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/style/editorials.css" type="text/css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+    </head>
+<body class="body">
+
+<!--
+
+
+-->
+
+
+<div class="editorial container">
+<p>This page contains a proof of <a href="https://en.wikipedia.org/wiki/Euler%27s_theorem"><strong>Euler's theorem</strong></a>:<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<div class="theorem">
+<p><strong>Euler’s Theorem</strong>. Let <span class="math inline">\(a\)</span> and <span class="math inline">\(m\)</span> be coprime integers. Then, <span class="math display">\[a^{\varphi(m)} \equiv 1 \pmod m\]</span> where <span class="math inline">\(\varphi\)</span> is Euler’s Totient function, and <span class="math inline">\(\varphi(m)\)</span> counts the number of non-negative integers less than <span class="math inline">\(m\)</span> which are coprime to it.</p>
+</div>
+<p>There are many proofs of Euler’s Theorem online which you can refer to. Here's a classic one:</p>
+<p><details class="proof"><summary>Proof 1</summary> Let <span class="math display">\[S := \{a_1, a_2, \ldots, a_{\varphi(m)}\}\]</span> be all the non-negative integers <span class="math inline">\(&lt; m\)</span> coprime to <span class="math inline">\(m\)</span>. Then I claim that <span class="math display">\[\{a\cdot a_1, a\cdot a_2, \ldots, a\cdot a_{\varphi(m)}\}\]</span> is the same set modulo <span class="math inline">\(m\)</span>.</p>
+<p>More precisely, we'll show that the map <span class="math inline">\(f: S \to S\)</span> defined as <span class="math inline">\(f: v \mapsto a \cdot v \bmod m\)</span> is well-defined, and is a bijection.</p>
+<p>To see this, first note that <span class="math inline">\(a\)</span> is coprime to <span class="math inline">\(m\)</span>, so if <span class="math inline">\(v\)</span> is coprime to <span class="math inline">\(m\)</span>, then <span class="math inline">\(f(v) = a\cdot v \bmod m\)</span> is also coprime to <span class="math inline">\(m\)</span>. So the map <span class="math inline">\(f\)</span> is well-defined.</p>
+<p>Next, we'll show that <span class="math inline">\(f\)</span> is injective. Suppose <span class="math inline">\(f(a_i) = f(a_j)\)</span>; we want to show that <span class="math inline">\(a_i = a_j\)</span>. Note that <span class="math inline">\(f(a_i) = f(a_j)\)</span> means that <span class="math inline">\(a\cdot a_i\)</span> is the same as <span class="math inline">\(a\cdot a_j\)</span> modulo <span class="math inline">\(m\)</span>, which by definition means that <span class="math inline">\(m\)</span> divides <span class="math inline">\(a\cdot a_i - a\cdot a_j = a\cdot (a_i - a_j).\)</span> Now, <span class="math inline">\(m\)</span> and <span class="math inline">\(a\)</span> are coprime, so <span class="math inline">\(m\)</span> divides <span class="math inline">\(a_i - a_j\)</span>. Also, <span class="math inline">\(0 \le a_i, a_j &lt; m\)</span>, so <span class="math inline">\(-m &lt; a_i - a_j &lt; m,\)</span> so the only way for <span class="math inline">\(m\)</span> to divide <span class="math inline">\(a_i - a_j\)</span> is if it's zero, so <span class="math inline">\(a_i - a_j = 0\)</span>, and <span class="math inline">\(a_i = a_j\)</span>. Therefore, <span class="math inline">\(f\)</span> is injective, and since it's a map from a finite set to a finite set, it's also surjective, so it's a bijection as claimed.</p>
+<p>Since both sets are the same modulo <span class="math inline">\(m\)</span>, multiplying all the numbers should give us the same result modulo <span class="math inline">\(m\)</span>, i.e., <span class="math display">\[\begin{align*}
+a_1\cdot a_2 \cdots a_{\varphi(m)} &amp;\equiv (a\cdot a_1)\cdot(a\cdot a_2)\cdots (a\cdot a_{\varphi(m)}) \pmod m \\
+a_1\cdot a_2 \cdots a_{\varphi(m)} &amp;\equiv a^{\varphi(m)} a_1\cdot a_2\cdots a_{\varphi(m)} \pmod m 
+\end{align*}\]</span> and <span class="math inline">\(m\)</span> divides <span class="math inline">\(a_1\cdot a_2 \cdots a_{\varphi(m)}\cdot (a^{\varphi(m)} - 1)\)</span>. But <span class="math inline">\(m\)</span> is coprime with <span class="math inline">\(a_1\cdot a_2 \cdots a_{\varphi(m)},\)</span> so <span class="math inline">\(m\)</span> must divide <span class="math inline">\(a^{\varphi(m)} - 1\)</span>, which is (equivalent to) what we want to prove. </details></p>
+<p>Here's another one:</p>
+<p><details class="proof"><summary>Proof 2</summary> First, we show that any number <span class="math inline">\(a\)</span> coprime to <span class="math inline">\(m\)</span> has a multiplicative inverse. Using <a href="https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity">Bézout's</a>, there exist integers <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> such that <span class="math display">\[ax + my = 1.\]</span> Reducing this modulo <span class="math inline">\(m\)</span> gives <span class="math inline">\(ax \equiv 1 \pmod{m}\)</span>, so <span class="math inline">\(x\)</span> is a multiplicative inverse of <span class="math inline">\(a\)</span>.</p>
+<p>Next, we show that <span class="math inline">\(a^k \equiv 1 \pmod{m}\)</span> for some positive integer <span class="math inline">\(k\)</span>. Consider the sequence <span class="math display">\[(1, a, a^2, a^3, \ldots).\]</span> Considering this sequence <em>modulo <span class="math inline">\(m\)</span></em>, each element is between <span class="math inline">\(0\)</span> and <span class="math inline">\(m-1\)</span>, so by the pigeonhole principle, they cannot all be distinct modulo <span class="math inline">\(m\)</span>; i.e., there exist <span class="math inline">\(0 \le i &lt; j\)</span> such that <span class="math display">\[a^i \equiv a^j \pmod m.\]</span> Letting <span class="math inline">\(a^{-1}\)</span> be a multiplicative inverse of <span class="math inline">\(a\)</span>, multiply both sides by <span class="math inline">\((a^{-1})^i\)</span> to get <span class="math display">\[1 \equiv a^{j-i} \pmod m,\]</span> which shows what we want.</p>
+<p>Now, let <span class="math inline">\(k\)</span> be the <em>smallest</em> positive integer such that <span class="math inline">\(a^k \equiv 1 \pmod{m}\)</span>. Let <span class="math display">\[S := \{a_1, a_2, \ldots, a_{\varphi(m)}\}\]</span> be the set of all the non-negative integers <span class="math inline">\(&lt; m\)</span> coprime to <span class="math inline">\(m\)</span>, and consider the equivalence relation <span class="math inline">\(\sim\)</span> on <span class="math inline">\(S\)</span> given by <span class="math display">\[u \sim v \leftrightarrow \text{$u \equiv va^j \!\pmod{m}$ for some $j$}.\]</span> We can check that this is indeed an equivalence relation:</p>
+<ul>
+<li><span class="math inline">\(u \equiv ua^0\)</span> so <span class="math inline">\(\sim\)</span> is reflexive;</li>
+<li><span class="math inline">\(u \equiv va^j\)</span> implies <span class="math inline">\(v \equiv ua^{-j}\)</span>, so <span class="math inline">\(\sim\)</span> is symmetric;</li>
+<li><span class="math inline">\(u \equiv va^i\)</span> and <span class="math inline">\(v \equiv wa^j\)</span> implies <span class="math inline">\(u \equiv wa^{i+j}\)</span>, so <span class="math inline">\(\sim\)</span> is transitive.</li>
+</ul>
+<p>Thus, we can partition <span class="math inline">\(S\)</span> using this equivalence relation <span class="math inline">\(\sim\)</span>. Note that every equivalence class contains exactly <span class="math inline">\(k\)</span> elements, because for every <span class="math inline">\(v \in S\)</span>, the following numbers (mod <span class="math inline">\(m\)</span>) are all the elements equivalent to <span class="math inline">\(v\)</span> via <span class="math inline">\(\sim\)</span>: <span class="math display">\[\{v, va, va^2, \ldots, va^{k-1} \}.\]</span> Note that further powers of <span class="math inline">\(a\)</span> don't yield new elements because <span class="math inline">\(a^k \equiv 1 \pmod{m}\)</span>, and these are all distinct because if <span class="math inline">\(va^i \equiv va^j \pmod{m}\)</span> for <span class="math inline">\(0 \le i &lt; j &lt; k\)</span>, then multiplying by the inverses of <span class="math inline">\(v\)</span> and <span class="math inline">\(a^i\)</span> (which are coprime to <span class="math inline">\(m\)</span>) yields <span class="math inline">\(a^{j-i} \equiv 1 \pmod{m}\)</span> with <span class="math inline">\(j - i &lt; k\)</span>, contradicting the fact that <span class="math inline">\(k\)</span> is the smallest one such that <span class="math inline">\(a^k \equiv 1 \pmod{m}\)</span>.</p>
+<p>Therefore, all the <span class="math inline">\(\phi(m)\)</span> elements of <span class="math inline">\(S\)</span> are partitioned into equivalence classes, each of which is of size <span class="math inline">\(k\)</span>. So if there are <span class="math inline">\(c\)</span> equivalence classes, we have the equation <span class="math display">\[\phi(m) = kc\]</span> (i.e., <span class="math inline">\(k\)</span> divides <span class="math inline">\(\phi(m)\)</span>), and therefore we have <span class="math display">\[a^{\phi(m)} = a^{kc} = (a^k)^c \equiv 1^c = 1 \pmod{m}.\]</span> </details></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>also known as the <strong>Fermat-Euler theorem</strong> because Fermat proved a special case (with <span class="math inline">\(m\)</span> prime), and also because Euler already has so many things named after him.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

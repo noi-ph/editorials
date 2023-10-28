@@ -48,74 +48,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     </style>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="/style/editorials.css" type="text/css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <style type="text/css">
-        body {
-            background-color: #e0e0e0;
-        }
-        .editorial {
-            font-family: Georgia,Cambria,"Times New Roman",Times,serif;
-            font-size: 20px;
-            max-width: 995px;
-        }
-        .editorial p {
-            text-align: justify;
-        }
-        .editorial .illus {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .editorial pre {
-            background-color: #f8f8f8;
-            border: 1px solid #c8c8c8;
-            border-radius: 5px;
-            padding: .8em;
-            /* margin-top: 2px; */
-            margin-bottom: 12px;
-        }
-        .editorial .editorial-section {
-            border: 1px solid #c8c8c8;
-            border-radius: 10px;
-            padding: 1.5rem 1rem 1rem 1rem;
-            background-color: white;
-        }
-        .editorial .theorem {
-            border: 1px solid #c8c8c8;
-            border-radius: 10px;
-            padding: 1rem 1.5rem 0 1.5rem;
-            background-color: #f0fff0;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-        .editorial .proof {
-            border: 1px solid #c8c8c8;
-            border-radius: 10px;
-            padding: 1rem 1rem .25rem 1rem;
-            background-color: #fbfbfb;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-        .center-p > p {
-            text-align: center;
-        }
-        .editorial a {
-            color: #3366CC;
-        }
-        .editorial a:visited {
-            color: #666699;
-        }
-        .editorial summary {
-            margin-bottom: .75rem;
-        }
-    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
 
     </head>
-<body>
+<body class="body">
 
 <!--
 
@@ -159,7 +100,9 @@ f(x) &amp;= \sum_{i=1}^n (x - v_i)^2 \\
     &amp;= 2n\left(x - \frac{\sum_{i=1}^n v_i}{n}\right) \\
     &amp;= 2n(x - a),
 \end{align*}\]</span> so <span class="math inline">\(f&#39;(x) &lt; 0\)</span> when <span class="math inline">\(x &lt; a\)</span> while <span class="math inline">\(f&#39;(x) &gt; 0\)</span> when <span class="math inline">\(x &gt; a\)</span>, so <span class="math inline">\(f\)</span> is decreasing up to <span class="math inline">\(a\)</span> and then increasing afterwards, so <span class="math inline">\(a\)</span> must be the global minimum. </details></p>
+<div class="remarks">
 <p><strong>Remark:</strong> This is actually the primary mathematical reason for why averages are so ubiquitous in probability and statistics! It being the square-error minimizer gives us a rigorous notion of what it <em>means</em> to “be in the center” of a set of points.</p>
+</div>
 <p>Note that this gives us our proof that <span class="math inline">\(n! \times \mathrm{SumSEMs}(a)\)</span> is always an integer. Each summand is an average, meaning it looks like <span class="math inline">\(\text{(sum of integers)}/k\)</span>, where <span class="math inline">\(k\)</span> is the length of a sublist. Since <span class="math inline">\(1 \leq k \leq n\)</span>, we are guaranteed that <span class="math inline">\(n!/k\)</span> is an integer, and therefore all summands become integers after multiplying by <span class="math inline">\(n!\)</span>.</p>
 <p>It may be a bit tedious, but for the first subtask, you can (with the aid of a calculator) compute <span class="math inline">\(a_1, a_2, a_3, a_4, a_5\)</span>, and then find the averages of each of its sublists. There are only <span class="math inline">\(5(5-1)/2 = 10\)</span> sublists, so this may be a bit tedious (especially since the numbers are big), but with a calculator, it’s still doable to compute this by hand.</p>
 <p></details></p>

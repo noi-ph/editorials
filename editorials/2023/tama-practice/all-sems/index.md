@@ -70,10 +70,12 @@ $$\begin{align*}
 so $f'(x) < 0$ when $x < a$ while $f'(x) > 0$ when $x > a$, so $f$ is decreasing up to $a$ and then increasing afterwards, so $a$ must be the global minimum.
 </details>
 
+<div class="remarks">
 **Remark:** This is actually the primary mathematical reason for why
 averages are so ubiquitous in probability and statistics! It being the
 square-error minimizer gives us a rigorous notion of what it *means* to
 “be in the center” of a set of points.
+</div>
 
 Note that this gives us our proof that $n! \times \mathrm{SumSEMs}(a)$
 is always an integer. Each summand is an average, meaning it looks like

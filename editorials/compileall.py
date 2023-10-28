@@ -10,7 +10,7 @@ def main():
 
     parser.add_argument('loc', nargs='*', default=[Path()], type=Path,
         help='Folders containing files to compile (default: current folder)')
-    parser.add_argument('-t', '--template', default='editorial_template.html', type=Path,
+    parser.add_argument('-t', '--template', default=Path('editorial_template.html'), type=Path,
         help='HTML template for pandoc to use (default: %(default)s)')
 
     args = parser.parse_args()
@@ -30,7 +30,7 @@ def main():
             run(['pandoc',
                 str(file),
                 '-o', str(target),
-                '-s',
+                '--standalone',
                 '--mathjax',
                 f'--template={args.template}',
             ])

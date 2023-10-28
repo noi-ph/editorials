@@ -48,74 +48,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     </style>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="/style/editorials.css" type="text/css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <style type="text/css">
-        body {
-            background-color: #e0e0e0;
-        }
-        .editorial {
-            font-family: Georgia,Cambria,"Times New Roman",Times,serif;
-            font-size: 20px;
-            max-width: 995px;
-        }
-        .editorial p {
-            text-align: justify;
-        }
-        .editorial .illus {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .editorial pre {
-            background-color: #f8f8f8;
-            border: 1px solid #c8c8c8;
-            border-radius: 5px;
-            padding: .8em;
-            /* margin-top: 2px; */
-            margin-bottom: 12px;
-        }
-        .editorial .editorial-section {
-            border: 1px solid #c8c8c8;
-            border-radius: 10px;
-            padding: 1.5rem 1rem 1rem 1rem;
-            background-color: white;
-        }
-        .editorial .theorem {
-            border: 1px solid #c8c8c8;
-            border-radius: 10px;
-            padding: 1rem 1.5rem 0 1.5rem;
-            background-color: #f0fff0;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-        .editorial .proof {
-            border: 1px solid #c8c8c8;
-            border-radius: 10px;
-            padding: 1rem 1rem .25rem 1rem;
-            background-color: #fbfbfb;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-        .center-p > p {
-            text-align: center;
-        }
-        .editorial a {
-            color: #3366CC;
-        }
-        .editorial a:visited {
-            color: #666699;
-        }
-        .editorial summary {
-            margin-bottom: .75rem;
-        }
-    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
 
     </head>
-<body>
+<body class="body">
 
 <!--
 
@@ -231,8 +172,12 @@ MOD <span class="op">=</span> <span class="dv">10</span><span class="op">**</spa
     \sum_{n=1}^N n^2 &amp;= \frac{1}{3} \left(N^3 + 3\frac{N(N+1)}{2} - N\right). \\
     \sum_{n=1}^N n^2 &amp;= \frac{N(N+1)(2N+1)}{6}. \\
 \end{align*}\]</span></p>
-<p><strong>Bonus:</strong> This process generalizes well. Use it derive a simple polynomial formula for the sum of cubes up to <span class="math inline">\(N\)</span>.</p>
+<div class="task">
+<p><strong>Bonus:</strong> This process generalizes well. Use it to derive a simple polynomial formula for the sum of cubes up to <span class="math inline">\(N\)</span>.</p>
+</div>
+<div class="remarks">
 <p><strong>Remark:</strong> The main ideas here can be used to derive formulas for any sum-of-powers summation. Using strong induction, you can show that <span class="math inline">\(\sum_{n=1}^N n^k\)</span> is always a degree <span class="math inline">\(k+1\)</span> polynomial in terms of <span class="math inline">\(N\)</span>—albeit for larger <span class="math inline">\(k\)</span>, the coefficients become much messier to look at.</p>
+</div>
 <p></details></p>
 </div>
 
