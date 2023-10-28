@@ -1,4 +1,4 @@
-# noi-ph.github.io
+# NOI.PH editorials repo
 
 Please visit https://noi.ph/
 

@@ -29,7 +29,7 @@ def main():
             print(f"COMPILING: {file} --> {target}")
             run(['pandoc',
                 str(file),
-                '-o', str(target),
+                f'--output={target}',
                 '--standalone',
                 '--mathjax',
                 f'--template={args.template}',
