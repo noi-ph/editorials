@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="pandoc" />
+    <title>Solution Writeup: The Glass Maze</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/style/editorials.css" type="text/css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    </head>
+<body class="body">
+
+<!--
+
+<div id="header">
+<h1 class="title">Solution Writeup: The Glass Maze</h1>
+</div>
+
+-->
+
+
+<div class="editorial container">
+<h1 id="the-glass-maze">The Glass Maze</h1>
+<h2 id="solution-writeup">Solution Writeup</h2>
+<p><strong>Contest:</strong> <a href="https://noi.ph/tama-2023/">TAMa 2023</a><br />
+<strong>Problem Idea:</strong> Kevin Atienza<br />
+<strong>Testing:</strong> Cassidy Tan, Vincent dela Cruz, JL Allas<br />
+<strong>Statement:</strong> Cisco Ortega<br />
+<strong>Test Data Preparation:</strong> Kevin Atienza<br />
+<strong>Solution Writeup:</strong> Cisco Ortega</p>
+<p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
+<p>First of all, generate the entire grid <span class="math inline">\(b\)</span> by just plugging and chugging using the formula. Use something like Python's <code>pow</code> function, or even Wolfram Alpha if you insist on doing the first subtask by hand.</p>
+<p>From now on, let's call <span class="math inline">\(W(i_s, j_s, i_t, j_t)\)</span> the <em>best weak link</em> between the two squares. The weak link along any path is the <em>minimum</em> grid value along that path. We also say <span class="math inline">\(s = (i_s, j_s)\)</span> and <span class="math inline">\(t = (i_t, j_t)\)</span> to reduce clutter.</p>
+<p>Consider a somewhat philosophical question: Why include the weak link at all in our path? Why not only pick stronger tiles? The answer must be, then, that we used the weakest link because we had no choice <em>but</em> to use it.</p>
+<p>So, let's endeavor to only use the strongest tiles for as long as we can help it, only choosing to use weaker tiles when it's clearly impossible with only stronger tiles, and our hand is forced. For two tiles <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span>, here is how we find their best weak link.</p>
+<p>For each tile in the grid, call it either &quot;to-be-used&quot; or &quot;to-be-avoided&quot;; initialize all tiles to &quot;to-be-avoided&quot;. We say that <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> are <strong>connected</strong> if there exists an NSEW-path between them that only uses to-be-used tiles; for now, let's not worry about how to determine connectivity with a program, since it's something that should be &quot;clear to see&quot; with your human eyes. For example, in the example on the left, <span class="math inline">\((1, 2)\)</span> and <span class="math inline">\((3, 4)\)</span> are connected, but on the example on the right, they are not.</p>
+<p>TODO</p>
+<p>Our goal is to now to try to connect <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> while prioritizing the use of the strongest tiles.</p>
+<ul>
+<li>Start by setting <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> themselves as to-be-used (since any path between them necessarily includes <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> themselves). Are they already connected? If so, we're done.</li>
+<li>If not, prioritize the strongest tile and set it as to-be-used. Are <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> connected now? If so, we're done.</li>
+<li>If not, prioritize the next strongest tile and set it as to-be-used. Are <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> connected now? If so, we're done.</li>
+<li>If not, prioritize the <em>next</em> strongest tile and set it as to-be-used. Are <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> connected now? If so, we're done.</li>
+<li>...</li>
+</ul>
+<p>Repeat this until <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> do become connected. The best weak link will be the value of the tile that caused <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> to be connected. Its optimality comes from the fact that it is <em>necessary</em>---we showed that it is impossible to get from <span class="math inline">\(s\)</span> to <span class="math inline">\(t\)</span> using only stronger tiles.</p>
+<p>Note that there is a bit of an edge case: technically, the weakest link is either the connecting tile <em>or one of <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> themselves</em> if they happen to be weaker than it. An easy way to fix the edge case is to just take the min grid value of <span class="math inline">\((s, t, \text{necessary connecting tile})\)</span> when we exit. An alternative fix is to modify the first step as follows:</p>
+<ul>
+<li>Start by setting <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> themselves as to-be-used, <strong>along with all other tiles that are stronger than <span class="math inline">\(s\)</span> or <span class="math inline">\(t\)</span></strong> (since we're forced into using <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> already anyway, these tiles can never make the solution worse).</li>
+</ul>
+<p>In either case, just conducting this process for all <span class="math inline">\((s, t)\)</span> pairs allows us to solve the problem for <span class="math inline">\(n=4\)</span> by hand, with a bit of effort (definitely with the help of a calculator or spreadsheet, though).</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 2</summary></p>
+<p>When <span class="math inline">\(n=12\)</span>, it is far too tedious to solve by hand. Therefore, we can just use a computer and ask it to do the computation for us. The previously described solution is pretty straightforward to directly translate into code, with <strong>one exception</strong>: determining if <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> are connected in the grid's current state.</p>
+<p>To solve this, we turn to a standard algorithm such as <strong>breadth first search</strong> or <strong>depth first search</strong>, often called BFS or DFS in the community. You can discover this by literally Googling &quot;how check when two tiles in grid are connected&quot;. Here is a screenshot of when I did; the StackOverflow link directly mentions DFS. Now that you know the keyword, you can seek out a dedicated beginner-friendly tutorial for it (and there are many online). May I recommend this one HYPERLINK, written by NOI.PH?</p>
+<p>Anyway, there are <span class="math inline">\(n^4 - n^2\)</span> pairs of start and target tiles. In each one, we perform a DFS/BFS up to <span class="math inline">\(n^2\)</span> times, once whenever we insert the next strongest tile in the grid and want to check connectivity again. Finally, each DFS or BFS takes on the order of <span class="math inline">\(\approx n^2\)</span> operations.</p>
+<p>In conclusion, we have established an upper bound: our solution takes <em>at most</em> <span class="math inline">\((n^4 - n^2) \times n^2 \times n^2\)</span> operations (probably less, since we might achieve connectedness after a few insertions). If you plug in <span class="math inline">\(n=12\)</span>, we get a number whose order of magnitude is <span class="math inline">\(\approx 10^8\)</span>, so our solution shouldn't take more than a few seconds to terminate.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 3</summary></p>
+<div class="remarks">
+<p><em>Construction ongoing!</em>    🏗 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🧱</p>
+</div>
+<p></details></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

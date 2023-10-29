@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="pandoc" />
+    <title>Solution Writeup: GCD of Fibonacci Subsets</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    </style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/style/editorials.css" type="text/css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    </head>
+<body class="body">
+
+<!--
+
+<div id="header">
+<h1 class="title">Solution Writeup: GCD of Fibonacci Subsets</h1>
+</div>
+
+-->
+
+
+<div class="editorial container">
+<h1 id="gcd-of-fibonacci-subsets">GCD of Fibonacci Subsets</h1>
+<h2 id="solution-writeup">Solution Writeup</h2>
+<p><strong>Contest:</strong> <a href="https://noi.ph/tama-2023/">TAMa 2023</a><br />
+<strong>Problem Idea:</strong> Cisco Ortega<br />
+<strong>Testing:</strong> Amanda Lim, Cassidy Tan<br />
+<strong>Statement:</strong> Cisco Ortega<br />
+<strong>Test Data Preparation:</strong> Kevin Atienza<br />
+<strong>Solution Writeup:</strong> Cisco Ortega, Kevin Atienza</p>
+<p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
+<p>Let’s build some intuition. Here are the first <span class="math inline">\(n=12\)</span> Fibonacci numbers: <span class="math display">\[
+    1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233
+\]</span> Maybe you then get the feeling that: most of these subsets would yield a gcd of <span class="math inline">\(1\)</span>!</p>
+<p>To formalize this, we note that if <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> have a gcd of <span class="math inline">\(1\)</span>, then <strong>any</strong> subset that contains <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> will automatically have a gcd of <span class="math inline">\(1\)</span> as well! A single pair of coprime <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> will “contaminate” the entire subset. So, as a necessary condition for some subset <span class="math inline">\(A\)</span> to have a gcd greater than <span class="math inline">\(1\)</span>, each <em>pair</em> of elements in <span class="math inline">\(A\)</span> must already have a gcd greater than <span class="math inline">\(1\)</span>.</p>
+<p>But looking at the first <span class="math inline">\(12\)</span> Fibonacci numbers, most pairs seem to be coprime!</p>
+<p>We note the following subsets of the first <span class="math inline">\(12\)</span> Fibonacci numbers:</p>
+<ul>
+<li>Divisible by <span class="math inline">\(2\)</span>: <span class="math inline">\(\{2, 8, 34, 144\}\)</span></li>
+<li>Divisible by <span class="math inline">\(3\)</span>: <span class="math inline">\(\{3, 21, 144\}\)</span></li>
+<li>Divisible by <span class="math inline">\(5\)</span>: <span class="math inline">\(\{5, 55\}\)</span></li>
+</ul>
+<p>and from there we can compute the answer (even by hand!) with the following series of steps:</p>
+<ul>
+<li>The gcd of a singleton set <span class="math inline">\(\{x\}\)</span> is <span class="math inline">\(x\)</span>.</li>
+<li>All subsets of <span class="math inline">\(\{2, 8, 34, 144\}\)</span> with at least <span class="math inline">\(2\)</span> elements have a gcd of <span class="math inline">\(2\)</span> ( <span class="math inline">\(\{8, 144\}\)</span>, whose gcd is <span class="math inline">\(8\)</span>)</li>
+<li>All subsets of <span class="math inline">\(\{3, 21, 144\}\)</span> with at least <span class="math inline">\(2\)</span> elements have a gcd of <span class="math inline">\(3\)</span></li>
+<li><span class="math inline">\(\{5, 55\}\)</span> has a gcd of <span class="math inline">\(5\)</span></li>
+<li><strong>All</strong> other subsets of the first <span class="math inline">\(12\)</span> Fibonacci numbers have a gcd of <span class="math inline">\(1\)</span>.</li>
+</ul>
+<p>We have now reduced the problem to counting the number of subsets of some set, which is classic in combinatorics.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 2</summary></p>
+<p>First, note that <span class="math inline">\(2^{54} \approx 1.8 \times 10^{16} \gg 10^8\)</span>, so it is not feasible to brute force over all subsets. We need something a little smarter. To solve subtask 2, I expect most solutions will still leverage the insight of: <em>these Fibonacci numbers seem to often not share common factors with that many other Fibonacci numbers</em>.</p>
+<p>There are many possible approaches that use this insight. Here are some solutions. Let the first <span class="math inline">\(n\)</span> Fibonacci numbers be indexed <span class="math inline">\(S = \{f_1, f_2, f_3, \dots, f_{n}\}\)</span>.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<h3 id="summing-based-on-the-minimum-element">Summing based on the minimum element</h3>
+<p>All non-empty subsets of <span class="math inline">\(S\)</span> have a minimum element. <em>Fix</em> an index <span class="math inline">\(i\)</span>, and suppose we <em>only</em> consider subsets whose minimum element is <span class="math inline">\(f_i\)</span> (thus the “minimum index” is <span class="math inline">\(i\)</span>).</p>
+<ul>
+<li>Because <span class="math inline">\(f_i\)</span> is the minimum, it’s always in the subsets we’re considering</li>
+<li>Let <span class="math inline">\(S&#39; = \{f_j \mid i &lt; j ~\text{and}~ \gcd(f_i, f_j) &gt; 1\}\)</span>, i.e., we filter out <em>only</em> the larger Fibonacci numbers that share a common factor with <span class="math inline">\(f_i\)</span> (a necessary condition for the gcd to be greater than <span class="math inline">\(1\)</span>)</li>
+<li>First, consider subsets with <span class="math inline">\(f_i\)</span> as the minimum, such that all other elements are in <span class="math inline">\(S&#39;\)</span> (i.e., all share a common factor with <span class="math inline">\(f_i\)</span>)
+<ul>
+<li><strong>Brute force</strong> all subsets <span class="math inline">\(A&#39;\)</span> of <span class="math inline">\(S&#39;\)</span></li>
+<li>For each one, compute <span class="math inline">\(\gcd(\{f_i\} \cup A&#39;)\)</span> and add that gcd to the total.</li>
+<li>There are <span class="math inline">\(2^{|S&#39;|}\)</span> such subsets that we need to consider, and if <span class="math inline">\(S&#39;\)</span> is usually small, then this is okay.</li>
+</ul></li>
+<li>Next, consider subsets with <span class="math inline">\(f_i\)</span> as the minimum that contain an element <em>not</em> in <span class="math inline">\(S&#39;\)</span> (i.e., share <em>no</em> common factors with <span class="math inline">\(S&#39;\)</span>)
+<ul>
+<li>Any subset that contains <span class="math inline">\(f_i\)</span> and a number it shares no common factors with will <em>automatically</em> have a gcd of <span class="math inline">\(1\)</span>!</li>
+<li>Among <span class="math inline">\(f_1\)</span> to <span class="math inline">\(f_n\)</span>, there are <span class="math inline">\(n-i\)</span> numbers greater than <span class="math inline">\(f_i\)</span></li>
+<li>Thus, there are <span class="math inline">\(2^{n-i}\)</span> subsets that have <span class="math inline">\(f_i\)</span> as the minimum element</li>
+<li>Thus, there are <span class="math inline">\(2^{n-i} - 2^{|S&#39;|}\)</span> subsets that have <span class="math inline">\(f_i\)</span> as the minimum element and contain at least one other element not in <span class="math inline">\(S&#39;\)</span>.</li>
+<li>Since each of these subsets yields a gcd of <span class="math inline">\(1\)</span>, we add <span class="math inline">\(2^{n-i} - 2^{|S&#39;|}\)</span> to our total.</li>
+</ul></li>
+</ul>
+<p>This solves the problem for a fixed <span class="math inline">\(i\)</span>; so, to solve the full problem, we run this solution across all <span class="math inline">\(i\)</span> from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span> (i.e., consider all possible minimum elements) and sum up all the subtotals.</p>
+<p>If <span class="math inline">\(n=54\)</span>, then we can check that this solution is fast enough, because <span class="math inline">\(\sum_i 2^{S&#39;} = 2935312 \ll 10^8\)</span>.</p>
+<div class="remarks">
+<p>Some final notes:</p>
+<ul>
+<li>To easily enumerate all subsets of some universal set, consider <strong>bitmasking</strong></li>
+<li>To easily find the gcd of a pair of numbers, use the <strong>Euclidean algorithm</strong></li>
+</ul>
+</div>
+<h3 id="producing-gcds-of-sets-recursively">Producing gcds of sets recursively</h3>
+<p>This solution produces the gcds of the sets recursively, and makes use of the fact that the values of gcd are all divisors of some <span class="math inline">\(f_i \in S\)</span>. For simplicity, we include the empty set in our enumeration and say that the empty set has gcd <span class="math inline">\(0\)</span>; note that <span class="math inline">\(\gcd(0, n) = n\)</span> for any <span class="math inline">\(n\)</span> in the usual definition of <span class="math inline">\(\gcd\)</span>, so this won’t affect our sum.</p>
+<p>Every subset of <span class="math inline">\(S_n := \{f_1, \ldots, f_n\}\)</span> is formed by taking a subset of <span class="math inline">\(S_{n-1} := \{f_1, \ldots, f_{n-1}\}\)</span>, and then either inserting or not inserting <span class="math inline">\(f_n\)</span> to it. (Note that <span class="math inline">\(S_{n-1}\)</span> has <span class="math inline">\(2^{n-1}\)</span> subsets.) Now, suppose we have a subset <span class="math inline">\(T \subseteq S_{n-1}\)</span> whose gcd is <span class="math inline">\(g\)</span>. If we insert <span class="math inline">\(f_n\)</span> to <span class="math inline">\(T\)</span>, the new gcd will clearly be <span class="math inline">\(\gcd(g, f_n)\)</span>. (Check!) Therefore, if the list of gcds of all subsets of <span class="math inline">\(S_{n-1}\)</span> is <span class="math inline">\((g_1, g_2, \ldots, g_{2^{n-1}})\)</span>, then the list of gcds of all subsets of <span class="math inline">\(S_n\)</span> is <span class="math display">\[(g_1, g_2, \ldots, g_{2^{n-1}}, h_1, h_2, \ldots, h_{2^{n-1}})\]</span> where <span class="math inline">\(h_i = \gcd(g_i, f_n)\)</span>. Thus, we can build the list of all gcds with recursion.</p>
+<p>So far, this still isn’t that much better than the usual brute force—we’re still essentially going through all subsets. However, we can dramatically speed this up by only listing the <em>distinct</em> values of the gcd, and keeping track of their <em>counts</em>. (In other words, we’re keeping a “frequency table” of the gcds.) This is okay because we don’t really need the subsets themselves, but only their <em>gcds</em>, and subsets with the same gcd behave pretty much identically as far as we’re concerned, so it makes sense to handle them all simultaneously.</p>
+<p>Doing it this way, the size of our data is no longer proportional to <span class="math inline">\(2^n\)</span>, but to the number of <em>distinct</em> gcd values (which are all divisors of all <span class="math inline">\(f_i \in S\)</span>). Finally, once we have the counts of the gcds of <span class="math inline">\(S\)</span>, we can simply sum them all up by weighting each distinct gcd value by its count!</p>
+<p>A possible implementation in Python now looks like the following. Here <code class="sourceCode python">gs</code> represents the frequency table. In Python, the most natural way to make a frequency table would be to use the <a href="https://docs.python.org/3/library/collections.html#collections.Counter"><code class="sourceCode python">Counter</code></a> class (from the <a href="https://docs.python.org/3/library/collections.html"><code class="sourceCode python">collections</code></a> library).<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> collections <span class="im">import</span> Counter
+<span class="im">from</span> math <span class="im">import</span> gcd
+
+mod <span class="op">=</span> <span class="dv">998</span>_244_353
+
+<span class="kw">def</span> insert_value(gs, f):
+    <span class="cf">for</span> g, c <span class="kw">in</span> [<span class="op">*</span>gs.items()]:
+        g <span class="op">=</span> gcd(g, f)
+        gs[g] <span class="op">=</span> (gs[g] <span class="op">+</span> c) <span class="op">%</span> mod
+
+<span class="kw">def</span> solve(n):
+    gs <span class="op">=</span> Counter([<span class="dv">0</span>])
+    a, b <span class="op">=</span> <span class="dv">0</span>, <span class="dv">1</span>
+    <span class="cf">for</span> it <span class="kw">in</span> <span class="bu">range</span>(n):
+        a, b <span class="op">=</span> b, a <span class="op">+</span> b
+        insert_value(gs, b)
+    <span class="cf">return</span> <span class="bu">sum</span>(g <span class="op">*</span> c <span class="cf">for</span> g, c <span class="kw">in</span> gs.items()) <span class="op">%</span> mod</code></pre></div>
+<p>Now, what’s the running time of this solution? Clearly it depends a lot on the number of <em>distinct</em> possible gcds. We have an upper bound, which is the total number of distinct divisors of all <span class="math inline">\(f_i \in S\)</span>. Well, this is somewhat hard to compute...</p>
+<p>...But actually, we don’t have to compute a bound at all! We can simply run the algorithm for increasing values of <span class="math inline">\(n\)</span> to see whether the number of distinct gcds grows too fast for the computer to handle, or grows reasonably tamely. And as it turns out, for <span class="math inline">\(n = 54\)</span> it’s pretty much instantaneous!</p>
+<div class="task">
+<p><strong>Exercise:</strong> You can actually see how many distinct gcd values there are by simply printing the size of <code class="sourceCode python">gs</code> at the end of each loop iteration! In other words, simply insert the line <code class="sourceCode python"><span class="bu">print</span>(<span class="bu">len</span>(gs))</code> at the end of the <code class="sourceCode python"><span class="cf">for</span></code> loop above.</p>
+<p>Do this and see for yourself that there really are only a few distinct values of the gcd.</p>
+<p>In fact, if you go ahead and do this, <strong>you’ll actually notice something quite peculiar...</strong></p>
+</div>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 3</summary></p>
+<div class="remarks">
+<p><em>Construction ongoing!</em>    🏗 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🧱</p>
+</div>
+<p></details></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Note that <span class="math inline">\(f_1 = 1\)</span> and <span class="math inline">\(f_2 = 2\)</span>, which differs from the usual indexing of Fibonacci numbers (where <span class="math inline">\(F_1 = 1\)</span> and <span class="math inline">\(F_2 = 1\)</span>).<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Here, <code class="sourceCode python">gs.items()</code> enumerates all key-value pairs (which in this case is the gcd value and the count), and <code>[*x]</code> creates a copy of the list. Note that it’s important that we make a copy of the list to not mess up the calculations! (Why?)<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

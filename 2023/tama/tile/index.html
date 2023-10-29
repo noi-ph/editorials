@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="pandoc" />
+    <title>Solution Writeup: Sweet Tile O’ Mine</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/style/editorials.css" type="text/css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    </head>
+<body class="body">
+
+<!--
+
+<div id="header">
+<h1 class="title">Solution Writeup: Sweet Tile O’ Mine</h1>
+</div>
+
+-->
+
+
+<div class="editorial container">
+<h1 id="sweet-tile-o-mine">Sweet Tile O’ Mine</h1>
+<h2 id="solution-writeup">Solution Writeup</h2>
+<p><strong>Contest:</strong> <a href="https://noi.ph/tama-2023/">TAMa 2023</a><br />
+<strong>Problem Idea:</strong> Cisco Ortega<br />
+<strong>Testing:</strong> Dylan Dalida, Vincent dela Cruz<br />
+<strong>Statement:</strong> Cisco Ortega<br />
+<strong>Test Data Preparation:</strong> Kevin Atienza<br />
+<strong>Solution Writeup:</strong> Cisco Ortega</p>
+<p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
+<h3 id="the-case-r1">The case <span class="math inline">\(r=1\)</span></h3>
+<p>Let’s consider an even simpler case: What is the answer when <span class="math inline">\(r=1\)</span>? Note that the only tiles available to us in this case are the <span class="math inline">\(1 \times 1\)</span> square and <span class="math inline">\(1 \times 2\)</span> domino.</p>
+<p>This is classic. Consider the leftmost empty square—what will be placed there? Either we place a <span class="math inline">\(1 \times 1\)</span> square there, or we place a <span class="math inline">\(1 \times 2\)</span> square there. In either case, we are left with the problem of tiling the remaining <span class="math inline">\(n-1\)</span> columns (if <span class="math inline">\(1 \times 1\)</span>) or <span class="math inline">\(n-2\)</span> columns (if <span class="math inline">\(1 \times 2\)</span>)—which is the same as our original problem, but with smaller inputs. <img class="illus" src="images/r1.png" width="320px"/> Let <span class="math inline">\(f(n)\)</span> be the number of ways to tile a <span class="math inline">\(1\)</span>-row Beast Bar with <span class="math inline">\(n\)</span> columns. Then, we see that <span class="math display">\[
+    f(n) = f(n-1) + f(n-2)
+\]</span> with base cases <span class="math inline">\(f(0) = f(1) = 1\)</span>.</p>
+<div class="task">
+<p><strong>Bonus:</strong> Compute the first few values of this sequence. Aren’t these numbers familiar?</p>
+</div>
+<h3 id="the-case-r2">The case <span class="math inline">\(r=2\)</span></h3>
+<p>Let’s proceed similarly for the case where <span class="math inline">\(r=2\)</span>. Consider the leftmost empty column—it <em>has</em> to be filled up somehow, so let’s consider all the possible configurations of pieces that completely cover it.</p>
+<p>There are eleven such ways. It’s more nontrivial to enumerate all of them (<em>and nontrivial to be certain that we didn’t miss any</em>) but all we have to do is be systematic and split into cases. What piece covers the first row? Is it a <span class="math inline">\(1 \times 1\)</span>, or a <span class="math inline">\(1 \times 2\)</span>, or a <span class="math inline">\(2 \times 1\)</span>, or a rotation of an L, or one of the <span class="math inline">\(2 \times 2\)</span>s? Carefully consider each possible case one by one. <img class="illus" src="images/r2.png" width="640px"/> Notice that some of these solutions “incompletely” cover the second column. Instead of just <span class="math inline">\(f(n)\)</span>, let’s define <em>four</em> functions <span class="math inline">\(f_{00}, f_{01}, f_{10}\)</span>, and <span class="math inline">\(f_{11}\)</span> such that <span class="math inline">\(f_s(n)\)</span> determines the number of ways to completely tile a <span class="math inline">\(2\)</span>-row Beast Bar with <span class="math inline">\(n\)</span> columns <em>if</em> there is some garbage in the leftmost column (as determined by the subscript)—the first character is <code>1</code> if there is garbage in the first row, and <code>0</code> otherwise; likewise with the second character.</p>
+<p>We can go back and partition those eleven different ways according to the garbage they leave in the following column. <img class="illus" src="images/r2-gray.png" width="900px"/></p>
+<p>Thus, we say: <span class="math display">\[
+    f_{00}(n) = 2 f_{00}(n-1) + 2 f_{01}(n-1) + 2 f_{10}(n-1) + 5 f_{11}(n-1).
+\]</span> We consider all ways to tile the first column, and then we’re left with the task of tiling the rest of the Beast Bar (with maybe some garbage in that first column, which we remember to account for).</p>
+<p>Let’s proceed with the other cases. What can you do when there’s a single square of garbage on the bottom row? <img class="illus" src="images/r2-mask-1b.png" width="880px"/> which similarly means, <span class="math display">\[
+    f_{01}(n) = f_{00}(n-1) + f_{10}(n-1) + f_{11}(n-1).
+\]</span></p>
+<p>By symmetry, the case when there’s a single square of garbage in the top row is similar: <span class="math display">\[
+    f_{10}(n) = f_{00}(n-1) + f_{01}(n-1) + f_{11}(n-1).
+\]</span></p>
+<p>Finally, if we want to tile <span class="math inline">\(n\)</span> columns but the entirety of the leftmost column is filled with garbage—well, that’s the same as tiling <span class="math inline">\(n-1\)</span> columns (with a clean leftmost column): <span class="math display">\[
+    f_{11}(n) = f_{00}(n-1).
+\]</span></p>
+<p>Note that this tactic of, “We only need to keep track of the garbage in the leftmost column,” works because our tiles <strong>all have a width of at most 2 squares</strong>—so tiles placed to cover a square in the leftmost column can only affect up to one column over.</p>
+<p>If <span class="math inline">\(c\)</span> is small (and <span class="math inline">\(c=8\)</span> is small enough that you can even do this by hand), then what we can do is create a table with four rows (labeled <code>00</code> and <code>01</code> and <code>10</code> and <code>11</code>) and <span class="math inline">\(c+1\)</span> columns (labeled <span class="math inline">\(0\)</span> to <span class="math inline">\(c\)</span>) such that the cell in the row labeled <span class="math inline">\(s\)</span> and the column labeled <span class="math inline">\(n\)</span> contains the value <span class="math inline">\(f_s(n)\)</span>. Then, you can populate the table from left-to-right, calculating the values that go in each column by using the values in the previous column.</p>
+<ul>
+<li>What is our base case? What should be the values of <span class="math inline">\(f_{00}(0)\)</span> and <span class="math inline">\(f_{01}(0)\)</span> and <span class="math inline">\(f_{10}(0)\)</span> and <span class="math inline">\(f_{11}(0)\)</span>?</li>
+<li>Once the table has been fully populated—which cell contains our answer?</li>
+</ul>
+<p></details></p>
+<p><details class="editorial-section" ><summary class="h2">Subtask 2</summary></p>
+<h3 id="the-case-r3">The case <span class="math inline">\(r=3\)</span></h3>
+<p>The case for when <span class="math inline">\(r=3\)</span> is pretty much the same as the <span class="math inline">\(r=2\)</span> case, with the only exception being that we now have to keep track of <span class="math inline">\(2^3 = 8\)</span> possible states for how garbage is placed in the leftmost column.</p>
+<p>Also, there are even more different ways to cover the first column, but it’s still not too hard to enumerate all of them by hand. Again, just be very systematic with your casework.</p>
+<ul>
+<li>Suppose we place a <span class="math inline">\(1 \times 1\)</span> square in the topmost row. Now, exhaust all the ways to place tiles in the remaining rows...
+<ul>
+<li>Suppose we place a <span class="math inline">\(1 \times 1\)</span> square in the next row. Now, exhaust all the ways to place tiles in the remaining row...</li>
+<li>After that, suppose we place a <span class="math inline">\(1 \times 2\)</span> domino in the next row. Now, exhaust all the ways to place tiles in the remaining row...</li>
+<li>After that, suppose we place a <span class="math inline">\(2 \times 1\)</span> domino in the next row. Now, exhaust all the ways to place tiles in the remaining row...</li>
+<li>...</li>
+</ul></li>
+<li>After that, suppose we place a <span class="math inline">\(1 \times 2\)</span> square in the topmost row. Now, exhaust all the ways to place tiles in the remaining rows...</li>
+<li>...</li>
+</ul>
+<p>It may seem like a lot of work, but I promise that with careful bookkeeping and meticulous enumeration, you should be done with just a few minutes of active effort. Don’t underestimate how much time and grief can be saved by just being organized!</p>
+<p>Here, we’ve decided to help you get started! These are all the ways to cover the first column with tiles, assuming the first column has no garbage, <em>and we place a <span class="math inline">\(1 \times 1\)</span> square in the topmost row</em>. <img class="illus" src="images/r3-sq.png" width="900px" /> You’ll find that the “has no garbage in the first column” <code>000</code> case will take up the bulk of your work. When there is garbage in the first row, your options for placing tiles will get severely more limited, and you’ll finish enumerating all the possibilities much more quickly.</p>
+<p>Anyway, when you’re done, you can construct eight interdependent recurrence relations <span class="math inline">\(f_{000}\)</span>, <span class="math inline">\(f_{001}\)</span>, <span class="math inline">\(f_{010}\)</span>, <span class="math inline">\(f_{011}\)</span>, <span class="math inline">\(f_{100}\)</span>, <span class="math inline">\(f_{101}\)</span>, <span class="math inline">\(f_{110}\)</span>, and <span class="math inline">\(f_{111}\)</span>, similarly to what we did for subtask <span class="math inline">\(1\)</span>.</p>
+<p>Then, again construct the <span class="math inline">\(2^3 \times (c+1)\)</span> table. Populate the table from left-to-right, computing the values that go in each column using the values in the previous column. Of course, you should use a computer to do this instead of doing it by hand, perhaps representing the table as <span class="math inline">\(8\)</span> lists. Because <span class="math inline">\(8 \times (10^6+1) &lt; 10^8\)</span>, we will still comfortably be within our <span class="math inline">\(1\)</span> minute time limit.</p>
+<p></details></p>
+<p><details class="editorial-section" ><summary class="h2">Subtask 3</summary></p>
+<p>The eight functions <span class="math inline">\(f_{000}\)</span>, <span class="math inline">\(f_{001}\)</span>, <span class="math inline">\(f_{010}\)</span>, <span class="math inline">\(f_{011}\)</span>, <span class="math inline">\(f_{100}\)</span>, <span class="math inline">\(f_{101}\)</span>, <span class="math inline">\(f_{110}\)</span>, and <span class="math inline">\(f_{111}\)</span> are so interdependent that it makes sense to “bundle” them together into one vector.</p>
+<p>With the language of vector addition and scalar multiplication, you can check that the eight recurrence relations can be written in the following way: <span class="math display">\[
+\small
+    \begin{bmatrix}
+        f_{000}(n+1) \\
+        f_{001}(n+1) \\
+        f_{010}(n+1) \\
+        f_{011}(n+1) \\
+        f_{100}(n+1) \\
+        f_{101}(n+1) \\
+        f_{110}(n+1) \\
+        f_{111}(n+1)
+    \end{bmatrix}
+    = 
+    f_{000}(n)\!\begin{bmatrix}
+        3 \\
+        2 \\
+        1 \\
+        1 \\
+        2 \\
+        1 \\
+        1 \\
+        1 \\
+    \end{bmatrix}
+    +
+    f_{001}(n)\!\begin{bmatrix}
+        3 \\
+        0 \\
+        1 \\
+        0 \\
+        2 \\
+        0 \\
+        1 \\
+        0 \\
+    \end{bmatrix}
+    +
+    f_{010}(n)\!\begin{bmatrix}
+        3 \\
+        2 \\
+        0 \\
+        0 \\
+        2 \\
+        1 \\
+        0 \\
+        0 \\
+    \end{bmatrix}
+    +
+    f_{011}(n)\!\begin{bmatrix}
+        7 \\
+        1 \\
+        1 \\
+        0 \\
+        5 \\
+        1 \\
+        1 \\
+        0 \\
+    \end{bmatrix}
+    +
+    f_{100}(n)\!\begin{bmatrix}
+        3 \\
+        2 \\
+        1 \\
+        1 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+    \end{bmatrix}
+    +
+    f_{101}(n)\!\begin{bmatrix}
+        3 \\
+        0 \\
+        1 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+    \end{bmatrix}
+    +
+    f_{110}(n)\!\begin{bmatrix}
+        7 \\
+        5 \\
+        1 \\
+        1 \\
+        1 \\
+        1 \\
+        0 \\
+        0 \\
+    \end{bmatrix}
+    +
+    f_{111}(n)\!\begin{bmatrix}
+        11 \\
+        1 \\
+        1 \\
+        0 \\
+        1 \\
+        0 \\
+        0 \\
+        0 \\
+    \end{bmatrix}.
+\]</span> Let <span class="math inline">\(T\)</span> be a function that accepts an <span class="math inline">\(8\)</span>-element vector and outputs another <span class="math inline">\(8\)</span>-element vector, defined as: <span class="math display">\[
+\begin{align*}
+    T\left(\begin{bmatrix}
+        v_0 \\
+        v_1 \\
+        v_2 \\
+        v_3 \\
+        v_4 \\
+        v_5 \\
+        v_6 \\
+        v_7 \\
+    \end{bmatrix}
+    \right) =
+    v_0 \begin{bmatrix}
+        3 \\
+        2 \\
+        1 \\
+        1 \\
+        2 \\
+        1 \\
+        1 \\
+        1 \\
+    \end{bmatrix}
+    +
+    v_1 \begin{bmatrix}
+        3 \\
+        0 \\
+        1 \\
+        0 \\
+        2 \\
+        0 \\
+        1 \\
+        0 \\
+    \end{bmatrix}
+    +
+    v_2 \begin{bmatrix}
+        3 \\
+        2 \\
+        0 \\
+        0 \\
+        2 \\
+        1 \\
+        0 \\
+        0 \\
+    \end{bmatrix}
+    +
+    v_3 \begin{bmatrix}
+        7 \\
+        1 \\
+        1 \\
+        0 \\
+        5 \\
+        1 \\
+        1 \\
+        0 \\
+    \end{bmatrix}
+    +
+    v_4 \begin{bmatrix}
+        3 \\
+        2 \\
+        1 \\
+        1 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+    \end{bmatrix}
+    +
+    v_5 \begin{bmatrix}
+        3 \\
+        0 \\
+        1 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+        0 \\
+    \end{bmatrix}
+    +
+    v_6 \begin{bmatrix}
+        7 \\
+        5 \\
+        1 \\
+        1 \\
+        1 \\
+        1 \\
+        0 \\
+        0 \\
+    \end{bmatrix}
+    +
+    v_7 \begin{bmatrix}
+        11 \\
+        1 \\
+        1 \\
+        0 \\
+        1 \\
+        0 \\
+        0 \\
+        0 \\
+    \end{bmatrix}.
+\end{align*}
+\]</span> Rewriting what has already been written: <span class="math display">\[
+\begin{align*}
+    T\left(
+    \begin{bmatrix}
+        f_{000}(n) \\
+        f_{001}(n) \\
+        f_{010}(n) \\
+        f_{011}(n) \\
+        f_{100}(n) \\
+        f_{101}(n) \\
+        f_{110}(n) \\
+        f_{111}(n)
+    \end{bmatrix}
+    \right)
+    =
+    \begin{bmatrix}
+        f_{000}(n+1) \\
+        f_{001}(n+1) \\
+        f_{010}(n+1) \\
+        f_{011}(n+1) \\
+        f_{100}(n+1) \\
+        f_{101}(n+1) \\
+        f_{110}(n+1) \\
+        f_{111}(n+1)
+    \end{bmatrix}.
+\end{align*}
+\]</span> In a sense, <span class="math inline">\(T\)</span> is a <strong>“transition”</strong> function. When we apply it to a vector containing our bundle of <span class="math inline">\(f_{s}(n)\)</span> functions, it “advances all of them forward” by <span class="math inline">\(+1\)</span>. To get the answer that we want: <span class="math display">\[
+\begin{align*}
+    \underbrace{T(T(T\dots T}_{c~\text{times}}\left(
+    \begin{bmatrix}
+        f_{000}(0) \\
+        f_{001}(0) \\
+        f_{010}(0) \\
+        f_{011}(0) \\
+        f_{100}(0) \\
+        f_{101}(0) \\
+        f_{110}(0) \\
+        f_{111}(0)
+    \end{bmatrix}
+    \right)\dots )))
+    =
+    \begin{bmatrix}
+        f_{000}(c) \\
+        f_{001}(c) \\
+        f_{010}(c) \\
+        f_{011}(c) \\
+        f_{100}(c) \\
+        f_{101}(c) \\
+        f_{110}(c) \\
+        f_{111}(c)
+    \end{bmatrix}.
+\end{align*}
+\]</span></p>
+<p>If you’re aware of linear transformations (vector-functions that have the form of <span class="math inline">\(T\)</span>), then you know that <span class="math inline">\(T\)</span> can be written as a <strong>matrix</strong>, and the function <span class="math display">\[
+    \underbrace{T\circ T\circ T\circ \dots \circ T}_{c~\text{times}}
+\]</span> can be evaluated in <span class="math inline">\(\approx \log_2 (c)\)</span> matrix multiplications using any fast exponentiation algorithm. </details></p>
+<p><details class="editorial-section"><summary class="h2">Subtasks 4 &amp; 5</summary></p>
+<p>For <span class="math inline">\(r=7\)</span>, just do the same thing that we had done previously, except the difference is that you should use <strong>code</strong> to determine the transition function <span class="math inline">\(T\)</span>, instead of doing it by hand. The idea is still the same though—try placing some tile in the topmost row, recurse on the remaining rows, then backtrack and try placing a different tile there (and again recursing on the remaining rows). This idea is called <strong>recursive backtracking</strong>.</p>
+<p>Each matrix multiplication takes roughly <span class="math inline">\((2^7)^3\)</span> steps, and we can still afford to do <span class="math inline">\(\log_2(10^{18})\)</span> such operations for Subtask 5.</p>
+<p></details></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

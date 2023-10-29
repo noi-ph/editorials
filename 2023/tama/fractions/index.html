@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="pandoc" />
+    <title>Solution Writeup: Fruity Fractions</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/style/editorials.css" type="text/css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    </head>
+<body class="body">
+
+<!--
+
+<div id="header">
+<h1 class="title">Solution Writeup: Fruity Fractions</h1>
+</div>
+
+-->
+
+
+<div class="editorial container">
+<h1 id="fruity-fractions">Fruity Fractions</h1>
+<h2 id="solution-writeup">Solution Writeup</h2>
+<p><strong>Contest:</strong> <a href="https://noi.ph/tama-2023/">TAMa 2023</a><br />
+<strong>Problem Idea:</strong> Kevin Atienza<br />
+<strong>Testing:</strong> Vincent dela Cruz<br />
+<strong>Statement:</strong> Cisco Ortega<br />
+<strong>Test Data Preparation:</strong> Kevin Atienza<br />
+<strong>Solution Writeup:</strong> Cisco Ortega, Kevin Atienza</p>
+<p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
+<p>Let the apple emoji 🍎 be <span class="math inline">\(x\)</span>, the banana emoji 🍌 be <span class="math inline">\(y\)</span>, and the coconut emoji 🥥 be <span class="math inline">\(z\)</span>.</p>
+<p>First, note that floating point is the devil. So, as one normally does with rational functions, let’s multiply through both sides by a common denominator and move everything to one side.</p>
+<p>To be a bit less cluttered, let <span class="math inline">\(s = x + 2z\)</span> and <span class="math inline">\(t = 2x - y + 3z\)</span>. Then, we should get: <span class="math display">\[
+    \frac{2syt + 2xyt - 3xst - xsy}{xsyt} = 0.
+\]</span> And again, as is typical for rational functions, we know that the entire expression equals <span class="math inline">\(0\)</span> when <span class="math inline">\(2syt + 2xyt - 3xst - xsy = 0\)</span> and <span class="math inline">\(x \neq 0\)</span> and <span class="math inline">\(s \neq 0\)</span> and <span class="math inline">\(y \neq 0\)</span> and <span class="math inline">\(t \neq 0\)</span>.</p>
+<p>This can all be done using integer arithmetic! Perfect!</p>
+<p>A simple brute force solution is to enumerate <strong>all</strong> tuples of <span class="math inline">\((x, y, z)\)</span> where <span class="math inline">\(-n \leq x, y, z \leq n\)</span> (say, using three nested for loops) and count the number of tuples for which the above criteria hold. The total amount of work is proportional to <span class="math inline">\((2n+1)^3\)</span>, the number of tested tuples, and with <span class="math inline">\(n=3^5 = 243\)</span>, this approach is fast enough for the first subtask.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 2</summary></p>
+<p>Let’s write the numerator entirely in terms of <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>: <span class="math display">\[
+    2(x+2z)y(2x - y + 3z) + 2xy(2x - y + 3z) - 2x(x+2z)(2x - y + 3z) - 2x(x+2z)y = 0.
+\]</span> If we expand this out and collect like terms, we should get an equation that looks something like this: <span class="math display">\[
+    Ax^3 + Bx^2y + Cxy^2 + Dy^2z + Eyz^2 + Fx^2z + Gxz^2 + Hxyz = 0,
+\]</span> where <span class="math inline">\(A, B, C, D, E, F, G, H\)</span> are some constants whose values I won’t spell out here (you can do the algebra on pen-and-paper or using a computer algebra system to get these coefficients yourself).</p>
+<p>However, note that once <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are selected, then our choices for <span class="math inline">\(z\)</span> are “locked in”; when only <span class="math inline">\(z\)</span> is left to vary, we are left with a one-variable equation, which we know how to solve! In particular: <span class="math display">\[
+    (Ey + Gx)z^2 + (Dy^2 + Fx^2 + Hxy)z + (Ax^3 + Bx^2y + Cxy^2) = 0.
+\]</span> If <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are fixed, then this just becomes a quadratic equation in terms of <span class="math inline">\(z\)</span>, and we know how to solve those! So, precisely, we get the following solution:</p>
+<ul>
+<li>Enumerate all pairs <span class="math inline">\((x, y)\)</span> such that <span class="math inline">\(-n \leq x, y \leq n\)</span>. For each one:
+<ul>
+<li>Use the quadratic formula to solve for what values of <span class="math inline">\(z\)</span> satisfy the equation.</li>
+<li>For each distinct solution of <span class="math inline">\(z\)</span> that (a) is an integer; and (b) lies within <span class="math inline">\(-n\)</span> to <span class="math inline">\(n\)</span>, add <span class="math inline">\(+1\)</span> to the answer.
+<ul>
+<li>Remember also to not count solutions which would make any of the denominators equal to <span class="math inline">\(0\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>You also have to handle some other edge cases, such as what to do if <span class="math inline">\(Ey + Gx = 0\)</span>, but those are implementation details you can figure out yourself. The amount of work done is now only proportional to <span class="math inline">\((2n+1)^2\)</span> (since we only enumerate all possible <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>). With <span class="math inline">\(n = 5^5 = 3125\)</span>, this approach is fast enough for the second subtask.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 3</summary></p>
+<p>The previous algorithm is too slow for subtasks 3 and 4. This is because the amount of work grows quadratically with respect to <span class="math inline">\(n\)</span>, and for <span class="math inline">\(n = 5^{10} = 9765625\)</span>, we have <span class="math inline">\((2n+1)^2 \approx 4\cdot 10^{14}\)</span>, which is quite large; a computer that can do <span class="math inline">\(1\)</span> billion operations per second (a.k.a. “1 gigahertz”) will take several days to solve this problem with the previous algorithm.</p>
+<p>Anyway, for this subtask, we will just give you hints on how to proceed. But for these hints to be helpful, you probably should first know how to solve degree <span class="math inline">\(1\)</span> and degree <span class="math inline">\(2\)</span> Diophantine equations. (The current equation is of degree <span class="math inline">\(3\)</span>.) There are plenty of those you can practice on in Project Euler.</p>
+<div class="task">
+<p><strong>Hint 1:</strong> If <span class="math inline">\((x, y, z)\)</span> is an integer solution, then <span class="math inline">\((n x, n y, n z)\)</span> is also an integer solution for any integer <span class="math inline">\(n\)</span>. In fact, <span class="math inline">\((\alpha x, \alpha y, \alpha z)\)</span> is a <em>rational</em> solution for any rational <span class="math inline">\(\alpha\)</span>.</p>
+<p>(Basically, “<span class="math inline">\(f\)</span> is <em>homogeneous</em>.”)</p>
+<p>If you think about this some more, it means that if we write our equation as <span class="math display">\[f(x, y, z) = 0,\]</span> then integer solutions to this are related to rational solutions of <span class="math display">\[f(X, Y, 1) = 0.\]</span></p>
+</div>
+<div class="task">
+<p><strong>Hint 2:</strong> Because <span class="math inline">\(f\)</span> is homogeneous of degree <span class="math inline">\(3\)</span>, the graph of <span class="math inline">\(f(X, Y, 1) = 0\)</span> is a cubic curve, which renders the corresponding rational equation hard to solve. (We can generally solve up to degree <span class="math inline">\(2\)</span> easily, but degree <span class="math inline">\(3\)</span> is where dragons<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> roam.)</p>
+<p>However, if you actually draw/plot the graph of <span class="math inline">\(f(X, Y, 1) = 0\)</span>, you should see <em>something curious</em>...</p>
+</div>
+<p></details></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>dragons known as <em>elliptic curves</em>, that is<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

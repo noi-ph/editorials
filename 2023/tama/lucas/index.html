@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="pandoc" />
+    <title>Solution Writeup: Squares of Even Lucas Numbers</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    </style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/style/editorials.css" type="text/css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    </head>
+<body class="body">
+
+<!--
+
+<div id="header">
+<h1 class="title">Solution Writeup: Squares of Even Lucas Numbers</h1>
+</div>
+
+-->
+
+
+<div class="editorial container">
+<h1 id="squares-of-even-lucas-numbers">Squares of Even Lucas Numbers</h1>
+<h2 id="solution-writeup">Solution Writeup</h2>
+<p><strong>Contest:</strong> <a href="https://noi.ph/tama-2023/">TAMa 2023</a><br />
+<strong>Problem Idea:</strong> Cisco Ortega<br />
+<strong>Testing:</strong> Paolo Estavillo, Vincent dela Cruz<br />
+<strong>Statement:</strong> Cisco Ortega<br />
+<strong>Test Data Preparation:</strong> Kevin Atienza<br />
+<strong>Solution Writeup:</strong> Cisco Ortega</p>
+<p><details class="editorial-section"><summary class="h2">Subtasks 1 &amp; 2</summary></p>
+<p><strong>Just do it.</strong> With <span class="math inline">\(n = 10^6 + 2023 &lt; 10^8\)</span>, we have more than enough time to simply generate all of the first <span class="math inline">\(n\)</span> Lucas numbers and add up the squares of the even ones. Also, <span class="math inline">\(n=30\)</span> is small enough that you could do the first subtask by hand, if you feel compelled.</p>
+<p>There is one caveat. Lucas numbers grow exponentially quickly, so we need to make sure to take mods at all intermediate steps, i.e., compute the Lucas numbers modulo <span class="math inline">\(m\)</span> as we go along, instead of only at the end:</p>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">L <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">1</span>]
+<span class="cf">while</span> <span class="bu">len</span>(L) <span class="op">&lt;</span> n:
+    L.append(
+        (L[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> L[<span class="op">-</span><span class="dv">2</span>]) <span class="op">%</span> m  <span class="co"># mod each number!!</span>
+    )
+<span class="co"># now, add the squares of the even ones...</span></code></pre></div>
+<p>This keeps the sizes of the numbers “reasonable”.</p>
+<p>The problem with this is that <span class="definition" data-bs-toggle="tooltip" data-bs-placement="bottom" title="The parity of a number is whether it’s odd or even. (The word “parity” itself is related to the word “pair”.)">parity</span> is not necessarily preserved after taking mods. For example: <span class="math display">\[
+\begin{align*}
+    1568397607 \bmod 998244353 &amp;= 570153254, \\
+    45537549124 \bmod 998244353 &amp;= 616553239,
+\end{align*}
+\]</span> so there are cases where odd Lucas numbers are being turned even, and vice versa.</p>
+<p>So, we need a way to tell us whether a pre-modded Lucas number is even or odd. There are a few options, actually. Here’s two of them.</p>
+<h3 id="generate-the-parities-separately">Generate the parities separately</h3>
+<p><em>In addition</em> to the values of the Lucas numbers modulo <span class="math inline">\(m\)</span>, separately compute them modulo <span class="math inline">\(2\)</span> as well. Use the value mod <span class="math inline">\(2\)</span> to determine if it is even, and if it is, add the square of the value mod <span class="math inline">\(m\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python">L <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">1</span>]
+L_parity <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>]
+<span class="cf">while</span> <span class="bu">len</span>(L) <span class="op">&lt;</span> n:
+    L.append(
+        (L[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> L[<span class="op">-</span><span class="dv">2</span>]) <span class="op">%</span> m  <span class="co"># mod each number!!</span>
+    )
+    L_parity.append(
+        (L_parity[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> L_parity[<span class="op">-</span><span class="dv">2</span>]) <span class="op">%</span> <span class="dv">2</span>
+    )
+
+total <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> value, parity <span class="kw">in</span> <span class="bu">zip</span>(L, L_parity):
+    <span class="cf">if</span> parity <span class="op">==</span> <span class="dv">0</span>:
+        total <span class="op">=</span> (total <span class="op">+</span> value<span class="op">**</span><span class="dv">2</span>) <span class="op">%</span> m</code></pre></div>
+<div class="remarks">
+<p><strong>Remark:</strong> You can also just compute the Lucas numbers modulo <span class="math inline">\(2m\)</span>; that way, reducing them modulo <span class="math inline">\(m\)</span> and <span class="math inline">\(2\)</span> is still valid. (Can you see why?)</p>
+</div>
+<h3 id="pen-and-paper-insight">Pen-and-paper insight</h3>
+It turns out that there’s a simple criterion that gives us the parity of a Lucas number given only its index.
+<div class="theorem">
+<p><strong>Claim:</strong> <span class="math inline">\(L_{k}\)</span> is even if and only if <span class="math inline">\(k\)</span> is divisible by <span class="math inline">\(3\)</span>.</p>
+</div>
+<p>Perhaps you might have spotted this pattern while playing around with the numbers. And actually, it’s not that hard to prove.</p>
+<p><details class="proof"><summary>Proof</summary> Perform strong induction. Assume that <span class="math inline">\(L_{3k-2}\)</span> and <span class="math inline">\(L_{3k-1}\)</span> are odd and that <span class="math inline">\(L_{3k}\)</span> is even; use this to show that <span class="math inline">\(L_{3(k+1) - 2}\)</span> and <span class="math inline">\(L_{3(k+1) - 1}\)</span> are odd and that <span class="math inline">\(L_{3(k+1)}\)</span> is even.</p>
+<p>This fact directly follows from the definition of the Lucas sequence and working with it modulo <span class="math inline">\(2\)</span>. The details aren’t too hard and are left as an exercise. </details></p>
+<p>So, even more simply, you only need to add up the squares of the Lucas numbers whose index is a multiple of <span class="math inline">\(3\)</span>.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 3</summary></p>
+<p>The interesting thing about the numbers modulo <span class="math inline">\(m\)</span> is that there are <em>finitely many of them</em>. That means any infinite sequence such as the Lucas numbers will start to <em>repeat</em> at a certain point.</p>
+<p>In particular, the Lucas sequence is a <em>linear recurrence relation</em>—each next term is determined entirely by the previous two terms in the sequence. So once you get two consecutive terms <span class="math inline">\((L_k, L_{k+1})\)</span> such that this ordered pair of consecutive values already appeared previously in the sequence, we <em>know</em> that the sequence is going to be periodic from this point on, and we know what that period will be.</p>
+<p>For example, consider the Lucas numbers modulo <span class="math inline">\(10\)</span>: <span class="math display">\[
+    2, 1, 3, 4, 7, 1, 8, 9, 7, 6, 3, 9, \textbf{2, 1}, 3, 4, 7, 1, 8, 9, 7, 6, 3, 9, ...
+\]</span> Note that when we see <span class="math inline">\((2, 1)\)</span> again, it’s the signal that the sequence devolves to just repeating the chunk <span class="math inline">\(2, 1, 3, 4, 7, 1, 8, 9, 7, 6, 3, 9\)</span> from that point on.</p>
+<p>In fact, whenever this sequence start to repeat itself, the period <em>always</em> begins with <span class="math inline">\(2\)</span> and <span class="math inline">\(1\)</span>. Can you see why? <strong>Hint:</strong> If you know two consecutive terms in the Lucas number, you can determine the next term, but you can also determine the <em>previous</em> term.</p>
+<p>If this period is sufficiently small (spoiler: it <em>is</em> for Subtask 3 :D), then you can abuse it to compute things like sums (of even squares) even for very large <span class="math inline">\(n\)</span>, because the period behaves predictably.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtasks 4 &amp; 5</summary></p>
+<p>Without spoiling the full details, I will remark that there are two primary approaches that you could use in solving these subtasks. One is <strong>far more painful</strong> than the other.</p>
+<h3 id="painful-number-theory">Painful number theory</h3>
+<p>In one solution, you use the explicit formula of the Lucas numbers, expand it out, then use a sum-of-geometric-series formula.</p>
+<p>The problem with this is, of course, the <span class="math inline">\(\sqrt{5}\)</span> in the explicit formula of the Lucas numbers. To handle this, you have to:</p>
+<ul>
+<li>First, factorize the modulus into prime powers.</li>
+<li>The small moduli can be brute-forced with period bashing, as in Subtask 3.</li>
+<li>The large moduli are, conveniently, all prime, so we can proceed!</li>
+<li>Now, for each prime <span class="math inline">\(p\)</span> in the factorization, use Euler’s criterion to determine if <span class="math inline">\(x^2 \equiv 5 \pmod{p}\)</span> has a solution.</li>
+<li>If yes, solve for it using a modulo square root algorithm like Cipolla’s.</li>
+<li>If no, instead start working in the field extension with numbers of the form <span class="math inline">\(a + b \sqrt{5}\)</span> (kind of like what we do with the complex numbers)</li>
+<li>Then, proceed with the rest of your solution.</li>
+<li>Finally, use the Chinese Remainder Theorem to stitch all your answers together into the true answer modulo <span class="math inline">\(m\)</span>.</li>
+</ul>
+<p>If you want to code this, go ahead! It’s a fun series of standard (still a bit obscure?) algorithms in number theory. If not, you can try considering another solution...</p>
+<h3 id="using-matrices-to-solve-linear-recurrence-neat-very-nice">Using matrices to solve linear recurrence (neat, very nice)</h3>
+<p>Using standard matrix techniques, you should be able to compute the sum of even Lucas numbers.</p>
+<p>Does this technique also work for Lucas <strong>squares</strong>? It could work if the squares of Lucas numbers also form a linear recurrence relation... do they?</p>
+<p></details></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>

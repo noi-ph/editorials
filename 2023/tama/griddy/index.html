@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="generator" content="pandoc" />
+    <title>Solution Writeup: Hit the Griddy</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    </style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="/style/editorials.css" type="text/css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    </head>
+<body class="body">
+
+<!--
+
+<div id="header">
+<h1 class="title">Solution Writeup: Hit the Griddy</h1>
+</div>
+
+-->
+
+
+<div class="editorial container">
+<h1 id="hit-the-griddy">Hit the Griddy</h1>
+<h2 id="solution-writeup">Solution Writeup</h2>
+<p><strong>Contest:</strong> <a href="https://noi.ph/tama-2023/">TAMa 2023</a><br />
+<strong>Problem Idea:</strong> Kevin Atienza<br />
+<strong>Testing:</strong> Vincent dela Cruz, Dan Baterisna<br />
+<strong>Statement:</strong> Cisco Ortega<br />
+<strong>Test Data Preparation:</strong> Kevin Atienza<br />
+<strong>Solution Writeup:</strong> Kevin Atienza</p>
+<p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
+<p><strong>Disclaimer:</strong> The first solution we’ll describe is the simplest one conceptually, but is not necessarily the easiest one to implement. Nonetheless, we’re covering it anyway because the ideas we’ll encounter will be useful for later.</p>
+<h3 id="a-straightforward-approach">A straightforward approach</h3>
+<p>Anyway, the most straightforward solution would be to <em>just do it</em> as stated, a.k.a., <em>brute force</em>: enumerate all <span class="math inline">\(2^{rc}\)</span> grids, compute <span class="math inline">\(B(G)\)</span> for each of them, and then sum up all these <span class="math inline">\(B(G)^3\)</span>. Enumerating grids is relatively straightforward with backtracking, and for the first subtask, <span class="math inline">\(2^{rc} = 2^{25} = 33554432\)</span> which is quite manageable for a computer. The only missing ingredient to fully implement this solution is being able to compute <span class="math inline">\(B(G)\)</span> for a given grid <span class="math inline">\(G\)</span> in the first place.</p>
+<h3 id="computing-bg">Computing <span class="math inline">\(B(G)\)</span></h3>
+<p>We are given a grid with <span class="math inline">\(r\)</span> rows and <span class="math inline">\(c\)</span> columns, and we want to make it <em>based</em>, i.e., change it so that every row and every column has an even number of cringe memes.</p>
+<p>Let’s convert a cool meme (🗿) into a <span class="math inline">\(0\)</span> and a cringe meme (😬) into a <span class="math inline">\(1\)</span>, so the condition translates to: the sum of every row and every column is even.</p>
+<p>Now, the effect of flipping a cell is to flip the <span class="definition" data-bs-toggle="tooltip" data-bs-placement="bottom" title="The parity of a number is whether it’s odd or even. (The word “parity” itself is related to the word “pair”.)">parity</span> of exactly one row and exactly one column, namely the row and column containing the cell. Thus, if there are <span class="math inline">\(R\)</span> odd rows, then you need at least <span class="math inline">\(R\)</span> flips to make all these odd rows even. Similarly, if there are <span class="math inline">\(C\)</span> odd columns, then you need at least <span class="math inline">\(C\)</span> flips. Combining these tells us that we need <span class="math inline">\(\max(R, C)\)</span> or more moves to make the grid based.</p>
+On the other hand, for every move, we can choose the row and column to flip <em>independently</em>. Thus, it seems intuitive that <span class="math inline">\(\max(R, C)\)</span> moves are enough. And indeed, it is:
+<div class="theorem">
+<p><strong>Theorem 1:</strong> If the grid <span class="math inline">\(G\)</span> has exactly <span class="math inline">\(R\)</span> odd rows and exactly <span class="math inline">\(C\)</span> odd columns, then <span class="math inline">\(B(G) = \max(R, C)\)</span>.</p>
+</div>
+<p><details class="proof"><summary>Proof</summary> Without loss of generality, assume <span class="math inline">\(R \le C\)</span> (we can rotate the grid otherwise), so our goal is to show that <span class="math inline">\(B(G) = C\)</span>. Using our earlier argument, at least <span class="math inline">\(\max(R, C) = C\)</span> moves are needed, so all that remains is to show that <span class="math inline">\(C\)</span> moves are enough.</p>
+<p>With a greedy strategy, we can turn <span class="math inline">\(R\)</span> odd rows and odd columns even with just <span class="math inline">\(R\)</span> moves; we end up with <span class="math inline">\(0\)</span> odd rows and <span class="math inline">\(C - R\)</span> odd columns. Then, for each of the <span class="math inline">\(C - R\)</span> remaining odd columns, we flip its topmost cell. This makes all columns even, and also all rows even, except potentially the topmost row.</p>
+<p>Let’s figure out what happens with the topmost row. After the <span class="math inline">\(R\)</span>th move, it was even, and each of the final <span class="math inline">\(C - R\)</span> moves flipped it. Thus, it’s even if and only if <span class="math inline">\(C - R\)</span> is even, which is equivalent to saying that <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span> have the same parity.</p>
+<p>But <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span> clearly have the same parity, since <span class="math inline">\(R \bmod 2\)</span> is basically the sum of the <em>whole</em> grid modulo <span class="math inline">\(2\)</span> (why?), which is also <span class="math inline">\(C \bmod 2\)</span> for a similar reason, so we indeed have <span class="math inline">\((R \bmod 2) = (C \bmod 2)\)</span>. Thus, the topmost row is even after all <span class="math inline">\(C\)</span> moves, and <span class="math inline">\(C\)</span> moves are enough. </details></p>
+<p>With this formula, we can now easily compute <span class="math inline">\(B(G)\)</span> by computing the parities of all rows and columns, computing <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span> from those, and finally computing <span class="math inline">\(B(G)\)</span> as <span class="math inline">\(\max(R, C)\)</span>.</p>
+<h3 id="implementation">Implementation</h3>
+<p>Here’s an implementation in C++.</p>
+<p><strong>Note:</strong> It looks quite a bit involved, mostly because of the backtracking, so if you can’t grok this yet, I suggest skipping it for now and proceeding to the following sections which will describe solutions that are simpler to implement. Understanding this is <em>not</em> required to understand the following solutions. <details><summary class="h4">Code (C++)</summary></p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="kw">using</span> ll = <span class="dt">long</span> <span class="dt">long</span>;
+<span class="at">const</span> ll mod = <span class="dv">998&#39;244&#39;353</span>;
+
+ll solve(<span class="dt">int</span> r, <span class="dt">int</span> c) {
+    vector&lt;vector&lt;<span class="dt">int</span>&gt;&gt; G(r, vector&lt;<span class="dt">int</span>&gt;(c));
+
+    <span class="co">// this function computes B(G)</span>
+    <span class="kw">auto</span> B = [&amp;]() {
+        <span class="co">// compute parities of rows and columns</span>
+        vector&lt;<span class="dt">int</span>&gt; odd_row(r), odd_col(c);
+        <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; r; i++) {
+            <span class="cf">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; c; j++) {
+                odd_row[i] ^= G[i][j];
+                odd_col[j] ^= G[i][j];
+            }
+        }
+
+        <span class="co">// compute the number of odd_ rows and columns</span>
+        <span class="dt">int</span> odd_row_count = <span class="dv">0</span>, odd_col_count = <span class="dv">0</span>;
+        <span class="cf">for</span> (<span class="dt">int</span> odd : odd_row) odd_row_count += odd;
+        <span class="cf">for</span> (<span class="dt">int</span> odd : odd_col) odd_col_count += odd;
+
+        <span class="co">// return the larger</span>
+        <span class="cf">return</span> max(odd_row_count, odd_col_count);
+    };
+
+    <span class="co">// this function computes the sum of B(G)^3 across all</span>
+    <span class="co">// grids G, assuming all cells before cell (i, j) have</span>
+    <span class="co">// already been chosen.</span>
+    ll ans = <span class="dv">0</span>;
+    function&lt;<span class="dt">void</span>(<span class="dt">int</span>,<span class="dt">int</span>)&gt; sum_grids = [&amp;](<span class="dt">int</span> i, <span class="dt">int</span> j) {
+        <span class="cf">if</span> (i &gt;= r) {
+            <span class="co">// we&#39;re past the last row, so just compute B(G)^3</span>
+            ll b = B() % mod;
+            (ans += b * b % mod * b) %= mod;
+        } <span class="cf">else</span> <span class="cf">if</span> (j &gt;= c) {
+            <span class="co">// we&#39;re past the current row, so go to the next row</span>
+            sum_grids(i + <span class="dv">1</span>, <span class="dv">0</span>);
+        } <span class="cf">else</span> {
+            <span class="co">// try G[i][j] = 0 and G[i][j] = 1</span>
+            <span class="cf">for</span> (<span class="dt">int</span> v : {<span class="dv">0</span>, <span class="dv">1</span>}) {
+                G[i][j] = v;
+                <span class="co">// ... then go to the next cell</span>
+                sum_grids(i, j + <span class="dv">1</span>);
+            }
+        }
+    };
+    sum_grids(<span class="dv">0</span>, <span class="dv">0</span>);
+    
+    <span class="cf">return</span> ans % mod;
+}
+
+<span class="dt">int</span> main() {
+    <span class="dt">int</span> r, c;
+    scanf(<span class="st">&quot;</span><span class="sc">%d%d</span><span class="st">&quot;</span>, &amp;r, &amp;c);
+    printf(<span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span>, (solve(r, c) % mod + mod) % mod);
+}</code></pre></div>
+<p></details> Running this with the input <code>5 5</code> gives the answer in ~3 seconds in my computer (when the program is compiled with the <code>-O3</code> optimization flag of <code>g++</code>).</p>
+<p>As for the running time, we can write it as <span class="math display">\[\mathcal{O}((\text{number of grids})\times (\text{time to compute $B(G)$)}).\]</span> There are <span class="math inline">\(2^{rc}\)</span> grids, and we can compute <span class="math inline">\(B(G)\)</span> in <span class="math inline">\(\mathcal{O}(rc)\)</span> (why?), so the overall time complexity is <span class="math inline">\(\mathcal{O}(2^{rc} rc)\)</span>.</p>
+<h3 id="solving-via-pen-and-paper">Solving via pen and paper?</h3>
+<p>This subtask can technically also be solved via pen and paper. The following sections deal with solutions to further subtasks that involve much less computation. Those computations are few enough that they can be done by hand (or with a spreadsheet) to solve this subtask.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 2</summary></p>
+<h3 id="a-better-approach">A better approach</h3>
+<p>It’s now clear that we can’t go through all possible grids if we hope to solve the remaining subtasks within the lifetime of our sun; <span class="math inline">\(2^{rc}\)</span> is simply too large. On the other hand, the number of possible values of <span class="math inline">\(B(G)\)</span> is relatively small; it’s always between <span class="math inline">\(0\)</span> and <span class="math inline">\(\max(r, c)\)</span>. This suggests that a better approach might be to count the number of grids for each possible value of <span class="math inline">\(B(G)\)</span>.</p>
+<p>Inspired by this, let’s define the function <span class="math inline">\(\mathit{count}(r, c, b)\)</span> to be the number of <span class="math inline">\(r\times c\)</span> grids <span class="math inline">\(G\)</span> such that <span class="math inline">\(B(G) = b\)</span>. With this function, we can now write the answer as <span class="math display">\[\mathit{count}(r, c, 0)\cdot 0^3 + \mathit{count}(r, c, 1)\cdot 1^3 + \mathit{count}(r, c, 2)\cdot 2^3 + \ldots\]</span> with the sum going the way up to <span class="math inline">\(b = \max(r, c)\)</span>; Written in summation notation, this is the same as <span class="math display">\[\sum_{b=0}^{\max(r,c)} \mathit{count}(r, c, b)\cdot b^3.\]</span></p>
+<h3 id="computing-mathitcountr-c-b">Computing <span class="math inline">\(\mathit{count}(r, c, b)\)</span></h3>
+<p>Our goal now is to compute <span class="math inline">\(\mathit{count}(r, c, b)\)</span> for <span class="math inline">\(0 \le b \le \max(r, c)\)</span>. There are a couple of ways to do this. In what follows, we’ll describe an approach that’s relatively straightforward conceptually (but not necessarily implementation-wise).</p>
+<p>We know from earlier that <span class="math inline">\(B(G) = \max(R, C)\)</span>, where <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span> are the numbers of odd rows and columns, respectively. So we probably want to define a new function that counts the number of <span class="math inline">\(r\times c\)</span> grids with exactly <span class="math inline">\(R\)</span> odd rows and <span class="math inline">\(C\)</span> odd columns. Denoting that count by <span class="math inline">\(f(r, c, R, C)\)</span>, it’s easy to see that <span class="math display">\[\mathit{count}(r, c, b) = \sum_{\substack{R, C \\ \max(R, C) = b}} f(r, c, R, C).\]</span> So all that remains is to compute <span class="math inline">\(f(r, c, R, C)\)</span> for all <span class="math inline">\(0 \le R \le r\)</span> and <span class="math inline">\(0 \le C \le c\)</span>.</p>
+<p>Let’s now compute <span class="math inline">\(f(r, c, R, C)\)</span>. Let’s choose which <span class="math inline">\(R\)</span> rows and <span class="math inline">\(C\)</span> columns will be odd, and after choosing these, let’s count the number of grids. <span class="math inline">\(f(r, c, R, C)\)</span> will be the sum of these counts among all possible choices. However, since the rows are pretty much the same, as is the columns, these counts ought to be the same! In other words, we can write <span class="math display">\[f(r, c, R, C) = \binom{r}{R} \binom{c}{C} g(r, c, R, C),\]</span> where <span class="math inline">\(g(r, c, R, C)\)</span> is the number of <span class="math inline">\(r\times c\)</span> grids <span class="math inline">\(G\)</span> with a given selection of <span class="math inline">\(R\)</span> rows and <span class="math inline">\(C\)</span> columns odd, and the rest even. And as we’ve just reasoned out, the actual choice doesn’t matter, so let’s say they’re the <span class="math inline">\(R\)</span> topmost rows and the <span class="math inline">\(C\)</span> leftmost columns.</p>
+<h3 id="computing-gr-c-r-c">Computing <span class="math inline">\(g(r, c, R, C)\)</span></h3>
+<p>So we want to build a grid with the <span class="math inline">\(R\)</span> topmost rows odd, and the <span class="math inline">\(C\)</span> leftmost columns even. For simplicity, let’s assume that <span class="math inline">\(0 &lt; R &lt; r\)</span> and <span class="math inline">\(0 &lt; C &lt; c\)</span>; we’ll deal with edge cases later.</p>
+<p>For example, if <span class="math inline">\(r = 4\)</span>, <span class="math inline">\(c = 9\)</span>, <span class="math inline">\(R = 2\)</span> and <span class="math inline">\(C = 4\)</span>, then the grid we’re building would look like this. <span class="math display">\[\begin{array}{|ccccccccc|c}
+\text{odd} &amp; \text{odd} &amp; \text{odd} &amp; \text{odd} &amp; \text{even} &amp; \text{even} &amp; \text{even} &amp; \text{even} &amp; \text{even} &amp; \\
+\hline
+\text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp;  \text{odd} \\
+\text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp;  \text{odd} \\
+\text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp;  \text{even} \\
+\text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp;  \text{even} \\
+\hline
+\end{array}\]</span></p>
+<p>A straightforward way to build a grid is to build it row by row. This can be stated recursively. First, we choose what the first row looks like. Then, we “recursively” construct the rest of the grid...somehow.</p>
+<p>Let’s now go into the details. First, because we assumed <span class="math inline">\(R &gt; 0\)</span>, the topmost row must be odd, so if it has exactly <span class="math inline">\(x\)</span> ones, then <span class="math inline">\(x\)</span> must be one of: <span class="math inline">\(1, 3, 5, \ldots\)</span>. Fix such an <span class="math inline">\(x\)</span>, and let’s count the number of grids with exactly <span class="math inline">\(x\)</span> <span class="math inline">\(1\)</span>s in the topmost row.</p>
+<p>Now, the placement of these <span class="math inline">\(x\)</span> <span class="math inline">\(1\)</span>s affects the parities of the columns. On the other hand, the <span class="math inline">\(C\)</span> leftmost columns are pretty much the same as each other, as is the <span class="math inline">\(c - C\)</span> rightmost columns. So if <span class="math inline">\(y\)</span> of these <span class="math inline">\(x\)</span> <span class="math inline">\(1\)</span>s belong to the <span class="math inline">\(C\)</span> leftmost columns, and the <span class="math inline">\(x - y\)</span> remaining <span class="math inline">\(1\)</span>s belong to the <span class="math inline">\(c - C\)</span> rightmost columns, then that means that, when looking at the “rest of the grid”, that is, <em>the grid with the first row removed</em>:</p>
+<ul>
+<li><span class="math inline">\(y\)</span> of the <span class="math inline">\(C\)</span> leftmost columns are even, and the remaining <span class="math inline">\(C - y\)</span> are odd;</li>
+<li><span class="math inline">\(x - y\)</span> of the <span class="math inline">\(c - C\)</span> rightmost columns are odd, and the remaining <span class="math inline">\((c - C) - (x - y)\)</span> are even.</li>
+</ul>
+<p>Thus, as far as the “rest of the grid” is concerned, there are exactly <span class="math inline">\(C - y + x - y\)</span> odd columns. We can now count the number of them recursively! Since the “rest of the grid” has <span class="math inline">\(r - 1\)</span> rows, and <span class="math inline">\(R - 1\)</span> of them must be odd, and there are <span class="math inline">\(c\)</span> columns, <span class="math inline">\(C - y + x - y\)</span> of which must be odd, there must be exactly <span class="math display">\[\binom{C}{y} \binom{c - C}{x - y} g(r - 1, c, R - 1, C - y + x - y)\]</span> such grids, where the binomial coefficients come from choosing which cells will contain the <span class="math inline">\(1\)</span>s in the leftmost <span class="math inline">\(C\)</span> and the rightmost <span class="math inline">\(c - C\)</span> columns.</p>
+<p>Now, the above count is just for a fixed choice of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. To compute <span class="math inline">\(g(r, c, R, C)\)</span>, we simply sum over all possible values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. We thus get the formula: <span class="math display">\[g(r, c, R, C) = \sum_{\substack{x=0 \\ \text{$x$ odd}}}^c \sum_{y=0}^x \binom{C}{y} \binom{c - C}{x - y} g(r - 1, c, R - 1, C - y + x - y).\]</span> We can now use this to compute <span class="math inline">\(g(r, c, R, C)\)</span>. However, this is still incomplete, for a few reasons:</p>
+<ul>
+<li><p>The above only works if <span class="math inline">\(R &gt; 0\)</span>, which is how we knew that the topmost row is odd. If <span class="math inline">\(R = 0\)</span>, then the topmost row is even. Well, we can still find a recursive formula similar to the above, just with a couple of changes (such as <span class="math inline">\(x\)</span> now being even, among other things). The formula we get when <span class="math inline">\(R = 0\)</span> is <span class="math display">\[g(r, c, R, C) = \sum_{\substack{x=0 \\ \text{$x$ even}}}^c \sum_{y=0}^x \binom{C}{y} \binom{c - C}{x - y} g(r - 1, c, R, C - y + x - y).\]</span></p></li>
+<li><p>We haven’t discussed the base case yet! In our recursion above, the base case is <span class="math inline">\(r = 0\)</span>, and the answer is pretty simple: there is only one grid with zero rows and <span class="math inline">\(c\)</span> columns, namely the <em>empty grid</em>. Each of its columns is even (because every column is empty, and <span class="math inline">\(0\)</span> is even). Therefore, we have <span class="math display">\[g(0, c, 0, C) = \begin{cases}
+1 &amp; \text{if $C = 0$} \\
+0 &amp; \text{otherwise.}
+\end{cases}\]</span></p></li>
+<li><p>As an implementation detail, you should probably further restrict the summation formula to only those terms where <span class="math inline">\(y \le C\)</span> and <span class="math inline">\(x - y \le c - C\)</span>, because <span class="math inline">\(\binom{C}{y}\)</span> or <span class="math inline">\(\binom{c - C}{x - y}\)</span> will be zero anyway. If you don’t do this, then at first glance it seems like there won’t be any issues since you seem to be just adding zero anyway. However, there’s a subtle issue: the value <span class="math inline">\((C - y + x - y)\)</span>—an argument to the recursive call—has the potential to exceed <span class="math inline">\(c\)</span>, which could become an off-by-one error depending on your implementation.</p></li>
+</ul>
+<h3 id="running-time">Running time</h3>
+<p>With this, we now have a recursive algorithm to compute <span class="math inline">\(g\)</span>, and thus an algorithm to compute <span class="math inline">\(f\)</span>, <span class="math inline">\(\mathit{count}\)</span>, and the answer. What is the running time? Well, for the algorithm to work, we need to be able to compute binomial coefficients. We can do that by simply building Pascal’s triangle, which is basically a graphical manifestation of the recursive formula <span class="math display">\[\binom{n}{r} = \binom{n - 1}{r - 1} + \binom{n - 1}{r}\]</span> (with base case <span class="math inline">\(\binom{n}{0} = \binom{n}{n} = 1\)</span>). Thus, in our analysis, we can assume that we can compute any binomial coefficient we need with an <span class="math inline">\(\mathcal{O}(1)\)</span> lookup (after an <span class="math inline">\(\mathcal{O}(\max(r, c)^2)\)</span> precomputation; note that we only need up to row <span class="math inline">\(\max(r, c)\)</span> of Pascal’s triangle).</p>
+<p>So the algorithm consists of:</p>
+<ol style="list-style-type: decimal">
+<li>Computing the values <span class="math inline">\(g(r, c, R, C)\)</span> that we need.</li>
+<li>Computing the values <span class="math inline">\(f(r, c, R, C)\)</span> that we need.</li>
+<li>Computing the values <span class="math inline">\(\mathit{count}(r, c, b)\)</span> we need.</li>
+<li>Computing the final sum to get the answer.</li>
+</ol>
+<p>Now, it turns out that the first step is the bottleneck, because once we have all the <span class="math inline">\(g\)</span> values we need:</p>
+<ul>
+<li>Each of the <span class="math inline">\(\mathcal{O}(rc)\)</span> values of <span class="math inline">\(f\)</span> we need can be obtained from the corresponding value of <span class="math inline">\(g\)</span> in <span class="math inline">\(\mathcal{O}(1)\)</span> (using our formula).</li>
+<li>We only need the values <span class="math inline">\(\mathit{count}(r, c, b)\)</span> for <span class="math inline">\(0 \le b \le \max(r, c)\)</span>. The formula for <span class="math inline">\(\mathit{count}(r, c, b)\)</span> contains at most <span class="math inline">\(r + c + 1\)</span> summands, so it can be computed in <span class="math inline">\(\mathcal{O}(r + c)\)</span> time. Thus, computing all values of <span class="math inline">\(\mathit{count}\)</span> we need takes <span class="math inline">\(\mathcal{O}(\max(r, c)(r + c)) = \mathcal{O}(\max(r, c)^2)\)</span> time.</li>
+<li>The final sum only has <span class="math inline">\(\mathcal{O}(\max(r, c))\)</span> summands.</li>
+</ul>
+<p>So all that remains is to analyze the running time of computing the <span class="math inline">\(g(r, c, R, C)\)</span> values we need. Note that the value of the argument “<span class="math inline">\(r\)</span>” here actually varies because of the recursion! On the other hand, notice that the value of <span class="math inline">\(c\)</span> doesn’t change at all, so it might as well be fixed. So all in all, we want to compute <span class="math inline">\(g(r&#39;, c, R, C)\)</span> for all triples <span class="math inline">\((r&#39;, R, C)\)</span> such that <span class="math inline">\(0 \le R \le r&#39; \le r\)</span> and <span class="math inline">\(0 \le C \le c\)</span>.</p>
+<p>Now, in general, our formula for <span class="math inline">\(g(r&#39;, c, R, C)\)</span> involves a nested sum with <span class="math inline">\(\mathcal{O}(c^2)\)</span> summands (check), so the running time is basically <span class="math display">\[\mathcal{O}(c^2 \cdot (\text{number of distinct arguments})).\]</span> Also, there are <span class="math inline">\(\mathcal{O}(r^2 c)\)</span> distinct arguments to <span class="math inline">\(g\)</span> (why?), so this is simply <span class="math inline">\(\mathcal{O}(r^2 c^3)\)</span>.</p>
+<p>The overall running time is then <span class="math inline">\(\mathcal{O}(r^2 c^3)\)</span> since this also dominates all other steps (which are <span class="math inline">\(\mathcal{O}(\max(r, c)^2)\)</span> overall). For subtask 2, we have <span class="math inline">\(r = 64\)</span> and <span class="math inline">\(c = 100\)</span>, and this might be too slow. However, we can improve the running time a bit with the following observations:</p>
+<ul>
+<li>The answer for <span class="math inline">\((r, c)\)</span> is the same as the answer for <span class="math inline">\((c, r)\)</span>, so we may freely swap <span class="math inline">\(r\)</span> and <span class="math inline">\(c\)</span>;</li>
+<li>The algorithm runs faster when <span class="math inline">\(r &gt; c\)</span> (because the time complexity “<span class="math inline">\(\mathcal{O}(r^2 c^3)\)</span>” is asymmetric with respect to <span class="math inline">\(r\)</span> and <span class="math inline">\(c\)</span>).</li>
+</ul>
+<p>Therefore, if <span class="math inline">\(r &lt; c\)</span>, we can simply <em>swap</em> <span class="math inline">\(r\)</span> and <span class="math inline">\(c\)</span> to make it run faster!</p>
+<p>My Python 3 implementation of this solution, when given the input <span class="math inline">\(r = 100\)</span> and <span class="math inline">\(c = 64\)</span>, runs in less than one minute.</p>
+<p>In the next section, we’ll discuss a solution that’s much easier to implement and even gets you up to Subtask 3. However, even though the solution presented above is somewhat more involved (e.g., there are more nested loops), in some sense, it’s simpler because you need less thinking to derive it; ultimately, it’s really “just DP”.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 3</summary></p>
+<p>The previous solution will choke on subtask 3 because the input values are quite large. To improve on the previous solution, we need a better way to compute <span class="math inline">\(\mathit{count}(r, c, b)\)</span>. Building the grid row-by-row is too slow.</p>
+<p>It turns out that we can vastly improve our computation of <span class="math inline">\(g(r, c, R, C)\)</span> by building the grid <em>cell by cell</em> instead! (Recall that <span class="math inline">\(g(r, c, R, C)\)</span> is the number of <span class="math inline">\(r \times c\)</span> grids where the <span class="math inline">\(R\)</span> topmost rows and <span class="math inline">\(C\)</span> leftmost columns are odd.) To see what I mean, suppose we’re choosing the values of the cells in order, left to right, then top to bottom. Now, each cell will contain <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>, so generally, there are two choices we can make at every step.</p>
+<p>However, things change a bit when we’re choosing the rightmost cell of the current row. Since we know the parity of the row, there’s really only one remaining choice for the rightmost cell that will give the row the correct parity!</p>
+<p>For example, in the following grid, suppose we’re now at the cell marked <span class="math inline">\(X\)</span>. Since the row has to be odd, the value of <span class="math inline">\(X\)</span> must be <span class="math inline">\(1\)</span>. <span class="math display">\[\begin{array}{|ccccccccc|c}
+\text{odd} &amp; \text{odd} &amp; \text{odd} &amp; \text{odd} &amp; \text{even} &amp; \text{even} &amp; \text{even} &amp; \text{even} &amp; \text{even} &amp; \\
+\hline
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp;  \text{odd} \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; X &amp;  \text{odd} \\
+\text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp;  \text{even} \\
+\text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp;  \text{even} \\
+\hline
+\end{array}\]</span></p>
+<p>Furthermore, things change again when we’re choosing the cells at the bottommost rows. Since each column also has a fixed parity, each cell is again already determined; there’s only one choice for each of those cells that will make the parity of the column correct.</p>
+<p>For example, in the following grid, suppose we’re now at <span class="math inline">\(X\)</span>. Then since the column must be odd, the value of <span class="math inline">\(X\)</span> must be <span class="math inline">\(0\)</span>. <span class="math display">\[\begin{array}{|ccccccccc|c}
+\text{odd} &amp; \text{odd} &amp; \text{odd} &amp; \text{odd} &amp; \text{even} &amp; \text{even} &amp; \text{even} &amp; \text{even} &amp; \text{even} &amp; \\
+\hline
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp;  \text{odd} \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp;  \text{odd} \\
+1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp;  \text{even} \\
+\text{1} &amp; X &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp; \text{?} &amp;  \text{even} \\
+\hline
+\end{array}\]</span></p>
+<p>Finally, things get even more special when we reach the bottom-rightmost cell. In that case, it has to satisfy <em>two</em> conditions, one for the row, and one for the column. It turns out that both conditions are satisfiable if and only if <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span> have the same parity (why?), and in that case, there’s exactly one choice again!</p>
+<p>Thus, we made exactly <span class="math inline">\((r - 1)(c - 1)\)</span> independent binary choices, corresponding to the cells not in the rightmost column or bottommost row, and everything else is uniquely determined. Thus, we’ve essentially proven the following:</p>
+<div class="theorem">
+<p><strong>Theorem 2:</strong> For <span class="math inline">\(r \ge 1\)</span>, <span class="math inline">\(c \ge 1\)</span>, <span class="math inline">\(0 \le R \le r\)</span>, <span class="math inline">\(0 \le C \le c\)</span>, we have <span class="math display">\[g(r, c, R, C) = \begin{cases}
+2^{(r - 1)(c - 1)} &amp; \text{if $R$ and $C$ have the same parity;} \\
+0 &amp; \text{otherwise.}
+\end{cases}\]</span></p>
+</div>
+<p>This formula simplifies our solution a lot! After precomputing the value of <span class="math inline">\(2^{(r - 1)(c - 1)}\)</span> (modulo <span class="math inline">\(998244353\)</span>), computing all the values of <span class="math inline">\(g(r, c, R, C)\)</span> we need now only takes <span class="math inline">\(\mathcal{O}(rc)\)</span> time. And in fact, we can now compute the answer in <span class="math inline">\(\mathcal{O}(rc)\)</span> time overall, which is good enough up to subtask 3.</p>
+<div class="task">
+<p><strong>Exercise:</strong> Show that this solution runs in <span class="math inline">\(\mathcal{O}(rc)\)</span> time.</p>
+</div>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 4</summary></p>
+<p>For this subtask, <span class="math inline">\(\mathcal{O}(rc)\)</span> won’t be enough. We want something faster.</p>
+I’ll just leave you with a hint to get you started. (The solution of course needs more steps after this.)
+<div class="task">
+<p><strong>Hint:</strong> Try to count the number of grids <span class="math inline">\(G\)</span> for which <span class="math inline">\(B(G) \le b\)</span>, rather than <span class="math inline">\(B(G) = b\)</span>.</p>
+</div>
+<p></details></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>DP stands for <strong>dynamic programming</strong>, a powerful algorithmic technique! There are training materials in the Discord server explaining it. Feel free to ask us to point you to the right direction!<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
