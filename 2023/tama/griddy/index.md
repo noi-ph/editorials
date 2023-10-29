@@ -206,7 +206,7 @@ $$g(0, c, 0, C) = \begin{cases}
 
 With this, we now have a recursive algorithm to compute $g$, and thus an algorithm to compute $f$, $\mathit{count}$, and the answer. What is the running time? Well, for the algorithm to work, we need to be able to compute binomial coefficients. We can do that by simply building Pascal&rsquo;s triangle, which is basically a graphical manifestation of the recursive formula
 $$\binom{n}{r} = \binom{n - 1}{r - 1} + \binom{n - 1}{r}$$
-(with base case $\binom{n}{0} = \binom{n}{n} = 1$). Thus, in our analysis, we can assume that we can compute any binomial coefficient we need with an $\mathcal{O}(1)$ lookup (after an $\mathcal{O}(\max(r, c)^2)$ precomputation; note that we only need up to row $\max(r, c)$ of Pascal&rsquo;s triangle).
+(with base cases $\binom{n}{0} = \binom{n}{n} = 1$). Thus, in our analysis, we can assume that we can compute any binomial coefficient we need with an $\mathcal{O}(1)$ lookup (after an $\mathcal{O}(\max(r, c)^2)$ precomputation; note that we only need up to row $\max(r, c)$ of Pascal&rsquo;s triangle).
 
 So the algorithm consists of:
 

@@ -236,6 +236,6 @@ only need to evaluate the totient function at a handful of points, you
 could also just ask WolframAlpha to perform these computations for you.
 
 [^1]: You have to be a bit careful when considering the cases where your
-    base is not coprime to your modulus
+    base is not coprime to your modulus.
 
 </details>

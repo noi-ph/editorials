@@ -87,4 +87,4 @@ However, if you actually draw/plot the graph of $f(X, Y, 1) = 0$, you should see
 
 </details>
 
-[^1]: dragons known as *elliptic curves*, that is
+[^1]: that is, dragons known as *elliptic curves*

@@ -73,9 +73,11 @@ It turns out that there&rsquo;s a simple criterion that gives us the parity of a
 Perhaps you might have spotted this pattern while playing around with the numbers. And actually, it&rsquo;s not that hard to prove.
 
 <details class="proof"><summary>Proof</summary>
-Perform strong induction.  Assume that $L_{3k-2}$ and $L_{3k-1}$ are odd and that $L_{3k}$ is even; use this to show that $L_{3(k+1) - 2}$ and $L_{3(k+1) - 1}$ are odd and that $L_{3(k+1)}$ is even.
+Perform induction.  Assume that $L_{3k}$ is even, and $L_{3k+1}$ and $L_{3k+2}$ are odd; use this to show that $L_{3(k+1)}$ is even, and $L_{3(k+1) + 1}$ and $L_{3(k+1) + 2}$ are odd. More precisely, we&rsquo;re proving the following statement by induction on $k$:
 
- This fact directly follows from the definition of the Lucas sequence and working with it modulo $2$.  The details aren&rsquo;t too hard and are left as an exercise.
+&ldquo;For all $k \ge 0$, $L_{3k}$ is even, and $L_{3k+1}$ and $L_{3k+2}$ are odd.&rdquo;
+
+This fact directly follows from the definition of the Lucas sequence and working with it modulo $2$.  The details aren&rsquo;t too hard and are left as an exercise.
 </details>
 
 So, even more simply, you only need to add up the squares of the Lucas numbers whose index is a multiple of $3$.

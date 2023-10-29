@@ -15,6 +15,10 @@
 
 <details class="editorial-section"><summary class="h2">Subtask 1</summary>
 
+<div class="remarks">
+*Construction ongoing!* &nbsp;&nbsp; &#127959; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#129521;
+</div>
+
 First of all, generate the entire grid $b$ by just plugging and chugging using the formula.  Use something like Python's `pow` function, or even Wolfram Alpha if you insist on doing the first subtask by hand.
 
 From now on, let's call $W(i_s, j_s, i_t, j_t)$ the _best weak link_ between the two squares.  The weak link along any path is the _minimum_ grid value along that path.  We also say $s = (i_s, j_s)$ and $t = (i_t, j_t)$ to reduce clutter.
@@ -49,9 +53,13 @@ In either case, just conducting this process for all $(s, t)$ pairs allows us to
 
 <details class="editorial-section"><summary class="h2">Subtask 2</summary>
 
+<div class="remarks">
+*Construction ongoing!* &nbsp;&nbsp; &#127959; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#129521;
+</div>
+
 When $n=12$, it is far too tedious to solve by hand.  Therefore, we can just use a computer and ask it to do the computation for us.  The previously described solution is pretty straightforward to directly translate into code, with **one exception**: determining if $s$ and $t$ are connected in the grid's current state.
 
-To solve this, we turn to a standard algorithm such as **breadth first search** or **depth first search**, often called BFS or DFS in the community.  You can discover this by literally Googling "how check when two tiles in grid are connected".  Here is a screenshot of when I did; the StackOverflow link directly mentions DFS.  Now that you know the keyword, you can seek out a dedicated beginner-friendly tutorial for it (and there are many online).  May I recommend this one HYPERLINK, written by NOI.PH?
+To solve this, we turn to a standard algorithm such as **breadth first search** or **depth first search**, often called BFS or DFS in the community.  You can discover this by literally Googling "how check when two tiles in grid are connected".  Here is a screenshot of when I did; the StackOverflow link directly mentions DFS.  Now that you know the keyword, you can seek out a dedicated beginner-friendly tutorial for it (and there are many online).  May I recommend this one tutorial (TODO HYPERLINK), written by NOI.PH?
 
 Anyway, there are $n^4 - n^2$ pairs of start and target tiles.  In each one, we perform a DFS/BFS up to $n^2$ times, once whenever we insert the next strongest tile in the grid and want to check connectivity again.  Finally, each DFS or BFS takes on the order of $\approx n^2$ operations.  
 

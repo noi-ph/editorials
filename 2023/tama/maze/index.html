@@ -47,6 +47,9 @@
 <strong>Test Data Preparation:</strong> Kevin Atienza<br />
 <strong>Solution Writeup:</strong> Cisco Ortega</p>
 <p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
+<div class="remarks">
+<p><em>Construction ongoing!</em>    🏗 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🧱</p>
+</div>
 <p>First of all, generate the entire grid <span class="math inline">\(b\)</span> by just plugging and chugging using the formula. Use something like Python's <code>pow</code> function, or even Wolfram Alpha if you insist on doing the first subtask by hand.</p>
 <p>From now on, let's call <span class="math inline">\(W(i_s, j_s, i_t, j_t)\)</span> the <em>best weak link</em> between the two squares. The weak link along any path is the <em>minimum</em> grid value along that path. We also say <span class="math inline">\(s = (i_s, j_s)\)</span> and <span class="math inline">\(t = (i_t, j_t)\)</span> to reduce clutter.</p>
 <p>Consider a somewhat philosophical question: Why include the weak link at all in our path? Why not only pick stronger tiles? The answer must be, then, that we used the weakest link because we had no choice <em>but</em> to use it.</p>
@@ -69,8 +72,11 @@
 <p>In either case, just conducting this process for all <span class="math inline">\((s, t)\)</span> pairs allows us to solve the problem for <span class="math inline">\(n=4\)</span> by hand, with a bit of effort (definitely with the help of a calculator or spreadsheet, though).</p>
 <p></details></p>
 <p><details class="editorial-section"><summary class="h2">Subtask 2</summary></p>
+<div class="remarks">
+<p><em>Construction ongoing!</em>    🏗 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🧱</p>
+</div>
 <p>When <span class="math inline">\(n=12\)</span>, it is far too tedious to solve by hand. Therefore, we can just use a computer and ask it to do the computation for us. The previously described solution is pretty straightforward to directly translate into code, with <strong>one exception</strong>: determining if <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> are connected in the grid's current state.</p>
-<p>To solve this, we turn to a standard algorithm such as <strong>breadth first search</strong> or <strong>depth first search</strong>, often called BFS or DFS in the community. You can discover this by literally Googling &quot;how check when two tiles in grid are connected&quot;. Here is a screenshot of when I did; the StackOverflow link directly mentions DFS. Now that you know the keyword, you can seek out a dedicated beginner-friendly tutorial for it (and there are many online). May I recommend this one HYPERLINK, written by NOI.PH?</p>
+<p>To solve this, we turn to a standard algorithm such as <strong>breadth first search</strong> or <strong>depth first search</strong>, often called BFS or DFS in the community. You can discover this by literally Googling &quot;how check when two tiles in grid are connected&quot;. Here is a screenshot of when I did; the StackOverflow link directly mentions DFS. Now that you know the keyword, you can seek out a dedicated beginner-friendly tutorial for it (and there are many online). May I recommend this one tutorial (TODO HYPERLINK), written by NOI.PH?</p>
 <p>Anyway, there are <span class="math inline">\(n^4 - n^2\)</span> pairs of start and target tiles. In each one, we perform a DFS/BFS up to <span class="math inline">\(n^2\)</span> times, once whenever we insert the next strongest tile in the grid and want to check connectivity again. Finally, each DFS or BFS takes on the order of <span class="math inline">\(\approx n^2\)</span> operations.</p>
 <p>In conclusion, we have established an upper bound: our solution takes <em>at most</em> <span class="math inline">\((n^4 - n^2) \times n^2 \times n^2\)</span> operations (probably less, since we might achieve connectedness after a few insertions). If you plug in <span class="math inline">\(n=12\)</span>, we get a number whose order of magnitude is <span class="math inline">\(\approx 10^8\)</span>, so our solution shouldn't take more than a few seconds to terminate.</p>
 <p></details></p>

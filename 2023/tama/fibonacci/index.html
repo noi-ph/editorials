@@ -150,11 +150,10 @@ mod <span class="op">=</span> <span class="dv">998</span>_244_353
 
 <span class="kw">def</span> insert_value(gs, f):
     <span class="cf">for</span> g, c <span class="kw">in</span> [<span class="op">*</span>gs.items()]:
-        g <span class="op">=</span> gcd(g, f)
-        gs[g] <span class="op">=</span> (gs[g] <span class="op">+</span> c) <span class="op">%</span> mod
+        gs[gcd(g, f)] <span class="op">+=</span> c
 
 <span class="kw">def</span> solve(n):
-    gs <span class="op">=</span> Counter([<span class="dv">0</span>])
+    gs <span class="op">=</span> Counter([<span class="dv">0</span>])  <span class="co"># 0 represents the gcd of the empty set</span>
     a, b <span class="op">=</span> <span class="dv">0</span>, <span class="dv">1</span>
     <span class="cf">for</span> it <span class="kw">in</span> <span class="bu">range</span>(n):
         a, b <span class="op">=</span> b, a <span class="op">+</span> b
@@ -167,6 +166,9 @@ mod <span class="op">=</span> <span class="dv">998</span>_244_353
 <p>Do this and see for yourself that there really are only a few distinct values of the gcd.</p>
 <p>In fact, if you go ahead and do this, <strong>you’ll actually notice something quite peculiar...</strong></p>
 </div>
+<div class="remarks">
+<p><strong>Remark:</strong> If you really want to compute an upper bound before running your program, you can simply try to compute <span class="math display">\[d(f_1) + d(f_2) + \ldots + d(f_n)\]</span> for <span class="math inline">\(n = 54\)</span>, where <span class="math inline">\(d(k)\)</span> is the number of positive divisors of <span class="math inline">\(k\)</span>. This still isn't that easy to compute, but we can bound this loosely by noting that <span class="math inline">\(f_i\)</span> has at most <span class="math inline">\(12\)</span> digits for <span class="math inline">\(i \le 54\)</span>, and you can check with a program that every number with at most <span class="math inline">\(12\)</span> digits has less than <span class="math inline">\(10000\)</span> divisors. (It is left to the reader to write this program.) Therefore, the sum above is <span class="math inline">\(&lt; 54\cdot 10000 &lt; 10^6\)</span>, which is a very loose upper bound but is nonetheless still a piece of cake for the computer.</p>
+</div>
 <p></details></p>
 <p><details class="editorial-section"><summary class="h2">Subtask 3</summary></p>
 <div class="remarks">
@@ -177,7 +179,7 @@ mod <span class="op">=</span> <span class="dv">998</span>_244_353
 <hr />
 <ol>
 <li id="fn1"><p>Note that <span class="math inline">\(f_1 = 1\)</span> and <span class="math inline">\(f_2 = 2\)</span>, which differs from the usual indexing of Fibonacci numbers (where <span class="math inline">\(F_1 = 1\)</span> and <span class="math inline">\(F_2 = 1\)</span>).<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>Here, <code class="sourceCode python">gs.items()</code> enumerates all key-value pairs (which in this case is the gcd value and the count), and <code>[*x]</code> creates a copy of the list. Note that it’s important that we make a copy of the list to not mess up the calculations! (Why?)<a href="#fnref2">↩</a></p></li>
+<li id="fn2"><p>Here, <code class="sourceCode python">gs.items()</code> enumerates all key-value pairs (which in this case is the gcd value and the count), and <code>[*x]</code> creates a copy of the list. Note that in our case, it’s important that we make a copy of the list to not mess up the calculations! (Why?)<a href="#fnref2">↩</a></p></li>
 </ol>
 </div>
 </div>

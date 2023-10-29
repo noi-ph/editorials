@@ -102,11 +102,10 @@ mod = 998_244_353
 
 def insert_value(gs, f):
     for g, c in [*gs.items()]:
-        g = gcd(g, f)
-        gs[g] = (gs[g] + c) % mod
+        gs[gcd(g, f)] += c
 
 def solve(n):
-    gs = Counter([0])
+    gs = Counter([0])  # 0 represents the gcd of the empty set
     a, b = 0, 1
     for it in range(n):
         a, b = b, a + b
@@ -125,6 +124,12 @@ Do this and see for yourself that there really are only a few distinct values of
 In fact, if you go ahead and do this, **you&rsquo;ll actually notice something quite peculiar...**
 </div>
 
+<div class="remarks">
+**Remark:** If you really want to compute an upper bound before running your program, you can simply try to compute
+$$d(f_1) + d(f_2) + \ldots + d(f_n)$$
+for $n = 54$, where $d(k)$ is the number of positive divisors of $k$. This still isn't that easy to compute, but we can bound this loosely by noting that $f_i$ has at most $12$ digits for $i \le 54$, and you can check with a program that every number with at most $12$ digits has less than $10000$ divisors. (It is left to the reader to write this program.) Therefore, the sum above is $< 54\cdot 10000 < 10^6$, which is a very loose upper bound but is nonetheless still a piece of cake for the computer.
+</div>
+
 </details>
 
 
@@ -140,4 +145,4 @@ In fact, if you go ahead and do this, **you&rsquo;ll actually notice something q
 
 [^1]: Note that $f_1 = 1$ and $f_2 = 2$, which differs from the usual indexing of Fibonacci numbers (where $F_1 = 1$ and $F_2 = 1$).
 
-[^2]: Here, `gs.items()`{.python} enumerates all key-value pairs (which in this case is the gcd value and the count), and `[*x]` creates a copy of the list. Note that it&rsquo;s important that we make a copy of the list to not mess up the calculations! (Why?)
+[^2]: Here, `gs.items()`{.python} enumerates all key-value pairs (which in this case is the gcd value and the count), and `[*x]` creates a copy of the list. Note that in our case, it&rsquo;s important that we make a copy of the list to not mess up the calculations! (Why?)
