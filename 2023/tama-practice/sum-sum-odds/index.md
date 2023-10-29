@@ -141,7 +141,7 @@ As a building block, we first need the fact that $1 + 2 + 3 + \dots + N = N(N+1)
 
 Now, consider the telescoping sum
 $$\sum_{n=1}^N (n^3 - (n-1)^3),$$
-i.e.
+i.e.,
 $$\begin{array}{cccccccc}
      N^3 & -(N-1)^3 &          &        &      &      & \\
          & +(N-1)^3 & -(N-2)^3 &        &      &      & \\
