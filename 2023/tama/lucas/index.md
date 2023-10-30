@@ -9,7 +9,7 @@
 **Testing:** Paolo Estavillo, Vincent dela Cruz  
 **Statement:** Cisco Ortega  
 **Test Data Preparation:** Kevin Atienza  
-**Solution Writeup:** Cisco Ortega  
+**Solution Writeup:** Cisco Ortega, Kevin Atienza  
 
 
 
@@ -38,6 +38,7 @@ $$
 so there are cases where odd Lucas numbers are being turned even, and vice versa.
 
 So, we need a way to tell us whether a pre-modded Lucas number is even or odd.  There are a few options, actually.  Here&rsquo;s two of them.
+
 
 ### Generate the parities separately 
 
@@ -100,34 +101,63 @@ Note that when we see $(2, 1)$ again, it&rsquo;s the signal that the sequence de
 
 In fact, whenever this sequence start to repeat itself, the period _always_ begins with $2$ and $1$.  Can you see why?  **Hint:** If you know two consecutive terms in the Lucas number, you can determine the next term, but you can also determine the _previous_ term.
 
-If this period is sufficiently small (spoiler: it _is_ for Subtask 3 :D), then you can abuse it to compute things like sums (of even squares) even for very large $n$, because the period behaves predictably.
+If this period is sufficiently small (spoiler: it _is_ for Subtask 3 &#128512;), then you can abuse it to compute things like sums (of even squares) even for very large $n$, because the period behaves predictably.
 
 </details>
 
 
 
-<details class="editorial-section"><summary class="h2">Subtasks 4 & 5</summary>
+<details class="editorial-section"><summary class="h2">Subtask 4</summary>
 
-Without spoiling the full details, I will remark that there are two primary approaches that you could use in solving these subtasks.  One is **far more painful** than the other.
+We can push our solution for Subtask 3 further using a couple extra insights. First, there&rsquo;s actually a reasonable bound for the periodicity of the solution modulo a prime $p$:
 
-### Painful number theory 
+<div class="theorem">
+**Theorem:** If $p$ is prime, then the answers mod $p$ are periodic with period at most $3(p+1)$.
+</div>
+The proof of this needs a certain amount of number theory, so we&rsquo;ll skip it. (Feel free to ask in Discord if you want to hear more about it.) Without too much difficulty, it can be extended to prime power moduli as follows:
+<div class="theorem">
+**Theorem:** If $p$ is prime and $k > 0$, then the answers mod $p^k$ are periodic with period at most $3(p+1)p^{k-1}$.
+</div>
+We can even extend this further to general moduli using the Chinese remainder theorem. However, we won&rsquo;t state the corresponding theorem here, because we can also just use the Chinese remainder theorem in a different way. If the modulus $m$ has factorization
+$$m = p_1^{k_1}\cdot p_2^{k_2} \cdots p_r^{k_r},$$
+then we can simply solve the problem for each prime power modulus $p_i^{k_i}$, and then stitch them together using the Chinese remainder theorem to get the full answer modulo $m$.
+
+So to solve the problem, we factor the modulus into prime powers, and if the prime power factors are small enough, we can simply find the exact period directly, say by generating the sequence until it repeats! Once we have the exact period, computing the answer for any $n$ becomes pretty fast.
+
+The running time of this solution is more-or-less proportional to the largest prime power factor of $m$, which it turns out is small enough for Subtask 4. However, the modulus for Subtask 5 has a large prime factor, making this solution infeasible.
+
+<div class="caution">
+**Warning:** When looking for the period, make sure that the sequence really cycles! It&rsquo;s actually surprisingly tricky to figure out when the sequence repeats. Generally, you want to check that a long-enough contiguous subsequence repeats&mdash;it&rsquo;s not enough for it to repeat a single number. It turns out that in our problem, checking that $4$ consecutive numbers repeat is enough (but that&rsquo;s tricky to prove!). Alternatively, you could use a stronger version of the theorem which says that the period *divides* either $3(p-1)p^k$ or $3(p+1)p^k$ (which one it is depends on $p^2 \bmod 5$), though that&rsquo;s also tricky to prove.
+</div>
+
+</details>
+
+
+
+<details class="editorial-section"><summary class="h2">Subtask 5</summary>
+
+Without spoiling the full details, I will remark that there are two primary approaches that you could use in solving this subtask.  One is more painful than the other.
+
+
+### Number theory (painful &#128528;)
 
 In one solution, you use the explicit formula of the Lucas numbers, expand it out, then use a sum-of-geometric-series formula.
 
 The problem with this is, of course, the $\sqrt{5}$ in the explicit formula of the Lucas numbers.  To handle this, you have to:
 
 - First, factorize the modulus into prime powers.
-  - The small moduli can be brute-forced with period bashing, as in Subtask 3.
-  - The large moduli are, conveniently, all prime, so we can proceed!
+    - The small moduli can be brute-forced with period bashing, as in Subtask 3.
+    - The large moduli are, conveniently, all prime, so we can proceed!
 - Now, for each prime $p$ in the factorization, use Euler&rsquo;s criterion to determine if $x^2 \equiv 5 \pmod{p}$ has a solution.
-  - If yes, solve for it using a modulo square root algorithm like Cipolla&rsquo;s.
-  - If no, instead start working in the field extension with numbers of the form $a + b \sqrt{5}$ (kind of like what we do with the complex numbers)
-  - Then, proceed with the rest of your solution.
-- Finally, use the Chinese Remainder Theorem to stitch all your answers together into the true answer modulo $m$.
+    - If yes, solve for it using a modulo square root algorithm like Cipolla&rsquo;s.
+    - If no, instead start working in the field extension with numbers of the form $a + b \sqrt{5}$ (kind of like what we do with the complex numbers).[^1]
+    - Then, proceed with the rest of your solution.
+- Finally, use the Chinese remainder theorem to stitch all your answers together into the true answer modulo $m$.
 
 If you want to code this, go ahead!  It&rsquo;s a fun series of standard (still a bit obscure?) algorithms in number theory.  If not, you can try considering another solution...
 
-### Using matrices to solve linear recurrence (neat, very nice) 
+
+### Using matrices to solve linear recurrence (neat, very nice &#128578;) 
 
 Using standard matrix techniques, you should be able to compute the sum of even Lucas numbers.
 
@@ -135,4 +165,4 @@ Does this technique also work for Lucas **squares**?  It could work if the squar
 
 </details>
 
-
+[^1]: Adjoining a $\sqrt{5}$ sometimes still works even if $5$ already has a square root modulo $p$. You&rsquo;re simply working on a *ring* extension instead of a field extension. This works if you&rsquo;re somehow lucky that you don&rsquo;t divide by some problematic numbers (called &ldquo;zero divisors&rdquo;).

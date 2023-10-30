@@ -19,6 +19,8 @@
 *Construction ongoing!* &nbsp;&nbsp; &#127959; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#129521;
 </div>
 
+<!-- TODO demonstrate linearity of expectation somewhere, with two dependent variables. -->
+
 </details>
 
 

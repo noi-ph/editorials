@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta name="generator" content="pandoc" />
-    <title></title>
+    <title>Euler’s Theorem</title>
     <style type="text/css">code{white-space: pre;}</style>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
@@ -30,11 +30,16 @@
 
 <!--
 
+<div id="header">
+<h1 class="title">Euler’s Theorem</h1>
+</div>
 
 -->
 
 
 <div class="editorial container">
+<h1 id="eulers-theorem">Euler’s Theorem</h1>
+<div class="editorial-section">
 <p>This page contains a proof of <a href="https://en.wikipedia.org/wiki/Euler%27s_theorem"><strong>Euler's theorem</strong></a>:<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 <div class="theorem">
 <p><strong>Euler’s Theorem</strong>. Let <span class="math inline">\(a\)</span> and <span class="math inline">\(m\)</span> be coprime integers. Then, <span class="math display">\[a^{\varphi(m)} \equiv 1 \pmod m\]</span> where <span class="math inline">\(\varphi\)</span> is Euler’s Totient function, and <span class="math inline">\(\varphi(m)\)</span> counts the number of non-negative integers less than <span class="math inline">\(m\)</span> which are coprime to it.</p>
@@ -59,6 +64,7 @@ a_1\cdot a_2 \cdots a_{\varphi(m)} &amp;\equiv a^{\varphi(m)} a_1\cdot a_2\cdots
 </ul>
 <p>Thus, we can partition <span class="math inline">\(S\)</span> using this equivalence relation <span class="math inline">\(\sim\)</span>. Note that every equivalence class contains exactly <span class="math inline">\(k\)</span> elements, because for every <span class="math inline">\(v \in S\)</span>, the following numbers (mod <span class="math inline">\(m\)</span>) are all the elements equivalent to <span class="math inline">\(v\)</span> via <span class="math inline">\(\sim\)</span>: <span class="math display">\[\{v, va, va^2, \ldots, va^{k-1} \}.\]</span> Note that further powers of <span class="math inline">\(a\)</span> don't yield new elements because <span class="math inline">\(a^k \equiv 1 \pmod{m}\)</span>, and these are all distinct because if <span class="math inline">\(va^i \equiv va^j \pmod{m}\)</span> for <span class="math inline">\(0 \le i &lt; j &lt; k\)</span>, then multiplying by the inverses of <span class="math inline">\(v\)</span> and <span class="math inline">\(a^i\)</span> (which are coprime to <span class="math inline">\(m\)</span>) yields <span class="math inline">\(a^{j-i} \equiv 1 \pmod{m}\)</span> with <span class="math inline">\(j - i &lt; k\)</span>, contradicting the fact that <span class="math inline">\(k\)</span> is the smallest one such that <span class="math inline">\(a^k \equiv 1 \pmod{m}\)</span>.</p>
 <p>Therefore, all the <span class="math inline">\(\phi(m)\)</span> elements of <span class="math inline">\(S\)</span> are partitioned into equivalence classes, each of which is of size <span class="math inline">\(k\)</span>. So if there are <span class="math inline">\(c\)</span> equivalence classes, we have the equation <span class="math display">\[\phi(m) = kc\]</span> (i.e., <span class="math inline">\(k\)</span> divides <span class="math inline">\(\phi(m)\)</span>), and therefore we have <span class="math display">\[a^{\phi(m)} = a^{kc} = (a^k)^c \equiv 1^c = 1 \pmod{m}.\]</span> </details></p>
+</div>
 <div class="footnotes">
 <hr />
 <ol>

@@ -20,7 +20,7 @@
 
 ### A straightforward approach
 
-Anyway, the most straightforward solution would be to *just do it* as stated, a.k.a., *brute force*: enumerate all $2^{rc}$ grids, compute $B(G)$ for each of them, and then sum up all these $B(G)^3$. Enumerating grids is relatively straightforward with backtracking, and for the first subtask, $2^{rc} = 2^{25} = 33554432$ which is quite manageable for a computer. The only missing ingredient to fully implement this solution is being able to compute $B(G)$ for a given grid $G$ in the first place.
+Anyway, the most straightforward solution would be to *just do it* as stated, a.k.a., *brute force*: enumerate all $2^{rc}$ grids, compute $B(G)$ for each of them, and then sum up all these $B(G)^3$. Enumerating grids is relatively straightforward with backtracking, and for the first subtask, $2^{rc} = 2^{25} = 33554432$ which is quite manageable for a computer. The only missing ingredient to fully implement this solution is being able to compute $B(G)$ for a given grid $G$.
 
 
 ### Computing $B(G)$

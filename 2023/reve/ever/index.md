@@ -12,5 +12,6 @@
 **Solution Writeup:** Kevin Atienza  
 
 
+<div class="editorial-section">
 Sorry, I won&rsquo;t decrypt the editorial for you. &#128521; But...I made a simple web page to help you solve cryptograms! See [https://kcvajgf.github.io/cryptogram/](https://kcvajgf.github.io/cryptogram/)
-
+</div>

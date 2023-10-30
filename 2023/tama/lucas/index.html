@@ -82,7 +82,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <strong>Testing:</strong> Paolo Estavillo, Vincent dela Cruz<br />
 <strong>Statement:</strong> Cisco Ortega<br />
 <strong>Test Data Preparation:</strong> Kevin Atienza<br />
-<strong>Solution Writeup:</strong> Cisco Ortega</p>
+<strong>Solution Writeup:</strong> Cisco Ortega, Kevin Atienza</p>
 <p><details class="editorial-section"><summary class="h2">Subtasks 1 &amp; 2</summary></p>
 <p><strong>Just do it.</strong> With <span class="math inline">\(n = 10^6 + 2023 &lt; 10^8\)</span>, we have more than enough time to simply generate all of the first <span class="math inline">\(n\)</span> Lucas numbers and add up the squares of the even ones. Also, <span class="math inline">\(n=30\)</span> is small enough that you could do the first subtask by hand, if you feel compelled.</p>
 <p>There is one caveat. Lucas numbers grow exponentially quickly, so we need to make sure to take mods at all intermediate steps, i.e., compute the Lucas numbers modulo <span class="math inline">\(m\)</span> as we go along, instead of only at the end:</p>
@@ -137,28 +137,54 @@ It turns out that there’s a simple criterion that gives us the parity of a Luc
     2, 1, 3, 4, 7, 1, 8, 9, 7, 6, 3, 9, \textbf{2, 1}, 3, 4, 7, 1, 8, 9, 7, 6, 3, 9, ...
 \]</span> Note that when we see <span class="math inline">\((2, 1)\)</span> again, it’s the signal that the sequence devolves to just repeating the chunk <span class="math inline">\(2, 1, 3, 4, 7, 1, 8, 9, 7, 6, 3, 9\)</span> from that point on.</p>
 <p>In fact, whenever this sequence start to repeat itself, the period <em>always</em> begins with <span class="math inline">\(2\)</span> and <span class="math inline">\(1\)</span>. Can you see why? <strong>Hint:</strong> If you know two consecutive terms in the Lucas number, you can determine the next term, but you can also determine the <em>previous</em> term.</p>
-<p>If this period is sufficiently small (spoiler: it <em>is</em> for Subtask 3 :D), then you can abuse it to compute things like sums (of even squares) even for very large <span class="math inline">\(n\)</span>, because the period behaves predictably.</p>
+<p>If this period is sufficiently small (spoiler: it <em>is</em> for Subtask 3 😀), then you can abuse it to compute things like sums (of even squares) even for very large <span class="math inline">\(n\)</span>, because the period behaves predictably.</p>
 <p></details></p>
-<p><details class="editorial-section"><summary class="h2">Subtasks 4 &amp; 5</summary></p>
-<p>Without spoiling the full details, I will remark that there are two primary approaches that you could use in solving these subtasks. One is <strong>far more painful</strong> than the other.</p>
-<h3 id="painful-number-theory">Painful number theory</h3>
+<p><details class="editorial-section"><summary class="h2">Subtask 4</summary></p>
+<p>We can push our solution for Subtask 3 further using a couple extra insights. First, there’s actually a reasonable bound for the periodicity of the solution modulo a prime <span class="math inline">\(p\)</span>:</p>
+<div class="theorem">
+<p><strong>Theorem:</strong> If <span class="math inline">\(p\)</span> is prime, then the answers mod <span class="math inline">\(p\)</span> are periodic with period at most <span class="math inline">\(3(p+1)\)</span>.</p>
+</div>
+The proof of this needs a certain amount of number theory, so we’ll skip it. (Feel free to ask in Discord if you want to hear more about it.) Without too much difficulty, it can be extended to prime power moduli as follows:
+<div class="theorem">
+<p><strong>Theorem:</strong> If <span class="math inline">\(p\)</span> is prime and <span class="math inline">\(k &gt; 0\)</span>, then the answers mod <span class="math inline">\(p^k\)</span> are periodic with period at most <span class="math inline">\(3(p+1)p^{k-1}\)</span>.</p>
+</div>
+<p>We can even extend this further to general moduli using the Chinese remainder theorem. However, we won’t state the corresponding theorem here, because we can also just use the Chinese remainder theorem in a different way. If the modulus <span class="math inline">\(m\)</span> has factorization <span class="math display">\[m = p_1^{k_1}\cdot p_2^{k_2} \cdots p_r^{k_r},\]</span> then we can simply solve the problem for each prime power modulus <span class="math inline">\(p_i^{k_i}\)</span>, and then stitch them together using the Chinese remainder theorem to get the full answer modulo <span class="math inline">\(m\)</span>.</p>
+<p>So to solve the problem, we factor the modulus into prime powers, and if the prime power factors are small enough, we can simply find the exact period directly, say by generating the sequence until it repeats! Once we have the exact period, computing the answer for any <span class="math inline">\(n\)</span> becomes pretty fast.</p>
+<p>The running time of this solution is more-or-less proportional to the largest prime power factor of <span class="math inline">\(m\)</span>, which it turns out is small enough for Subtask 4. However, the modulus for Subtask 5 has a large prime factor, making this solution infeasible.</p>
+<div class="caution">
+<p><strong>Warning:</strong> When looking for the period, make sure that the sequence really cycles! It’s actually surprisingly tricky to figure out when the sequence repeats. Generally, you want to check that a long-enough contiguous subsequence repeats—it’s not enough for it to repeat a single number. It turns out that in our problem, checking that <span class="math inline">\(4\)</span> consecutive numbers repeat is enough (but that’s tricky to prove!). Alternatively, you could use a stronger version of the theorem which says that the period <em>divides</em> either <span class="math inline">\(3(p-1)p^k\)</span> or <span class="math inline">\(3(p+1)p^k\)</span> (which one it is depends on <span class="math inline">\(p^2 \bmod 5\)</span>), though that’s also tricky to prove.</p>
+</div>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 5</summary></p>
+<p>Without spoiling the full details, I will remark that there are two primary approaches that you could use in solving this subtask. One is more painful than the other.</p>
+<h3 id="number-theory-painful">Number theory (painful 😐)</h3>
 <p>In one solution, you use the explicit formula of the Lucas numbers, expand it out, then use a sum-of-geometric-series formula.</p>
 <p>The problem with this is, of course, the <span class="math inline">\(\sqrt{5}\)</span> in the explicit formula of the Lucas numbers. To handle this, you have to:</p>
 <ul>
-<li>First, factorize the modulus into prime powers.</li>
+<li>First, factorize the modulus into prime powers.
+<ul>
 <li>The small moduli can be brute-forced with period bashing, as in Subtask 3.</li>
 <li>The large moduli are, conveniently, all prime, so we can proceed!</li>
-<li>Now, for each prime <span class="math inline">\(p\)</span> in the factorization, use Euler’s criterion to determine if <span class="math inline">\(x^2 \equiv 5 \pmod{p}\)</span> has a solution.</li>
+</ul></li>
+<li>Now, for each prime <span class="math inline">\(p\)</span> in the factorization, use Euler’s criterion to determine if <span class="math inline">\(x^2 \equiv 5 \pmod{p}\)</span> has a solution.
+<ul>
 <li>If yes, solve for it using a modulo square root algorithm like Cipolla’s.</li>
-<li>If no, instead start working in the field extension with numbers of the form <span class="math inline">\(a + b \sqrt{5}\)</span> (kind of like what we do with the complex numbers)</li>
+<li>If no, instead start working in the field extension with numbers of the form <span class="math inline">\(a + b \sqrt{5}\)</span> (kind of like what we do with the complex numbers).<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
 <li>Then, proceed with the rest of your solution.</li>
-<li>Finally, use the Chinese Remainder Theorem to stitch all your answers together into the true answer modulo <span class="math inline">\(m\)</span>.</li>
+</ul></li>
+<li>Finally, use the Chinese remainder theorem to stitch all your answers together into the true answer modulo <span class="math inline">\(m\)</span>.</li>
 </ul>
 <p>If you want to code this, go ahead! It’s a fun series of standard (still a bit obscure?) algorithms in number theory. If not, you can try considering another solution...</p>
-<h3 id="using-matrices-to-solve-linear-recurrence-neat-very-nice">Using matrices to solve linear recurrence (neat, very nice)</h3>
+<h3 id="using-matrices-to-solve-linear-recurrence-neat-very-nice">Using matrices to solve linear recurrence (neat, very nice 🙂)</h3>
 <p>Using standard matrix techniques, you should be able to compute the sum of even Lucas numbers.</p>
 <p>Does this technique also work for Lucas <strong>squares</strong>? It could work if the squares of Lucas numbers also form a linear recurrence relation... do they?</p>
 <p></details></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Adjoining a <span class="math inline">\(\sqrt{5}\)</span> sometimes still works even if <span class="math inline">\(5\)</span> already has a square root modulo <span class="math inline">\(p\)</span>. You’re simply working on a <em>ring</em> extension instead of a field extension. This works if you’re somehow lucky that you don’t divide by some problematic numbers (called “zero divisors”).<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

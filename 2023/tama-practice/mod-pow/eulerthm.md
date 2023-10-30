@@ -1,3 +1,9 @@
+% Euler&rsquo;s Theorem
+
+
+# Euler&rsquo;s Theorem
+
+<div class="editorial-section">
 This page contains a proof of [**Euler's theorem**](https://en.wikipedia.org/wiki/Euler%27s_theorem):[^1]
 
 
@@ -77,6 +83,7 @@ $$\phi(m) = kc$$
 $$a^{\phi(m)} = a^{kc} = (a^k)^c \equiv 1^c = 1 \pmod{m}.$$
 </details>
 
+</div>
 
 [^1]: also known as the **Fermat-Euler theorem** because Fermat proved a
     special case (with $m$ prime), and also because Euler already has so
