@@ -578,6 +578,13 @@ so we only need to divide with numbers $g < n$. Since $n < m$ for all inputs, th
 
 Thus, we can safely divide whenever we need to, and all is well in the world.
 
+<div class="remarks">
+
+**Remark:** In math, when we're doing this idea &ldquo;working modulo $m$&rdquo; we usually say we're &ldquo;working in $\mathbb{Z}/m\mathbb{Z}$&rdquo;. Here, &ldquo;$\mathbb{Z}/m\mathbb{Z}$&rdquo; is a formalization of the &ldquo;set of integers modulo $m$&rdquo;. It is just like the integers $\mathbb{Z}$, but we make two numbers equal iff they are the same mod $m$. In this setting, we can also add, subtract, and multiply, and we can divide by any number coprime with $m$ (as shown above).
+
+If $m$ is prime, then this means we can divide by any &ldquo;nonzero number&rdquo; (where you need to remember that &ldquo;nonzero&rdquo; means &ldquo;not divisible by $m$&rdquo;), which makes $\mathbb{Z}/m\mathbb{Z}$ a **field**, just like $\mathbb{R}$ and $\mathbb{Q}$.
+</div>
+
 </details>
 
 [^1]: technically, we should say &ldquo;*uniformly randomly, and independently of each other*&rdquo; here...
