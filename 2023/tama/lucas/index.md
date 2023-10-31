@@ -165,4 +165,4 @@ Does this technique also work for Lucas **squares**?  It could work if the squar
 
 </details>
 
-[^1]: Adjoining a $\sqrt{5}$ sometimes still works even if $5$ already has a square root modulo $p$. You&rsquo;re simply working on a *ring* extension instead of a field extension. This works if you&rsquo;re somehow lucky that you don&rsquo;t divide by some problematic numbers (called &ldquo;zero divisors&rdquo;).
+[^1]: Adjoining a $\sqrt{5}$ sometimes still works even if $5$ already has a square root modulo $p$. You&rsquo;re simply working in a *ring* extension instead of a field extension. This works if you&rsquo;re somehow lucky that you don&rsquo;t divide by some problematic numbers (called &ldquo;zero divisors&rdquo;).

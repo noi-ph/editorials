@@ -54,7 +54,7 @@ With this formula, we can now easily compute $B(G)$ by computing the parities of
 Here&rsquo;s an implementation in C++.
 
 **Note:** It looks quite a bit involved, mostly because of the backtracking, so if you can&rsquo;t grok this yet, I suggest skipping it for now and proceeding to the following sections which will describe solutions that are simpler to implement. Understanding this is *not* required to understand the following solutions.
-<details><summary class="h4">Code (C++)</summary>
+<details class="code"><summary class="h4">Code (C++)</summary>
 
 ```cpp
 #include <bits/stdc++.h>
@@ -299,7 +299,7 @@ This formula simplifies our solution a lot! After precomputing the value of $2^{
 
 
 
-<details class="editorial-section"><summary class="h2">Subtask 4</summary>
+<details class="editorial-section"><summary class="h2">Subtasks 4 & 5</summary>
 
 For this subtask, $\mathcal{O}(rc)$ won&rsquo;t be enough. We want something faster.
 

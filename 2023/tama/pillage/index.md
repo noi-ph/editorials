@@ -19,7 +19,11 @@
 *Construction ongoing!* &nbsp;&nbsp; &#127959; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#128679; &#129521;
 </div>
 
-<!-- TODO demonstrate linearity of expectation somewhere, with two dependent variables. -->
+<!-- TODO demonstrate linearity of expectation somewhere, with two dependent variables.
+
+X = die result
+Y = square of die result
+-->
 
 </details>
 

@@ -102,7 +102,7 @@ On the other hand, for every move, we can choose the row and column to flip <em>
 <p>With this formula, we can now easily compute <span class="math inline">\(B(G)\)</span> by computing the parities of all rows and columns, computing <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span> from those, and finally computing <span class="math inline">\(B(G)\)</span> as <span class="math inline">\(\max(R, C)\)</span>.</p>
 <h3 id="implementation">Implementation</h3>
 <p>Here’s an implementation in C++.</p>
-<p><strong>Note:</strong> It looks quite a bit involved, mostly because of the backtracking, so if you can’t grok this yet, I suggest skipping it for now and proceeding to the following sections which will describe solutions that are simpler to implement. Understanding this is <em>not</em> required to understand the following solutions. <details><summary class="h4">Code (C++)</summary></p>
+<p><strong>Note:</strong> It looks quite a bit involved, mostly because of the backtracking, so if you can’t grok this yet, I suggest skipping it for now and proceeding to the following sections which will describe solutions that are simpler to implement. Understanding this is <em>not</em> required to understand the following solutions. <details class="code"><summary class="h4">Code (C++)</summary></p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span>
 <span class="kw">using</span> <span class="kw">namespace</span> std;
 
@@ -266,7 +266,7 @@ ll solve(<span class="dt">int</span> r, <span class="dt">int</span> c) {
 <p><strong>Exercise:</strong> Show that this solution runs in <span class="math inline">\(\mathcal{O}(rc)\)</span> time.</p>
 </div>
 <p></details></p>
-<p><details class="editorial-section"><summary class="h2">Subtask 4</summary></p>
+<p><details class="editorial-section"><summary class="h2">Subtasks 4 &amp; 5</summary></p>
 <p>For this subtask, <span class="math inline">\(\mathcal{O}(rc)\)</span> won’t be enough. We want something faster.</p>
 I’ll just leave you with a hint to get you started. (The solution of course needs more steps after this.)
 <div class="task">

@@ -66,10 +66,10 @@ You also have to handle some other edge cases, such as what to do if $Ey + Gx = 
 
 The previous algorithm is too slow for subtasks 3 and 4. This is because the amount of work grows quadratically with respect to $n$, and for $n = 5^{10} = 9765625$, we have $(2n+1)^2 \approx 4\cdot 10^{14}$, which is quite large; a computer that can do $1$ billion operations per second (a.k.a. &ldquo;1 gigahertz&rdquo;) will take several days to solve this problem with the previous algorithm.
 
-Anyway, for this subtask, we will just give you hints on how to proceed. But for these hints to be helpful, you probably should first know how to solve degree $1$ and degree $2$ Diophantine equations. (The current equation is of degree $3$.) There are plenty of those you can practice on in Project Euler.
+Anyway, for this subtask, we will just give you hints on how to proceed. But for these hints to be helpful, you probably should first know how to solve degree $1$ and degree $2$ Diophantine equations. (The current equation is of degree $3$.) There are plenty of those you can practice on in Project Euler. You could also refer to [this video (specifically Method 2)](https://www.youtube.com/watch?v=SCdDBYRrDtM&list=PL8yHsr3EFj53L8sMbzIhhXSAOpuZ1Fov8&index=44) for inspiration.
 
-<div class="task">
-**Hint 1:** If $(x, y, z)$ is an integer solution, then $(n x, n y, n z)$ is also an integer solution for any integer $n$. In fact, $(\alpha x, \alpha y, \alpha z)$ is a *rational* solution for any rational $\alpha$.
+<details class="task"><summary class="h4">Hint 1</summary>
+If $(x, y, z)$ is an integer solution, then $(n x, n y, n z)$ is also an integer solution for any integer $n$. In fact, $(\alpha x, \alpha y, \alpha z)$ is a *rational* solution for any rational $\alpha$.
 
 (Basically, &ldquo;$f$ is *homogeneous*.&rdquo;)
 
@@ -77,13 +77,13 @@ If you think about this some more, it means that if we write our equation as
 $$f(x, y, z) = 0,$$
 then integer solutions to this are related to rational solutions of
 $$f(X, Y, 1) = 0.$$
-</div>
+</details>
 
-<div class="task">
-**Hint 2:** Because $f$ is homogeneous of degree $3$, the graph of $f(X, Y, 1) = 0$ is a cubic curve, which renders the corresponding rational equation hard to solve. (We can generally solve up to degree $2$ easily, but degree $3$ is where dragons[^1] roam.)
+<details class="task"><summary class="h4">Hint 2</summary>
+Because $f$ is homogeneous of degree $3$, the graph of $f(X, Y, 1) = 0$ is a *cubic* curve, which renders the corresponding rational equation hard to solve. (We can generally solve up to degree $2$ easily, but degree $3$ is where dragons[^1] roam.)
 
 However, if you actually draw/plot the graph of $f(X, Y, 1) = 0$, you should see *something curious*...
-</div>
+</details>
 
 </details>
 
