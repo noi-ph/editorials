@@ -46,7 +46,7 @@
 .body .editorial pre {
     background-color: #f4f4f4;
     border: 1px solid #c8c8c8;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: .8em;
     /* margin-top: 2px; */
     margin-bottom: 12px;
@@ -59,49 +59,64 @@
     background-color: white;
 }
 
-.body .editorial .theorem {
+.body .editorial .theorem { background-color: #ddffdd; }
+.body .editorial .remarks { background-color: #ddddff; }
+.body .editorial .task    { background-color: #ffdddd; }
+.body .editorial .caution { background-color: #ffffdd; }
+.body .editorial .proof   { background-color: #eeeeee; }
+.body .editorial .code    { background-color: #f4f4f4; }
+
+.body .editorial .code pre {
+    border: none;
+    padding: 0;
+}
+
+.body .editorial .theorem,
+.body .editorial .remarks,
+.body .editorial .task,
+.body .editorial .caution,
+.body .editorial .proof,
+.body .editorial .code {
+    padding: 1rem 1.25rem 0 1.25rem;
     border: 1px solid #c8c8c8;
     border-radius: 10px;
-    padding: 1rem 1.3rem 0 1.3rem;
-    background-color: #ddffdd;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
-.body .editorial .remarks {
-    border: 1px solid #c8c8c8;
-    border-radius: 10px;
-    padding: 1rem 1.3rem 0 1.3rem;
-    background-color: #ddddff;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.body .editorial details.theorem,
+.body .editorial details.remarks,
+.body .editorial details.task,
+.body .editorial details.caution,
+.body .editorial details.proof,
+.body .editorial details.code {
+    padding-bottom: 1rem;
 }
 
-.body .editorial .task {
-    border: 1px solid #c8c8c8;
-    border-radius: 10px;
-    padding: 1rem 1.3rem 0 1.3rem;
-    background-color: #ffdddd;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.body .editorial details[open].code {
+    padding-bottom: 0;
 }
 
-.body .editorial .caution {
-    border: 1px solid #c8c8c8;
-    border-radius: 10px;
-    padding: 1rem 1.3rem 0 1.3rem;
-    background-color: #ffffdd;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.body .editorial details.code pre {
+    margin-bottom: 0;
 }
 
-.body .editorial .proof {
-    border: 1px solid #c8c8c8;
-    border-radius: 10px;
-    padding: 1rem 1rem .25rem 1rem;
-    background-color: #eeeeee;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.body .editorial details.theorem > summary,
+.body .editorial details.remarks > summary,
+.body .editorial details.task    > summary,
+.body .editorial details.caution > summary,
+.body .editorial details.proof   > summary,
+.body .editorial details.code    > summary {
+    margin: 0;
+}
+
+.body .editorial details[open].theorem > summary,
+.body .editorial details[open].remarks > summary,
+.body .editorial details[open].task    > summary,
+.body .editorial details[open].caution > summary,
+.body .editorial details[open].proof   > summary,
+.body .editorial details[open].code    > summary {
+    margin-bottom: .75rem;
 }
 
 .center-p > p {
@@ -117,12 +132,8 @@
     color: #666699;
 }
 
-.body .editorial summary {
-    margin-bottom: .75rem;
-}
 
 .definition {
     text-decoration-line: underline;
     text-decoration-style: dotted;
 }
-
