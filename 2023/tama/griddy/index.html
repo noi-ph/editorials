@@ -84,7 +84,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <strong>Test Data Preparation:</strong> Kevin Atienza<br />
 <strong>Solution Writeup:</strong> Kevin Atienza</p>
 <p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
+<div class="caution">
 <p><strong>Disclaimer:</strong> The first solution we’ll describe is the simplest one conceptually, but is not necessarily the easiest one to implement. Nonetheless, we’re covering it anyway because the ideas we’ll encounter will be useful for later.</p>
+</div>
 <h3 id="a-straightforward-approach">A straightforward approach</h3>
 <p>Anyway, the most straightforward solution would be to <em>just do it</em> as stated, a.k.a., <em>brute force</em>: enumerate all <span class="math inline">\(2^{rc}\)</span> grids, compute <span class="math inline">\(B(G)\)</span> for each of them, and then sum up all these <span class="math inline">\(B(G)^3\)</span>. Enumerating grids is relatively straightforward with backtracking, and for the first subtask, <span class="math inline">\(2^{rc} = 2^{25} = 33554432\)</span> which is quite manageable for a computer. The only missing ingredient to fully implement this solution is being able to compute <span class="math inline">\(B(G)\)</span> for a given grid <span class="math inline">\(G\)</span>.</p>
 <h3 id="computing-bg">Computing <span class="math inline">\(B(G)\)</span></h3>
@@ -102,7 +104,10 @@ On the other hand, for every move, we can choose the row and column to flip <em>
 <p>With this formula, we can now easily compute <span class="math inline">\(B(G)\)</span> by computing the parities of all rows and columns, computing <span class="math inline">\(R\)</span> and <span class="math inline">\(C\)</span> from those, and finally computing <span class="math inline">\(B(G)\)</span> as <span class="math inline">\(\max(R, C)\)</span>.</p>
 <h3 id="implementation">Implementation</h3>
 <p>Here’s an implementation in C++.</p>
-<p><strong>Note:</strong> It looks quite a bit involved, mostly because of the backtracking, so if you can’t grok this yet, I suggest skipping it for now and proceeding to the following sections which will describe solutions that are simpler to implement. Understanding this is <em>not</em> required to understand the following solutions. <details class="code"><summary class="h4">Code (C++)</summary></p>
+<div class="caution">
+<p><strong>Note:</strong> It looks quite a bit involved, mostly because of the backtracking, so if you can’t grok this yet, I suggest skipping it for now and proceeding to the following sections which will describe solutions that are simpler to implement. Understanding this is <em>not</em> required to understand the following sections.</p>
+</div>
+<p><details class="code"><summary class="h4">Code (C++)</summary></p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span>
 <span class="kw">using</span> <span class="kw">namespace</span> std;
 

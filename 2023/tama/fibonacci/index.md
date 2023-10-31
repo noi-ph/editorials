@@ -125,7 +125,7 @@ In fact, if you go ahead and do this, **you&rsquo;ll actually notice something q
 </div>
 
 <div class="remarks">
-**Remark:** If you really want to compute an upper bound before running your program, you can simply try to compute
+**Remark:** If you really want to compute an upper bound before running your program, you could try to compute the obvious bound
 $$d(f_1) + d(f_2) + \ldots + d(f_n)$$
 for $n = 54$, where $d(k)$ is the number of positive divisors of $k$. This still isn't that easy to compute, but we can bound this loosely by noting that $f_i$ has at most $12$ digits for $i \le 54$, and you can check with a program that every number with at most $12$ digits has less than $10000$ divisors. (It is left to the reader to write this program.) Therefore, the sum above is $< 54\cdot 10000 < 10^6$, which is a very loose upper bound but is nonetheless still a piece of cake for the computer.
 </div>

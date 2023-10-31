@@ -15,7 +15,9 @@
 
 <details class="editorial-section"><summary class="h2">Subtask 1</summary>
 
+<div class="caution">
 **Disclaimer:** The first solution we&rsquo;ll describe is the simplest one conceptually, but is not necessarily the easiest one to implement. Nonetheless, we&rsquo;re covering it anyway because the ideas we&rsquo;ll encounter will be useful for later.
+</div>
 
 
 ### A straightforward approach
@@ -53,7 +55,9 @@ With this formula, we can now easily compute $B(G)$ by computing the parities of
 
 Here&rsquo;s an implementation in C++.
 
-**Note:** It looks quite a bit involved, mostly because of the backtracking, so if you can&rsquo;t grok this yet, I suggest skipping it for now and proceeding to the following sections which will describe solutions that are simpler to implement. Understanding this is *not* required to understand the following solutions.
+<div class="caution">
+**Note:** It looks quite a bit involved, mostly because of the backtracking, so if you can&rsquo;t grok this yet, I suggest skipping it for now and proceeding to the following sections which will describe solutions that are simpler to implement. Understanding this is *not* required to understand the following sections.
+</div>
 <details class="code"><summary class="h4">Code (C++)</summary>
 
 ```cpp

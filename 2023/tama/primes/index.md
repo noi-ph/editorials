@@ -18,7 +18,7 @@
 
 The input in the first subtask is small enough that **brute force** may be feasible.
 
-One straightforward idea for a brute force solution would be to enumerate all possible sequences of numbers from $\{2, 3, \ldots, b-1\}$, and for each one, compute the corresponding Mini-sequences and Maxi-sequences and check whether the conditions $m_1 < m_2 < \ldots < m_n$ and $M_1 < M_2 < \ldots < M_n$ are satisfied.
+One straightforward idea for a brute force solution would be to enumerate all possible sequences of numbers from $\{2, 3, \ldots, b-1\}$, and for each one, compute the corresponding Mini-sequence and Maxi-sequence and check whether the conditions $m_1 < m_2 < \ldots < m_n$ and $M_1 < M_2 < \ldots < M_n$ are satisfied or not.
 
 Now, to compute the $m_i$ and $M_i$, we need to factorize the numbers. Since the numbers are only up to $47$, we can simply do this by brute force as well (and save the results).
 
@@ -65,7 +65,7 @@ def solve(n, b):
     return ans % mod
 ```
 </details>
-Here, we used backtracking to enumerate all sequences of numbers of length $n$ between $2$ and $b-1$. You can also just use [`itertools.product`](https://docs.python.org/3/library/itertools.html#itertools.product) to enumerate them more simply&mdash;it&rsquo;s just `product(range(2, b), repeat=n)`{.python}:
+Here, we used *backtracking* to enumerate all sequences of numbers of length $n$ between $2$ and $b-1$ (with the `sequences`{.python} function I defined). You can also just use [`itertools.product`](https://docs.python.org/3/library/itertools.html#itertools.product) to enumerate them more simply&mdash;it&rsquo;s just `product(range(2, b), repeat=n)`{.python}:
 
 ```python
 from itertools import product
@@ -138,6 +138,7 @@ def solve(n, b):
 ```
 </details>
 
+
 ### Pen and paper?
 
 You could also solve this subtask with pen and paper by using the solution for Subtask 2, which is perfectly doable by hand.
@@ -180,7 +181,7 @@ Here is now our problem, from a &ldquo;geometrical&rdquo; perspective:
 
 We&rsquo;re looking for sequences of points of length $n$ that go northeast. A straightforward way to build a sequence is to choose the points one by one, and we need only make sure that every point we choose is northeast of the previous point.
 
-Well, the sequence has to start somewhere, so the first point must be any one of the $(x_i, y_i)$s, and we can write the answer as
+Well, the sequence has to start somewhere, so the first point must be any one of the $(x_i, y_i)$'s, and we can write the answer as
 $$\mathit{answer} = S(n, 2) + S(n, 3) + \ldots + S(n, b-1)$$
 where $S(n, i)$ is the number of sequences of length $n$ that start at the point $(x_i, y_i)$. Writing the above in summation notation, it&rsquo;s the same as
 $$\mathit{answer} = \sum_{i=2}^{b-1} S(n, i).$$
@@ -192,7 +193,7 @@ The base case should be simple:
 </div>
 Using this recurrence, we can now build a table of values of $S(n', i)$, for all $(n', i)$ such that $1 \le n' \le n$ and $1 < i < b$. We can build this table in increasing order of $n'$, because each entry $S(n', i)$ only depends on the &ldquo;previous layer&rdquo; (because the summands are $S(n' - 1, j)$), whose values we&rsquo;ve already computed. Finally, once we fill in the $n$th layer, we could then compute the answer using our summation formula above.
 
-What&rsquo;s the running time of this solution? Well, there are $\approx nb$ possible arguments $(n', i)$, and each one is computed with a summation with $\approx b$ terms, so the amount of work is roughly $\approx nb\cdot b = nb^2$. (In algorithm parlance, we say that the running time is &ldquo;$\mathcal{O}(nb^2)$.&rdquo;) The amount of steps needed is small enough that this algorithm can be used to solve subtask 1 by hand (or maybe with a spreadsheet). For subtask 2, this is already quite waitable, but we can slightly speed it up by noticing that $S(n, i)$ doesn&rsquo;t really depend on $i$, only on $(x_i, y_i)$, so such values are equal for multiple points that happen to *coincide*. Formally, if $(x_i, y_i) = (x_j, y_j)$, then $S(n, i) = S(n, j)$. Using this, we only need to compute it once for every *distinct* point in $\{(x_i, y_i) \mid 1 < i < b \}$. This speeds up the running time from $\approx nb\cdot b$ steps to $\approx np\cdot b$ steps, where $p$ is the number of distinct points. (For $b = 4000$, you could check that $p = 1637$.)
+What&rsquo;s the running time of this solution? Well, there are $\approx nb$ possible arguments $(n', i)$, and each one is computed with a summation with $\approx b$ terms, so the amount of work is roughly $\approx nb\cdot b = nb^2$. (In algorithm parlance, we say that the running time is &ldquo;$\mathcal{O}(nb^2)$.&rdquo;) The amount of steps needed is small enough that this algorithm can be used to solve Subtask 1 by hand (or maybe with a spreadsheet). For Subtask 2, this is already quite waitable, but we can slightly speed it up by noticing that $S(n, i)$ doesn&rsquo;t really depend on $i$, only on $(x_i, y_i)$, so such values are equal for multiple points that happen to *coincide*. Formally, if $(x_i, y_i) = (x_j, y_j)$, then $S(n, i) = S(n, j)$. Using this, we only need to compute it once for every *distinct* point in $\{(x_i, y_i) \mid 1 < i < b \}$. This speeds up the running time from $\approx nb\cdot b$ steps to $\approx np\cdot b$ steps, where $p$ is the number of distinct points. (For $b = 4000$, you could check that $p = 1637$.)
 
 This technique of building a table of results whose elements depend on earlier entries is called **dynamic programming**, or DP.
 
