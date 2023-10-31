@@ -179,7 +179,30 @@ We can compute $\mathit{count}_{=v}(i)$ by noting that:
 </div>
 This is fairly intuitive, and you should try to prove it yourself &#128578;.
 <details class="proof"><summary class="h4">Proof</summary>
-Sort the sequence in **decreasing** order, so the $i$th element denotes the $i$th largest value.
+
+Sort the sequence in **decreasing** order, so the $j$th element denotes the $j$th largest value.
+
+Now, there are three *mutually exclusive* possibilities:
+
+1. **The $i$th largest value is $= v$,** i.e., the element at index $i$ is $v$. Then because the sequence is decreasing,
+    - only indices $1$ to $i - 1$ can have a value greater than $v$, and there are $< i$ of them; and
+    - only indices $i + 1$ to $w$ can have a value less than $v$, and there are $\le w - i$ of them.
+
+2. **The $i$th largest value is $> v$,** i.e., the element at index $i$ is $> v$. Then because the sequence is decreasing,
+    - indices $1$ to $i$ have values greater than $v$, and there are $i$ of them.
+
+3. **The $i$th largest value is $< v$,** i.e., the element at index $i$ is $< v$. Then because the sequence is decreasing,
+    - indices $i$ to $w$ have values less than $v$, and there are $w - i + 1$ of them.
+
+We can now check that the theorem holds:
+
+- If the $i$th largest value is $v$, then the first case holds, so the two conditions hold.
+- On the other hand, if the $i$th largest value is *not* $v$, then either the second or third case holds, so one of the two conditions fails.
+
+</details>
+
+<details class="proof"><summary class="h4">Alternate Proof</summary>
+Sort the sequence in **decreasing** order, so the $j$th element denotes the $j$th largest value.
 
 (&rArr;) Now, suppose the $i$th largest element is $v$, i.e., the element at index $i$ is $v$. Then because the sequence is decreasing,
 
@@ -291,7 +314,7 @@ Now, there's still that factor $w$ in the running time, which in the current sub
 How can we improve it? Well, the main reason for needing factorials up to $w$ is so that we can compute binomial coefficients. But looking closer, notice that we actually only need binomial coefficients **at exactly row $w$**. Furthermore, we actually only need the first $n$ coefficients in it. And as it turns out, there's a way to compute a row of binomial coefficients one by one, starting from the leftmost one, by using the following recurrence (which is easy to prove using the factorial formula):
 $$\binom{w}{g} = \binom{w}{g - 1}\cdot \frac{w - g + 1}{g},$$
 with base case simply $\binom{w}{0} = 1$. So now, instead of precomputing factorials, we may simply precompute the needed binomial coefficients using this recurrence with just $\approx n$ steps! The running time then improves to
-$$\mathcal{O}(n^2 k + nk \log w),$$
+$$\mathcal{O}(n^2 k + nk \lg w),$$
 which is really cool.
 
 </details>
@@ -397,7 +420,7 @@ $$\begin{align*}
 \end{align*}$$
 </details>
 
-Just as practice, you could try proving the *scaling* property formally yourself:
+For practice, you could try proving the *scaling* property formally yourself:
 <div class="task">
 
 **Exercise:** Prove the *scaling* property of expectation formally.
@@ -413,7 +436,7 @@ Just as practice, you could try proving the *scaling* property formally yourself
 
 <details class="editorial-section"><summary class="h2">Bonus: Computing rational numbers modulo $998244353$</summary>
 
-All solutions we described above compute the *full* answer, i.e., we pretend we were working on $\mathbb{R}$ where we can add, subtract, multiply, and crucially, divide, numbers. Actually, we could also pretend we are working on $\mathbb{Q}$, i.e., the rationals, since all intermediate results are clearly rational, and we can also do the same arithmetic operations there.
+All solutions we described above compute the *full* answer, i.e., we pretend we were working on $\mathbb{R}$ (or maybe $\mathbb{C}$) where we can add, subtract, multiply, and crucially, divide, numbers. Actually, we could also pretend we are working on $\mathbb{Q}$, i.e., the rationals, since all intermediate results are clearly rational, and we can also do the same arithmetic operations there.
 
 Now, in many problems, we can usually convert such full-answer solutions into solutions that compute the answer mod $m$, say $m = 998244353$, because we can also add, subtract and multiply numbers mod $m$. However, division mod $m$ is more complicated; it sometimes doesn't work at all. To see this, let $m = 10$, and note that $12 \equiv 32 \pmod{10}$, but dividing by $4$ fails:
 $$\frac{12}{4} = 3 \not\equiv 8 = \frac{32}{4} \pmod{10}.$$
@@ -525,7 +548,7 @@ Now, that's well and good, but we still need to relate this way of dividing modu
 $$(a/b \bmod m) = (ab^{-1} \bmod m).$$
 </div>
 
-For this theorem to work, we will amend the definitions given in the statement as follows: We say a rational is **divisible by $m$** if it can be written as $a/b$ with $a$ divisible by $m$ and $b$ *coprime* with $m$. This is equivalent to the definition in the statement when $m$ is prime, but is friendlier to nonprime moduli.
+For this theorem to work, we will amend the definition given in the statement as follows: We say a rational is **divisible by $m$** if it can be written as $a/b$ with $a$ divisible by $m$ and $b$ *coprime* with $m$. This is equivalent to the definition in the statement when $m$ is prime, but it's friendlier to nonprime moduli.
 
 <details class="proof"><summary class="h4">Proof</summary>
 
@@ -580,9 +603,9 @@ Thus, we can safely divide whenever we need to, and all is well in the world.
 
 <div class="remarks">
 
-**Remark:** In math, when we're doing this idea &ldquo;working modulo $m$&rdquo; we usually say we're &ldquo;working in $\mathbb{Z}/m\mathbb{Z}$&rdquo;. Here, &ldquo;$\mathbb{Z}/m\mathbb{Z}$&rdquo; is a formalization of the &ldquo;set of integers modulo $m$&rdquo;. It is just like the integers $\mathbb{Z}$, but we make two numbers equal iff they are the same mod $m$. In this setting, we can also add, subtract, and multiply, and we can divide by any number coprime with $m$ (as shown above).
+**Remark:** In math, when we're doing this idea of &ldquo;working modulo $m$&rdquo; we usually say we're &ldquo;working in $\mathbb{Z}/m\mathbb{Z}$&rdquo;. Here, &ldquo;$\mathbb{Z}/m\mathbb{Z}$&rdquo; is a formalization of the &ldquo;set of integers modulo $m$&rdquo;. It is just like the integers $\mathbb{Z}$, but we make two numbers equal iff they are the same mod $m$. In this setting, we can also add, subtract, and multiply, and we can divide by any number coprime with $m$ (as shown above).
 
-If $m$ is prime, then this means we can divide by any &ldquo;nonzero number&rdquo; (where you need to remember that &ldquo;nonzero&rdquo; means &ldquo;not divisible by $m$&rdquo;), which makes $\mathbb{Z}/m\mathbb{Z}$ a **field**, just like $\mathbb{R}$ and $\mathbb{Q}$.
+If $m$ is prime, then this means we can divide by any &ldquo;nonzero number&rdquo; (where you need to remember that &ldquo;nonzero&rdquo; means &ldquo;not divisible by $m$&rdquo;), which makes $\mathbb{Z}/m\mathbb{Z}$ a **field**, just like $\mathbb{R}$, $\mathbb{C}$, and $\mathbb{Q}$.
 </div>
 
 </details>
