@@ -7,7 +7,7 @@
 **Contest:** [TAMa 2023](https://noi.ph/tama-2023/)  
 **Problem Idea:** Cassidy Tan  
 **Testing:** Vincent dela Cruz  
-**Statement:** Cisco Ortega  
+**Statement:** Cassidy Tan  
 **Test Data Preparation:** Kevin Atienza  
 **Solution Writeup:** Kevin Atienza  
 
@@ -131,7 +131,7 @@ def solve(n, w, k):
 </details>
 
 <div class="remarks">
-**Remark:** The implementation tries to copy the mathematical formulas above as closely as possible. As a result, it's highly unoptimized, and there are definitely several improvements that be made. But the main point is that even such unoptimized code is enough to solve the subtask.
+**Remark:** The implementation tries to copy our formulas above as closely as possible. As a result, it's highly unoptimized, and there are definitely several improvements that be made. But the main point is that even such unoptimized code is enough to solve the subtask.
 </div>
 
 </details>
@@ -147,7 +147,7 @@ To find faster solutions, we use something called the &ldquo;**linearity of expe
 - $\operatorname{E}[\alpha X] = \alpha \operatorname{E}[X]$ for any random variable $X$ and any constant $\alpha$, and
 - $\operatorname{E}[X_1 + X_2] = \operatorname{E}[X_1] + \operatorname{E}[X_2]$ for any two random variables $X_1$ and $X_2$.
 
-The first one is quite intuitive; after all, it's just scaling the values, so the *average* should just be scaled appropriately. However, the second property&mdash;additivity&mdash;may be surprising. The property could be intuitive in the case where $X_1$ and $X_2$ are *independent*, but linearity doesn't *require* them to be&mdash;it's simply *always* true!
+The first one is quite intuitive; after all, $\alpha X$ is just $X$ with all values scaled by $\alpha$, so the *average* should just be scaled in the same way. However, the second property&mdash;additivity&mdash;may be surprising. The property could be intuitive in the case where $X_1$ and $X_2$ are *independent*, but linearity doesn't *require* them to be&mdash;it's simply *always* true!
 
 In a bonus section below, we'll explain why this is true, but for now, let's first try to apply this to the problem. Let $T$ be the same random variable as before, so it denotes the *sum* of the $n$ largest values of the sequence produced. Now, we define $n$ new random variables $T_1, T_2, \ldots T_n$, where $T_i$ denotes the $i$th largest value of the sequence. Then clearly we have
 $$T = T_1 + T_2 + \ldots + T_n = \sum_{i=1}^n T_i.$$
@@ -385,21 +385,13 @@ and note that the $p_sT$ column is still the sum of the $p_sT_1$ and $p_sT_2$ co
 It should now not be too hard to formalize this argument and make it more general. If you're interested, here it is:
 <details class="proof"><summary class="h4">Proof</summary>
 
-Suppose the sample space $k$ elements
-$$\{\omega_1, \omega_2, \ldots, \omega_k\}$$
-with respective probabilities $p_1, p_2, \ldots, p_k$. Next, for each $i$, define $t_i$, $u_i$, and $v_i$ as the values that $T$, $T_1$ and $T_2$ take at the element $\omega_i$ of the sample space, i.e., for each $i$:
-$$\begin{align*}
-T(\omega_i) &= t_i \\
-T_1(\omega_i) &= u_i \\
-T_2(\omega_i) &= v_i.
-\end{align*}$$
-Since $T = T_1 + T_2$, we must always have $t_i = u_i + v_i$. Then by the [law of the unconscious statistician](https://en.wikipedia.org/wiki/Law_of_the_unconscious_statistician), 
+Suppose the sample space has $k$ elements $\{\omega_1, \omega_2, \ldots, \omega_k\}$ with respective probabilities $p_1, p_2, \ldots, p_k$. Because $T = T_1 + T_2$, we must always have $T(\omega_i) = T_1(\omega_i) + T_2(\omega_i),$ for every $i$. 
+
+Thus, by the [law of the unconscious statistician](https://en.wikipedia.org/wiki/Law_of_the_unconscious_statistician), 
 $$\begin{align*}
 \operatorname{E}[T]
 &= \sum_{i=1}^k p_i \cdot T(\omega_i) \\
-&= \sum_{i=1}^k p_i \cdot t_i \\
-&= \sum_{i=1}^k p_i \cdot (u_i + v_i) \\
-&= \sum_{i=1}^k p_i \cdot u_i + \sum_{i=1}^k p_i \cdot v_i \\
+&= \sum_{i=1}^k p_i \cdot \left(T_1(\omega_i) + T_2(\omega_i)\right) \\
 &= \sum_{i=1}^k p_i \cdot T_1(\omega_i) + \sum_{i=1}^k p_i \cdot T_2(\omega_i) \\
 &= \operatorname{E}[T_1] + \operatorname{E}[T_2].
 \end{align*}$$
@@ -407,7 +399,13 @@ $$\begin{align*}
 
 Just as practice, you could try proving the *scaling* property formally yourself:
 <div class="task">
+
 **Exercise:** Prove the *scaling* property of expectation formally.
+</div>
+
+<div class="remarks">
+
+**Remark:** Our proof of linearity depends on the fact that the sample space is finite. Indeed, our definition of random variable assumes that as well. In other settings where there may be infinitely many outcomes, it turns out expectation is still linear, but our proof (and even the definition of &ldquo;expected value&rdquo;) needs to be modified a bit.
 </div>
 </details>
 

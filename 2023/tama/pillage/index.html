@@ -80,7 +80,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong>Contest:</strong> <a href="https://noi.ph/tama-2023/">TAMa 2023</a><br />
 <strong>Problem Idea:</strong> Cassidy Tan<br />
 <strong>Testing:</strong> Vincent dela Cruz<br />
-<strong>Statement:</strong> Cisco Ortega<br />
+<strong>Statement:</strong> Cassidy Tan<br />
 <strong>Test Data Preparation:</strong> Kevin Atienza<br />
 <strong>Solution Writeup:</strong> Kevin Atienza</p>
 <div class="editorial-section">
@@ -156,7 +156,7 @@ If that's confusing, let's formalize a bit. Let's define a <strong>winner sequen
     <span class="cf">return</span> <span class="bu">sum</span>(p_(t) <span class="op">*</span> t <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n, n<span class="op">*</span>k <span class="op">+</span> <span class="dv">1</span>))</code></pre></div>
 <p></details></p>
 <div class="remarks">
-<p><strong>Remark:</strong> The implementation tries to copy the mathematical formulas above as closely as possible. As a result, it's highly unoptimized, and there are definitely several improvements that be made. But the main point is that even such unoptimized code is enough to solve the subtask.</p>
+<p><strong>Remark:</strong> The implementation tries to copy our formulas above as closely as possible. As a result, it's highly unoptimized, and there are definitely several improvements that be made. But the main point is that even such unoptimized code is enough to solve the subtask.</p>
 </div>
 <p></details></p>
 <p><details class="editorial-section"><summary class="h2">Subtask 2</summary></p>
@@ -166,7 +166,7 @@ If that's confusing, let's formalize a bit. Let's define a <strong>winner sequen
 <li><span class="math inline">\(\operatorname{E}[\alpha X] = \alpha \operatorname{E}[X]\)</span> for any random variable <span class="math inline">\(X\)</span> and any constant <span class="math inline">\(\alpha\)</span>, and</li>
 <li><span class="math inline">\(\operatorname{E}[X_1 + X_2] = \operatorname{E}[X_1] + \operatorname{E}[X_2]\)</span> for any two random variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>.</li>
 </ul>
-<p>The first one is quite intuitive; after all, it's just scaling the values, so the <em>average</em> should just be scaled appropriately. However, the second property—additivity—may be surprising. The property could be intuitive in the case where <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are <em>independent</em>, but linearity doesn't <em>require</em> them to be—it's simply <em>always</em> true!</p>
+<p>The first one is quite intuitive; after all, <span class="math inline">\(\alpha X\)</span> is just <span class="math inline">\(X\)</span> with all values scaled by <span class="math inline">\(\alpha\)</span>, so the <em>average</em> should just be scaled in the same way. However, the second property—additivity—may be surprising. The property could be intuitive in the case where <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are <em>independent</em>, but linearity doesn't <em>require</em> them to be—it's simply <em>always</em> true!</p>
 <p>In a bonus section below, we'll explain why this is true, but for now, let's first try to apply this to the problem. Let <span class="math inline">\(T\)</span> be the same random variable as before, so it denotes the <em>sum</em> of the <span class="math inline">\(n\)</span> largest values of the sequence produced. Now, we define <span class="math inline">\(n\)</span> new random variables <span class="math inline">\(T_1, T_2, \ldots T_n\)</span>, where <span class="math inline">\(T_i\)</span> denotes the <span class="math inline">\(i\)</span>th largest value of the sequence. Then clearly we have <span class="math display">\[T = T_1 + T_2 + \ldots + T_n = \sum_{i=1}^n T_i.\]</span> Now, the <span class="math inline">\(T_i\)</span>'s are definitely not independent, e.g., knowing the largest value constrains the possible values of the second value, and vice versa. Regardless, <em>expectation is always additive</em>, so we have the equality <span class="math display">\[\operatorname{E}[T] = \operatorname{E}[T_1] + \operatorname{E}[T_2] + \ldots + \operatorname{E}[T_n] = \sum_{i=1}^n \operatorname{E}[T_i].\]</span> Thus, we've reduced the problem to computing <span class="math inline">\(\operatorname{E}[T_i]\)</span> for <span class="math inline">\(1 \le i \le n\)</span>, which is potentially more manageable!</p>
 <h3 id="computing-operatornameet_i">Computing <span class="math inline">\(\operatorname{E}[T_i]\)</span></h3>
 <p>Let's now try to compute <span class="math inline">\(\operatorname{E}[T_i]\)</span>, the expected value of the <span class="math inline">\(i\)</span>th largest element of the sequence. The possible values are between <span class="math inline">\(1\)</span> and <span class="math inline">\(k\)</span>, so by definition, we have <span class="math display">\[\operatorname{E}[T_i] = \sum_{v=1}^k \operatorname{P}[T_i = v]\cdot v,\]</span> where <span class="math inline">\(\operatorname{P}[T_i = v]\)</span> denotes the probability that <span class="math inline">\(T_i = v\)</span>. Next, we again turn probability into counting; noting that there are <span class="math inline">\(k^w\)</span> equally likely possibilities, we have something like <span class="math display">\[\operatorname{P}[T_i = v] = \frac{\mathit{count}_{=v}(i)}{k^w}\]</span> where <span class="math inline">\(\mathit{count}_{=v}(i)\)</span> denotes the number of sequences whose <span class="math inline">\(i\)</span>th largest value is <span class="math inline">\(v\)</span>. Thus, we're done if we can compute <span class="math inline">\(\mathit{count}_{=v}(i)\)</span>.</p>
@@ -304,22 +304,20 @@ s &amp; p_sT_1 &amp; p_sT_2 &amp; p_sT \\
 [2, 2, 2] &amp; \frac{2}{8} &amp; \frac{2}{8} &amp; \frac{4}{8}.
 \end{array}\]</span> and note that the <span class="math inline">\(p_sT\)</span> column is still the sum of the <span class="math inline">\(p_sT_1\)</span> and <span class="math inline">\(p_sT_2\)</span> columns. Finally, computing <span class="math inline">\(\operatorname{E}[T]\)</span> amounts to taking the <em>sum</em> of the <span class="math inline">\(p_sT\)</span> column, while computing <span class="math inline">\(\operatorname{E}[T_1] + \operatorname{E}[T_2]\)</span> amounts to taking the sum of the <span class="math inline">\(p_sT_1\)</span> and <span class="math inline">\(p_sT_2\)</span> columns separately, then adding them. But these are clearly the same! (And this worked even if <span class="math inline">\(T_1\)</span> and <span class="math inline">\(T_2\)</span> aren't independent.)</p>
 <p>It should now not be too hard to formalize this argument and make it more general. If you're interested, here it is: <details class="proof"><summary class="h4">Proof</summary></p>
-<p>Suppose the sample space <span class="math inline">\(k\)</span> elements <span class="math display">\[\{\omega_1, \omega_2, \ldots, \omega_k\}\]</span> with respective probabilities <span class="math inline">\(p_1, p_2, \ldots, p_k\)</span>. Next, for each <span class="math inline">\(i\)</span>, define <span class="math inline">\(t_i\)</span>, <span class="math inline">\(u_i\)</span>, and <span class="math inline">\(v_i\)</span> as the values that <span class="math inline">\(T\)</span>, <span class="math inline">\(T_1\)</span> and <span class="math inline">\(T_2\)</span> take at the element <span class="math inline">\(\omega_i\)</span> of the sample space, i.e., for each <span class="math inline">\(i\)</span>: <span class="math display">\[\begin{align*}
-T(\omega_i) &amp;= t_i \\
-T_1(\omega_i) &amp;= u_i \\
-T_2(\omega_i) &amp;= v_i.
-\end{align*}\]</span> Since <span class="math inline">\(T = T_1 + T_2\)</span>, we must always have <span class="math inline">\(t_i = u_i + v_i\)</span>. Then by the <a href="https://en.wikipedia.org/wiki/Law_of_the_unconscious_statistician">law of the unconscious statistician</a>, <span class="math display">\[\begin{align*}
+<p>Suppose the sample space has <span class="math inline">\(k\)</span> elements <span class="math inline">\(\{\omega_1, \omega_2, \ldots, \omega_k\}\)</span> with respective probabilities <span class="math inline">\(p_1, p_2, \ldots, p_k\)</span>. Because <span class="math inline">\(T = T_1 + T_2\)</span>, we must always have <span class="math inline">\(T(\omega_i) = T_1(\omega_i) + T_2(\omega_i),\)</span> for every <span class="math inline">\(i\)</span>.</p>
+<p>Thus, by the <a href="https://en.wikipedia.org/wiki/Law_of_the_unconscious_statistician">law of the unconscious statistician</a>, <span class="math display">\[\begin{align*}
 \operatorname{E}[T]
 &amp;= \sum_{i=1}^k p_i \cdot T(\omega_i) \\
-&amp;= \sum_{i=1}^k p_i \cdot t_i \\
-&amp;= \sum_{i=1}^k p_i \cdot (u_i + v_i) \\
-&amp;= \sum_{i=1}^k p_i \cdot u_i + \sum_{i=1}^k p_i \cdot v_i \\
+&amp;= \sum_{i=1}^k p_i \cdot \left(T_1(\omega_i) + T_2(\omega_i)\right) \\
 &amp;= \sum_{i=1}^k p_i \cdot T_1(\omega_i) + \sum_{i=1}^k p_i \cdot T_2(\omega_i) \\
 &amp;= \operatorname{E}[T_1] + \operatorname{E}[T_2].
 \end{align*}\]</span> </details></p>
 Just as practice, you could try proving the <em>scaling</em> property formally yourself:
 <div class="task">
 <p><strong>Exercise:</strong> Prove the <em>scaling</em> property of expectation formally.</p>
+</div>
+<div class="remarks">
+<p><strong>Remark:</strong> Our proof of linearity depends on the fact that the sample space is finite. Indeed, our definition of random variable assumes that as well. In other settings where there may be infinitely many outcomes, it turns out expectation is still linear, but our proof (and even the definition of “expected value”) needs to be modified a bit.</p>
 </div>
 <p></details></p>
 <p><details class="editorial-section"><summary class="h2">Bonus: Computing rational numbers modulo <span class="math inline">\(998244353\)</span></summary></p>
