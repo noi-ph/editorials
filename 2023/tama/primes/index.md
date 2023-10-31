@@ -172,7 +172,7 @@ Now, &ldquo;$x < x'$ and $y < y'$&rdquo; is the same as saying that &ldquo;point
 
 Here is now our problem, from a &ldquo;geometrical&rdquo; perspective:
 <div class="task">
-**Restated Problem**: Given a collection of points $(x_i, y_i)$, how many sequences of length $n$ of such points are there that &ldquo;go northeast&rdquo;?
+**Problem (Restated)**: Given a list of points $\left[(x_i, y_i) \mid 1 < i < b \right]$, how many sequences of $n$ such points are there that &ldquo;go northeast&rdquo;?
 </div>
 
 
@@ -192,7 +192,7 @@ The base case should be simple:
 </div>
 Using this recurrence, we can now build a table of values of $S(n', i)$, for all $(n', i)$ such that $1 \le n' \le n$ and $1 < i < b$. We can build this table in increasing order of $n'$, because each entry $S(n', i)$ only depends on the &ldquo;previous layer&rdquo; (because the summands are $S(n' - 1, j)$), whose values we&rsquo;ve already computed. Finally, once we fill in the $n$th layer, we could then compute the answer using our summation formula above.
 
-What&rsquo;s the running time of this solution? Well, there are $\approx nb$ possible arguments $(n', i)$, and each one is computed with a summation with $\approx b$ terms, so the amount of work is roughly $\approx nb\cdot b = nb^2$. In algorithm parlance, we say that the running time is &ldquo;$\mathcal{O}(nb^2)$.&rdquo; For subtask 2, this is fast enough! (And for subtask 1, you could probably even do it by hand, or maybe with a spreadsheet.)
+What&rsquo;s the running time of this solution? Well, there are $\approx nb$ possible arguments $(n', i)$, and each one is computed with a summation with $\approx b$ terms, so the amount of work is roughly $\approx nb\cdot b = nb^2$. (In algorithm parlance, we say that the running time is &ldquo;$\mathcal{O}(nb^2)$.&rdquo;) The amount of steps needed is small enough that this algorithm can be used to solve subtask 1 by hand (or maybe with a spreadsheet). For subtask 2, this is already quite waitable, but we can slightly speed it up by noticing that $S(n, i)$ doesn&rsquo;t really depend on $i$, only on $(x_i, y_i)$, so such values are equal for multiple points that happen to *coincide*. Formally, if $(x_i, y_i) = (x_j, y_j)$, then $S(n, i) = S(n, j)$. Using this, we only need to compute it once for every *distinct* point in $\{(x_i, y_i) \mid 1 < i < b \}$. This speeds up the running time from $\approx nb\cdot b$ steps to $\approx np\cdot b$ steps, where $p$ is the number of distinct points. (For $b = 4000$, you could check that $p = 1637$.)
 
 This technique of building a table of results whose elements depend on earlier entries is called **dynamic programming**, or DP.
 
@@ -203,22 +203,22 @@ This technique of building a table of results whose elements depend on earlier e
 <details class="editorial-section"><summary class="h2">Subtasks 3 & 4</summary>
 
 
-For the remaining subtasks, we will only give you hints. The previous $\mathcal{O}(nb^2)$ solution is now too slow, so we need something faster. I&rsquo;ll give you a few hints that you can use to speed up your solution in different ways. A combination of them (plus a few other insights) can be used to solve the remaining subtasks.
+For the remaining subtasks, I&rsquo;ll only give hints. The previous solution is now too slow, so we need something faster. I&rsquo;ll give you a few hints that you can use to speed up your solution in different ways. A combination of some of them (plus maybe a few other insights) can be used to solve the remaining subtasks.
 
-<details class="task"><summary class="h4">Hint 1 (Factorizing faster)</summary>
+<details class="task"><summary class="h4">Hint 1 (Factoring faster)</summary>
 There are faster ways to factorize all numbers up to $b$, e.g., by suitably modifying the [sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes).
 </details>
 
 <details class="task"><summary class="h4">Hint 2 (Summing faster)</summary>
-We&rsquo;re building the $n$th &ldquo;layer&rdquo; of the table (&ldquo;layer $n$&rdquo;) based only off the previous layer (&ldquo;layer $n-1$&rdquo;). Now, each element $S(n, i)$ of the current layer is obtained from the previous layer as the sum across &ldquo;all points northeast of $(x_i, y_i)$&rdquo;. Graphically, if we write the numbers $S(n-1, i)$ in their locations $(x_i, y_i)$ in the 2D plane, then we&rsquo;re summing up a &ldquo;quadrant&rdquo;, e.g.,
+The $n$th &ldquo;layer&rdquo; of the table (&ldquo;layer $n$&rdquo;) can be computed based only off the previous layer (&ldquo;layer $n-1$&rdquo;). Now, each element $S(n, i)$ of the current layer is obtained from the previous layer as the sum across &ldquo;all points northeast of $(x_i, y_i)$&rdquo;. Graphically, if we write the numbers $S(n-1, i)$ on their locations $(x_i, y_i)$ in the 2D plane, then we&rsquo;re summing up a &ldquo;quadrant&rdquo;, e.g.,
 
 <img class="illus" src="images/primes2.png" width="400px"/>
 
-It turns out that there are data structures that can speed this up! Such data structures preprocess a bunch of data like this so that after preprocessing, you can evaluate such &ldquo;range sums&rdquo; much more quickly than brute force. These cool **tree-based** data structures are fairly standard, and there are publicly available training materials discussing them, such as these training modules written by NOI.PH: [DS0](https://drive.google.com/file/d/1ZKVE8an5zEhyd3YYolK4BoQViawqEj9m/view?usp=drive_link), [DS1](https://drive.google.com/file/d/1hIirDnD-C--RVX7c8d6B6ScHcBbRb5ro/view?usp=drive_link), [DS2](https://drive.google.com/file/d/15q2WWAg2I1n5-MqHMKLm7BR7P4oYQZ-x/view?usp=drive_link) and [DS3](https://drive.google.com/file/d/17zd_VzBMJ0tfHue1tGAh5Qo4jpXNPPQJ/view?usp=drive_link).
+It turns out that there are data structures that can speed this up! Such data structures preprocess a bunch of data like this so that after preprocessing, you can evaluate such &ldquo;range sums&rdquo; much more quickly than brute force. These cool **tree-based** data structures are fairly standard, and there are publicly available training materials discussing them, such as these training modules written by NOI.PH: [Trees](https://drive.google.com/file/d/1ZKVE8an5zEhyd3YYolK4BoQViawqEj9m/view?usp=drive_link), [DS1](https://drive.google.com/file/d/1hIirDnD-C--RVX7c8d6B6ScHcBbRb5ro/view?usp=drive_link), [DS2](https://drive.google.com/file/d/15q2WWAg2I1n5-MqHMKLm7BR7P4oYQZ-x/view?usp=drive_link) and [DS3](https://drive.google.com/file/d/17zd_VzBMJ0tfHue1tGAh5Qo4jpXNPPQJ/view?usp=drive_link).
 </details>
 
 <details class="task"><summary class="h4">Hint 3 (More insight on the data)</summary>
-Our earlier images may be slightly misleading&mdash;they&rsquo;re just a bunch of random points. Are our points really random? Try plotting $(x_i, y_i)$ for $1 < i < b$ and see...
+Our images above are just showing a bunch of random points for illustration purposes, but that may be misleading. Are our points *really* random? Try plotting the points $\left[(x_i, y_i) \mid 1 < i < b\right]$ and see...
 </details>
 
 The last two hints are the reason why I asked you to *visualize* the problem earlier on&mdash;those insights are much easier to see visually.
