@@ -17,7 +17,7 @@ Euler’s Totient function, and $\varphi(m)$ counts the number of non-negative i
 </div>
 There are many proofs of Euler’s Theorem online which you can refer to. Here's a classic one:
 
-<details class="proof"><summary>Proof 1</summary>
+<details class="proof"><summary class="h4">Proof 1</summary>
 Let 
 $$S := \{a_1, a_2, \ldots, a_{\varphi(m)}\}$$
 be all the non-negative integers $< m$ coprime to $m$. Then I claim 
@@ -52,7 +52,7 @@ so $m$ must divide $a^{\varphi(m)} - 1$, which is (equivalent to) what we want t
 
 Here's another one:
 
-<details class="proof"><summary>Proof 2</summary>
+<details class="proof"><summary class="h4">Proof 2</summary>
 First, we show that any number $a$ coprime to $m$ has a multiplicative inverse. Using [Bézout's](https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity), there exist integers $x$ and $y$ such that
 $$ax + my = 1.$$
 Reducing this modulo $m$ gives $ax \equiv 1 \pmod{m}$, so $x$ is a multiplicative inverse of $a$.

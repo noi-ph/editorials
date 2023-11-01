@@ -20,7 +20,7 @@
 its **average** value.
 </div>
 
-<details class="proof"><summary>Proof</summary>
+<details class="proof"><summary class="h4">Proof</summary>
 Let $f(x)$ be the total square error of $x$ with respect to some
 sequence $[v_1, v_2, \dots, v_n]$, so
 $$f(x) = \sum_{i=1}^n (x - v_i)^2.$$
@@ -46,7 +46,7 @@ $$x = \frac{\sum_{i=1}^n v_i}{n},$$
 which, familiarly, is the average of the sequence.
 </details>
 
-<details class="proof"><summary>Alternate Proof</summary>
+<details class="proof"><summary class="h4">Alternate Proof</summary>
 (This requires a bit of calculus, so feel free to skip it if you don't understand it.)
 
 Define $f(x)$ the same as before, so that

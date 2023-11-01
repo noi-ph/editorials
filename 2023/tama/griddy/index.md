@@ -38,7 +38,7 @@ On the other hand, for every move, we can choose the row and column to flip *ind
 **Theorem 1:** If the grid $G$ has exactly $R$ odd rows and exactly $C$ odd columns, then $B(G) = \max(R, C)$.
 </div>
 
-<details class="proof"><summary>Proof</summary>
+<details class="proof"><summary class="h4">Proof</summary>
 Without loss of generality, assume $R \le C$ (we can rotate the grid otherwise), so our goal is to show that $B(G) = C$. Using our earlier argument, at least $\max(R, C) = C$ moves are needed, so all that remains is to show that $C$ moves are enough.
 
 With a greedy strategy, we can turn $R$ odd rows and odd columns even with just $R$ moves; we end up with $0$ odd rows and $C - R$ odd columns. Then, for each of the $C - R$ remaining odd columns, we flip its topmost cell. This makes all columns even, and also all rows even, except potentially the topmost row.

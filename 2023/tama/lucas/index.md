@@ -73,7 +73,7 @@ It turns out that there&rsquo;s a simple criterion that gives us the parity of a
 
 Perhaps you might have spotted this pattern while playing around with the numbers. And actually, it&rsquo;s not that hard to prove.
 
-<details class="proof"><summary>Proof</summary>
+<details class="proof"><summary class="h4">Proof</summary>
 Perform induction.  Assume that $L_{3k}$ is even, and $L_{3k+1}$ and $L_{3k+2}$ are odd; use this to show that $L_{3(k+1)}$ is even, and $L_{3(k+1) + 1}$ and $L_{3(k+1) + 2}$ are odd. More precisely, we&rsquo;re proving the following statement by induction on $k$:
 
 &ldquo;For all $k \ge 0$, $L_{3k}$ is even, and $L_{3k+1}$ and $L_{3k+2}$ are odd.&rdquo;
