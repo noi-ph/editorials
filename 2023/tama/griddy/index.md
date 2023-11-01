@@ -29,7 +29,7 @@ Anyway, the most straightforward solution would be to *just do it* as stated, a.
 
 We are given a grid with $r$ rows and $c$ columns, and we want to make it *based*, i.e., change it so that every row and every column has an even number of cringe memes.
 
-Let&rsquo;s convert a cool meme (&#128511;) into a $0$ and a cringe meme (&#128556;) into a $1$, so the condition translates to: the sum of every row and every column is even.
+Let&rsquo;s convert a cool meme (&#128511;) into a $0$ and a cringe meme (&#128556;) into a $1$, so the condition translates to: **the sum of every row and every column is even.**
 
 Now, the effect of flipping a cell is to flip the <span class="definition" data-bs-toggle="tooltip" data-bs-placement="bottom" title="The parity of a number is whether it&rsquo;s odd or even. (The word &ldquo;parity&rdquo; itself is related to the word &ldquo;pair&rdquo;.)">parity</span> of exactly one row and exactly one column, namely the row and column containing the cell. Thus, if there are $R$ odd rows, then you need at least $R$ flips to make all these odd rows even. Similarly, if there are $C$ odd columns, then you need at least $C$ flips. Combining these tells us that we need $\max(R, C)$ or more moves to make the grid based.
 

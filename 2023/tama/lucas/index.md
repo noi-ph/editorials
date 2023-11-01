@@ -61,7 +61,7 @@ for value, parity in zip(L, L_parity):
 ```
 
 <div class="remarks">
-**Remark:** You can also just compute the Lucas numbers modulo $2m$; that way, reducing them modulo $m$ and $2$ is still valid. (Can you see why?)
+**Remark:** You could also just compute the Lucas numbers modulo $2m$; that way, reducing them modulo $m$ and $2$ is still valid. (Can you see why?)
 </div>
 
 ### Pen-and-paper insight

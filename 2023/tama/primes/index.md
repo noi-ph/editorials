@@ -77,13 +77,13 @@ def solve(n, b):
 ```
 We can check that this is correct by running it on one of the examples, say $n = 3$ and $b = 18$.
 
-Unfortunately, when you try to pass in the actual input $n = 10$ and $b = 48$, you&rsquo;ll find that it doesn&rsquo;t seem to finish. Indeed, there are $46$ possible values, which means there are $46^{10} \approx 4\cdot 10^{16}$ possible sequences. Even if we could process $10^9$ sequences per second, this program will take more than one year to finish!
+Unfortunately, when you try to pass in the actual input $n = 10$ and $b = 48$, you&rsquo;ll find that it doesn&rsquo;t seem to finish. Indeed, there are $46$ possible values, which means there are $46^{10} \approx 4\cdot 10^{16}$ possible sequences. Even if we could process $10^9$ sequences per second, this program will take *more than one year* to finish!
 
 We can improve this slightly with some observations.
 
-- First, the numbers must be *distinct*, so we could just enumerate all sequences **without repeated values**. This reduces the number of candidates from $46^{10}$ to $46\cdot 45\cdot 44 \cdots 37$. However, this number is still large&mdash;it&rsquo;s $\approx 1.5\cdot 10^{16}$, which isn&rsquo;t a huge improvement. With $10^9$ sequences per second, our program would still take several months.
+- First, the numbers must be *distinct*, so we could just try to enumerate sequences **without repeated values**. This reduces the number of candidates from $46^{10}$ to $46\cdot 45\cdot 44 \cdots 37$. However, this number is still large&mdash;it&rsquo;s $\approx 1.5\cdot 10^{16}$, which isn&rsquo;t a huge improvement. With $10^9$ sequences per second, our program would still take several months.
 
-- Another insight would be to notice that for every set of $n$ distinct numbers, there is at most one ordering of them that could potentially work, because we want their largest (or smallest) prime factors to be increasing as well. So for every *set* of $n$ distinct numbers, we can simply **sort them by their largest prime factor**, and check if that ordering works. This reduces the number of candidates further to $\binom{46}{10} \approx 4\cdot 10^9$, which is much smaller than before, and the program may now be waitable.
+- Another insight would be to notice that for every *set* of $n$ distinct numbers, there is at most one ordering of them that could potentially work, because we want their largest (or smallest) prime factors to be increasing as well. So for every *set* of $n$ distinct numbers, we can simply **sort them by their largest prime factor**, and check if that ordering works. This reduces the number of candidates further to $\binom{46}{10} \approx 4\cdot 10^9$, which is much smaller than before, and the program may now be waitable.
 
 - However, we can do even better than this. We could attempt to build the sequence number by number, and stop the construction **as soon as one of the conditions already fails**. 
 
@@ -196,6 +196,11 @@ Using this recurrence, we can now build a table of values of $S(n', i)$, for all
 What&rsquo;s the running time of this solution? Well, there are $\approx nb$ possible arguments $(n', i)$, and each one is computed with a summation with $\approx b$ terms, so the amount of work is roughly $\approx nb\cdot b = nb^2$. (In algorithm parlance, we say that the running time is &ldquo;$\mathcal{O}(nb^2)$.&rdquo;) The amount of steps needed is small enough that this algorithm can be used to solve Subtask 1 by hand (or maybe with a spreadsheet). For Subtask 2, this is already quite waitable, but we can slightly speed it up by noticing that $S(n, i)$ doesn&rsquo;t really depend on $i$, only on $(x_i, y_i)$, so such values are equal for multiple points that happen to *coincide*. Formally, if $(x_i, y_i) = (x_j, y_j)$, then $S(n, i) = S(n, j)$. Using this, we only need to compute it once for every *distinct* point in $\{(x_i, y_i) \mid 1 < i < b \}$. This speeds up the running time from $\approx nb\cdot b$ steps to $\approx np\cdot b$ steps, where $p$ is the number of distinct points. (For $b = 4000$, you could check that $p = 1637$.)
 
 This technique of building a table of results whose elements depend on earlier entries is called **dynamic programming**, or DP.
+
+<div class="task">
+
+**Exercise:** There&rsquo;s another slight tweak that can be done to improve this from $\approx np\cdot b$ steps to $\approx np\cdot p$ steps. Explain how to do it.
+</div>
 
 </details>
 
