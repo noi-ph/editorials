@@ -9,13 +9,26 @@ def main():
     parser = ArgumentParser(description="Copy editorial files from somewhere else. WARNING: DON'T USE THIS UNLESS THE CONTEST IS ALREADY OVER!")
 
     parser.add_argument('source', type=Path, help="Source folder")
-    parser.add_argument('contest', type=Path, help="Contest path")
+    parser.add_argument('year', type=Path, help="Contest year")
+    parser.add_argument('contest', type=Path, help="Contest name")
 
     args = parser.parse_args()
 
-    source = args.source / args.contest / 'editorials'
-    target = args.contest
+    def _sources():
+        yield args.source / args.year / 'editorials' / args.contest
+        yield args.source / args.year / args.contest / 'editorials'
 
+    def get_sources():
+        for source in _sources():
+            print(f"Trying source folder {source}")
+            if source.is_dir():
+                yield source
+
+    if len(sources := [*get_sources()]) != 1:
+        raise RuntimeError(f"Unique source folder not found. Got {sources}")
+
+    [source] = sources
+    target = args.year / args.contest
     print("SOURCE IS", source)
     print("TARGET IS", target)
 
