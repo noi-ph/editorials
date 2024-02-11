@@ -5,7 +5,7 @@ Please visit https://noi.ph/
 
 # How to upload editorials
 
-Suppose your editorials are in `../path/to/repo-name/2023/my-contest/editorials`. Note that it is important for the last three parts of the path to be `[year]/[contestname]/editorials`. Here's what you do to upload:
+Suppose your editorials are in `../path/to/repo-name/2023/my-contest/editorials`. Note that it is important for the last three parts of the path to be `[year]/[contestname]/editorials`.[^1] Here's what you do to upload:
 
 1. Copy and compile everything.
 
@@ -30,3 +30,7 @@ Note that the scripts require `python3.10`; if you have an earlier version of Py
 # TODOs
 
 - add favicon
+
+
+
+[^1]: `[year]/editorials/[contestname]` is also OK.
