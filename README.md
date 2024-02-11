@@ -15,7 +15,7 @@ Suppose your editorials are in `../path/to/repo-name/2023/my-contest/editorials`
     $ ./compileall.py
     ```
 
-    Note that "`editorials`" is gone in the `copyall` command, and there's a space between `repo-name` and `2023`.
+    Note that there's a space between `repo-name` and `2023`, and `2023` and `my-contest`, in the `copyall` command.
 
     If all goes well, you should see your files in the appropriate folder in this repo, along with .html files for every .md file.
 
