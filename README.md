@@ -11,7 +11,7 @@ Suppose your editorials are in `../path/to/repo-name/2023/my-contest/editorials`
 
     ```bash
     $ cd editorials
-    $ ./copyall.py ../path/to/repo-name 2023/my-contest
+    $ ./copyall.py ../path/to/repo-name 2023 my-contest
     $ ./compileall.py
     ```
 
