@@ -9,6 +9,7 @@
     <meta name="generator" content="pandoc" />
     <title>Solution Writeup: Parañastack</title>
     <style type="text/css">code{white-space: pre;}</style>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
     <link rel="stylesheet" href="/style/editorials.css" type="text/css">
 
@@ -40,20 +41,72 @@
 <h1 id="parañastack">Parañastack</h1>
 <h2 id="solution-writeup">Solution Writeup</h2>
 <p><strong>Contest:</strong> <a href="https://noi.ph/2024-national-eliminations/">NOI.PH 2024 Online Elimination Round</a><br />
-<strong>Problem Idea:</strong> Toby Announced<br />
-<strong>Testing:</strong> Toby Announced<br />
-<strong>Statement:</strong> Toby Announced<br />
-<strong>Test Data Preparation:</strong> Toby Announced<br />
-<strong>Solution Writeup:</strong> Toby Announced</p>
+<strong>Problem Idea:</strong> CJ Quines<br />
+<strong>Testing:</strong> Dylan Dalida<br />
+<strong>Statement:</strong> CJ Quines<br />
+<strong>Test Data Preparation:</strong> CJ Quines<br />
+<strong>Solution Writeup:</strong> CJ Quines</p>
 <p><details class="editorial-section"><summary class="h2">Subtask 1</summary></p>
-<div class="remarks">
-<p><em>Construction ongoing!</em>    🏗 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🧱</p>
-</div>
+<p>When <span class="math inline">\(|T| = 0\)</span>, Abra takes the first move, and then the game immediately ends. The answer is always <span class="math inline">\(1\)</span>.</p>
 <p></details></p>
 <p><details class="editorial-section"><summary class="h2">Subtask 2</summary></p>
-<div class="remarks">
-<p><em>Construction ongoing!</em>    🏗 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🧱</p>
+<p>When <span class="math inline">\(|S| + |T| \le 10^3\)</span>, the input is small enough that we can simulate the game directly.</p>
+<p>Relatively unoptimized Python solutions using <a href="https://docs.python.org/3/library/collections.html#collections.deque"><code>collections.deque</code></a> would work.</p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 3</summary></p>
+<p>We use our solution from Subtask 2 to make some observations when <span class="math inline">\(|S| = 0\)</span>.</p>
+<div class="task">
+<p><strong>Exercise:</strong> What's the answer when the elements of <span class="math inline">\(T\)</span> are:</p>
+<ul>
+<li>all equal?</li>
+<li>sorted in ascending order?</li>
+<li>sorted in descending order?</li>
+<li>almost sorted in ascending order?</li>
+</ul>
+<p>What's the general answer?</p>
 </div>
+<p><details class="task"><summary class="h4">Answer</summary></p>
+<p>When the elements of <span class="math inline">\(T\)</span> are:</p>
+<ul>
+<li>all equal, the answer is always <span class="math inline">\(|T| + 1\)</span>.</li>
+<li>sorted in ascending order, the answer is always <span class="math inline">\(|T| + 1\)</span>.</li>
+<li>sorted in descending order, the answer is always <span class="math inline">\(2\binom{|T|}{2} + |T| + 1\)</span>.</li>
+<li>almost sorted in ascending order, it depends. Let's say <span class="math inline">\(T\)</span> is sorted, except for one swap, like <code>[1, 2, 4, 3, 5]</code>. If there's one swap, the answer is always <span class="math inline">\(|T| + 3\)</span>. Similarly, if there are two swaps, the answer is <span class="math inline">\(|T| + 5\)</span>.</li>
+</ul>
+<p>In general, the answer is twice the number of <a href="https://en.wikipedia.org/wiki/Inversion_(discrete_mathematics)">inversions</a>, plus <span class="math inline">\(|T| + 1\)</span>. There's standard algorithms for counting the number of inversions in an array.</p>
+<p>We leave the proof as an exercise to the reader.</p>
+<p></details></p>
+<p></details></p>
+<p><details class="editorial-section"><summary class="h2">Subtask 4</summary></p>
+<p>To go from Subtask 3 to the general case, we try adding elements to <span class="math inline">\(S\)</span>, one-by-one.</p>
+<div class="task">
+<p><strong>Exercise:</strong> Let <span class="math inline">\(T\)</span> be <code>[2, 4, 6, 8, 10]</code>. What's the answer when <span class="math inline">\(S\)</span> is:</p>
+<ul>
+<li><code>[1]</code>? <code>[3]</code>? <code>[5]</code>? <code>[7]</code>? <code>[9]</code>? <code>[11]</code>?</li>
+<li><code>[1, 3]</code>? <code>[1, 3, 5]</code>? <code>[1, 5, 3, 7, 11, 9]</code>?</li>
+<li><code>[1, 1]</code>? <code>[3, 1]</code>? <code>[3, 1, 5]</code>? <code>[3, 1, 5, 7, 11, 9]</code>? <code>[5, 1]</code>?</li>
+<li><code>[3, 5, 1]</code>? <code>[3, 7, 1]</code>? <code>[5, 3, 1]</code>? <code>[5, 7, 1]</code>?</li>
+</ul>
+<p>What's the general answer? Does your answer hold if <span class="math inline">\(T\)</span> isn't <code>[2, 4, 6, 8, 10]</code>?</p>
+</div>
+<p><details class="task"><summary class="h4">Answer</summary></p>
+<p>When <span class="math inline">\(S\)</span>:</p>
+<ul>
+<li>is a single element <span class="math inline">\(s\)</span>, we see it's twice the position of <span class="math inline">\(s\)</span> in the list <span class="math inline">\(T\)</span>, plus <span class="math inline">\(6\)</span>. This suggests something like the inversions, where the answer is somehow related to the number of inversions when we put <span class="math inline">\(s\)</span> in front of <span class="math inline">\(T\)</span>.</li>
+<li>starts with <span class="math inline">\(1\)</span>, then the answer is always <span class="math inline">\(6\)</span>. That means the elements after <span class="math inline">\(1\)</span> are ignored. We can guess that elements less than everything in <span class="math inline">\(T\)</span> are somehow special.</li>
+<li>has <span class="math inline">\(1\)</span> as the second element, then it's like the first case: twice the position of the first element, plus <span class="math inline">\(6\)</span>. That maybe means that everything after the minimum element is ignored.</li>
+<li>is some <span class="math inline">\(S&#39;\)</span> followed by <span class="math inline">\(1\)</span>, then it's twice the inversions of <span class="math inline">\(reversed(S&#39;) + T\)</span>, plus <span class="math inline">\(6\)</span>.</li>
+</ul>
+<p>This suggests the general answer: - Let <span class="math inline">\(s\)</span> be the first element in <span class="math inline">\(S\)</span> smaller than everything in <span class="math inline">\(T\)</span>. - Let <span class="math inline">\(S&#39;\)</span> be the prefix of <span class="math inline">\(S\)</span> going from the start to the element <span class="math inline">\(s\)</span>. If <span class="math inline">\(s\)</span> doesn't exist, <span class="math inline">\(S&#39; = S\)</span>. - The answer is twice the inversions of <span class="math inline">\(reversed(S&#39;) + T\)</span>, plus <span class="math inline">\(|T| + 1\)</span>.</p>
+<p>We leave the proof as an exercise to the reader, though we leave some hints below.</p>
+<p></details></p>
+<p><details class="proof"><summary class="h4">Hints for proof</summary></p>
+<p>The reverse thing suggests that we should look not at two separate stacks <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span>, but an array <span class="math inline">\(reversed(S) + T\)</span>.</p>
+<p>If we print what's happening to the array with each step, it looks like the array is being sorted by swapping inversions.</p>
+<p></details></p>
+<p><details class="proof"><summary class="h4">Remarks</summary></p>
+<p>The algorithm described here is <a href="https://en.wikipedia.org/wiki/Gnome_sort">gnome sort</a>, but with two stacks instead of an array.</p>
+<p></details></p>
 <p></details></p>
 </div>
 
