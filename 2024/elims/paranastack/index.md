@@ -91,12 +91,13 @@ When $S$:
 - is a single element $s$, we see it's twice the position of $s$ in the list $T$, plus $6$. This suggests something like the inversions, where the answer is somehow related to the number of inversions when we put $s$ in front of $T$.
 - starts with $1$, then the answer is always $6$. That means the elements after $1$ are ignored. We can guess that elements less than everything in $T$ are somehow special.
 - has $1$ as the second element, then it's like the first case: twice the position of the first element, plus $6$. That maybe means that everything after the minimum element is ignored.
-- is some $S'$ followed by $1$, then it's twice the inversions of $reversed(S') + T$, plus $6$.
+- is some $S'$ followed by $1$, then it's twice the inversions of $\mathit{reversed}(S') + T$, plus $6$.
 
 This suggests the general answer:
+
 - Let $s$ be the first element in $S$ smaller than everything in $T$.
 - Let $S'$ be the prefix of $S$ going from the start to the element $s$. If $s$ doesn't exist, $S' = S$.
-- The answer is twice the inversions of $reversed(S') + T$, plus $|T| + 1$.
+- The answer is twice the inversions of $\mathit{reversed}(S') + T$, plus $|T| + 1$.
 
 We leave the proof as an exercise to the reader, though we leave some hints below.
 
@@ -104,7 +105,7 @@ We leave the proof as an exercise to the reader, though we leave some hints belo
 
 <details class="proof"><summary class="h4">Hints for proof</summary>
 
-The reverse thing suggests that we should look not at two separate stacks $S$ and $T$, but an array $reversed(S) + T$.
+The reverse thing suggests that we should look not at two separate stacks $S$ and $T$, but an array $\mathit{reversed}(S) + T$.
 
 If we print what's happening to the array with each step, it looks like the array is being sorted by swapping inversions.
 
