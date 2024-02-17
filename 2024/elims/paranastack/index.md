@@ -48,7 +48,7 @@ What's the general answer?
 
 </div>
 
-<details class="task"><summary class="h4">Answer</summary>
+<details class="answer"><summary class="h4">Answer</summary>
 
 When the elements of $T$ are:
 
@@ -84,7 +84,7 @@ What's the general answer? Does your answer hold if $T$ isn't `[2, 4, 6, 8, 10]`
 
 </div>
 
-<details class="task"><summary class="h4">Answer</summary>
+<details class="answer"><summary class="h4">Answer</summary>
 
 When $S$:
 
@@ -103,7 +103,7 @@ We leave the proof as an exercise to the reader, though we leave some hints belo
 
 </details>
 
-<details class="proof"><summary class="h4">Hints for proof</summary>
+<details class="task"><summary class="h4">Hints for proof</summary>
 
 The reverse thing suggests that we should look not at two separate stacks $S$ and $T$, but an array $\mathit{reversed}(S) + T$.
 
@@ -111,7 +111,7 @@ If we print what's happening to the array with each step, it looks like the arra
 
 </details>
 
-<details class="proof"><summary class="h4">Remarks</summary>
+<details class="remarks"><summary class="h4">Remarks</summary>
 
 The algorithm described here is [gnome sort](https://en.wikipedia.org/wiki/Gnome_sort), but with two stacks instead of an array.
 

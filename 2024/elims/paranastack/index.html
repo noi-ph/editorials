@@ -65,7 +65,7 @@
 </ul>
 <p>What's the general answer?</p>
 </div>
-<p><details class="task"><summary class="h4">Answer</summary></p>
+<p><details class="answer"><summary class="h4">Answer</summary></p>
 <p>When the elements of <span class="math inline">\(T\)</span> are:</p>
 <ul>
 <li>all equal, the answer is always <span class="math inline">\(|T| + 1\)</span>.</li>
@@ -89,7 +89,7 @@
 </ul>
 <p>What's the general answer? Does your answer hold if <span class="math inline">\(T\)</span> isn't <code>[2, 4, 6, 8, 10]</code>?</p>
 </div>
-<p><details class="task"><summary class="h4">Answer</summary></p>
+<p><details class="answer"><summary class="h4">Answer</summary></p>
 <p>When <span class="math inline">\(S\)</span>:</p>
 <ul>
 <li>is a single element <span class="math inline">\(s\)</span>, we see it's twice the position of <span class="math inline">\(s\)</span> in the list <span class="math inline">\(T\)</span>, plus <span class="math inline">\(6\)</span>. This suggests something like the inversions, where the answer is somehow related to the number of inversions when we put <span class="math inline">\(s\)</span> in front of <span class="math inline">\(T\)</span>.</li>
@@ -105,11 +105,11 @@
 </ul>
 <p>We leave the proof as an exercise to the reader, though we leave some hints below.</p>
 <p></details></p>
-<p><details class="proof"><summary class="h4">Hints for proof</summary></p>
+<p><details class="task"><summary class="h4">Hints for proof</summary></p>
 <p>The reverse thing suggests that we should look not at two separate stacks <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span>, but an array <span class="math inline">\(\mathit{reversed}(S) + T\)</span>.</p>
 <p>If we print what's happening to the array with each step, it looks like the array is being sorted by swapping inversions.</p>
 <p></details></p>
-<p><details class="proof"><summary class="h4">Remarks</summary></p>
+<p><details class="remarks"><summary class="h4">Remarks</summary></p>
 <p>The algorithm described here is <a href="https://en.wikipedia.org/wiki/Gnome_sort">gnome sort</a>, but with two stacks instead of an array.</p>
 <p></details></p>
 <p></details></p>

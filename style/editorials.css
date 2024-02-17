@@ -64,6 +64,7 @@
 .body .editorial .task    { background-color: #ffdddd; }
 .body .editorial .caution { background-color: #ffffdd; }
 .body .editorial .proof   { background-color: #eeeeee; }
+.body .editorial .answer  { background-color: #eeeeee; }
 .body .editorial .code    { background-color: #f4f4f4; }
 
 .body .editorial .code pre {
@@ -76,6 +77,7 @@
 .body .editorial .task,
 .body .editorial .caution,
 .body .editorial .proof,
+.body .editorial .answer,
 .body .editorial .code {
     padding: 1rem 1.25rem 0 1.25rem;
     border: 1px solid #c8c8c8;
@@ -89,6 +91,7 @@
 .body .editorial details.task,
 .body .editorial details.caution,
 .body .editorial details.proof,
+.body .editorial details.answer,
 .body .editorial details.code {
     padding-bottom: 1rem;
 }
@@ -106,6 +109,7 @@
 .body .editorial details.task    > summary,
 .body .editorial details.caution > summary,
 .body .editorial details.proof   > summary,
+.body .editorial details.answer  > summary,
 .body .editorial details.code    > summary {
     margin: 0;
 }
@@ -115,6 +119,7 @@
 .body .editorial details[open].task    > summary,
 .body .editorial details[open].caution > summary,
 .body .editorial details[open].proof   > summary,
+.body .editorial details[open].answer  > summary,
 .body .editorial details[open].code    > summary {
     margin-bottom: .75rem;
 }
